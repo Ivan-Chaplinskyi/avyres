@@ -4740,3 +4740,7 @@ back-to-top.hide {
   border-style: inset;
   border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
 }
+
+lazy-content img {
+  filter: blur(10px);
+}

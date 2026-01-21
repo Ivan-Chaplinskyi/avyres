@@ -113,6 +113,12 @@
                 <div class="section-carousel__block block-{{ block.id }} color-{{ block.settings.color_scheme }} gradient media-position--{{ block.settings.media_position }}" {{ block.shopify_attributes }}>
                   {%- if has_media -%}
                     <div class="section-carousel__media media media--overlay{% if has_media_mobile %} small-hide{% endif %}">
+                      {%- if section.index > 1 -%}
+                        <lazy-content>
+                          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                          <template>
+                      {%- endif -%}
+
                       {%- liquid
                         if block_video_external != blank
                           render 'external-video', video: block_video_external, title: section.settings.title, controls: section.settings.show_controls_on_video
@@ -126,6 +132,11 @@
                           endif
                         endif
                       -%}
+
+                      {%- if section.index > 1 -%}
+                          </template>
+                        </lazy-content>
+                      {%- endif -%}
                     </div>
                     {%- if has_media_mobile -%}
                       <div class="media media--overlay section-carousel__media small-up-hide">
