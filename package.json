@@ -1,0 +1,23 @@
+{
+  "name": "avyres",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "shopify theme dev --store th3vvq-ca.myshopify.com",
+    "push": "shopify theme push --store th3vvq-ca.myshopify.com",
+    "pull": "shopify theme pull --store th3vvq-ca.myshopify.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ivan-Chaplinskyi/avyres.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ivan-Chaplinskyi/avyres/issues"
+  },
+  "homepage": "https://github.com/Ivan-Chaplinskyi/avyres#readme"
+}

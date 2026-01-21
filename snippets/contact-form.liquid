@@ -1,0 +1,57 @@
+{% form 'contact' %}
+  {% if form.posted_successfully? and form_posted_successfully != blank %}
+    <p>{{- form_posted_successfully -}}</p>
+  {% endif %}
+
+  {{ form.errors | default_errors }}
+ 
+    {%- if label_name != blank -%}
+    <div>
+        <label for="ContactName">{{- label_name -}}</label>
+        <input
+        type="text"
+        id="ContactName"
+        name="contact[name]"
+        required
+        >
+    </div>
+    {%- endif -%}
+
+    {%- if label_email != blank -%}
+    <div>
+        <label for="ContactEmail">{{- label_email -}}</label>
+        <input
+        type="email"
+        id="ContactEmail"
+        name="contact[email]"
+        required
+        >
+    </div>
+  {%- endif -%}
+
+  <div>
+    <select
+    name="contact[collection]"
+    required
+    >
+      <option value="" disabled selected>
+        Which collection are you interested in?
+      </option>
+      <option value="Womenswear">Womenswear</option>
+      <option value="Menswear">Menswear</option>
+      <option value="Both">Both</option>
+    </select>
+  </div>
+
+  {%- if submit_form -%}
+    <button type="submit" class="button button--filled">
+        {{- submit_form -}}
+    </button>
+  {%- endif -%}
+
+  {%- if bottom_text != blank -%}
+    <small>
+      {{- bottom_text -}}
+    </small>
+  {%- endif -%}
+{% endform %}
