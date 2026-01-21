@@ -430,7 +430,9 @@
                   height: section.settings.logo.height,
                   srcset: logo_srcset,
                   alt: logo_alt,
-                  preload: true
+                  preload: true,
+                  fetchpriority: 'high',
+                  loading: 'eager'
               }}
 
               {% liquid
@@ -458,7 +460,9 @@
                   height: section.settings.logo.height,
                   srcset: logo_transparent_srcset,
                   alt: logo_transparent_alt,
-                  preload: true
+                  preload: true,
+                  fetchpriority: 'high',
+                  loading: 'eager'
               }}
 
             {%- else -%}

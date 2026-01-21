@@ -117,7 +117,7 @@
                         if block_video_external != blank
                           render 'external-video', video: block_video_external, title: section.settings.title, controls: section.settings.show_controls_on_video
                         elsif block_video != blank
-                          echo block_video | video_tag: image_size: '2160x', loop: true, autoplay: true, muted: true, controls: section.settings.show_controls_on_video
+                          echo block_video | video_tag: image_size: '2160x', loop: true, autoplay: true, muted: true, controls: section.settings.show_controls_on_video, fetchpriority: 'low'
                         else
                           if block_image != blank
                             render 'image', image: block_image, sizes: 'auto'
@@ -133,7 +133,7 @@
                           if block_video_external_mobile != blank
                             render 'external-video', video: block_video_external_mobile, title: section.settings.title, controls: section.settings.show_controls_on_video_mobile
                           elsif block_video_mobile != blank
-                            echo block_video_mobile | video_tag: image_size: '720x', loop: true, autoplay: true, muted: true, controls: section.settings.show_controls_on_video_mobile
+                            echo block_video_mobile | video_tag: image_size: '720x', loop: true, autoplay: true, muted: true, controls: section.settings.show_controls_on_video_mobile, fetchpriority: 'low'
                           else
                             if block_image_mobile != blank
                               render 'image', image: block_image_mobile, image_for_mobile: true, sizes: 'auto'
