@@ -9,6 +9,7 @@
   font-style: var(--font-body-style);
   font-weight: var(--font-body-weight);
   text-transform: none;
+  overflow: hidden;
 }
 
 .drawer__title {
