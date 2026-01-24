@@ -1,12 +1,1 @@
-const viewMoreElement = document.querySelector('.js-btn-load-more');
-
-if (viewMoreElement) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          viewMoreElement.click();
-        }
-    });
-  });
-  observer.observe(viewMoreElement);
-}
+let viewMoreElement=document.querySelector(".js-btn-load-more");if(viewMoreElement){let e=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&viewMoreElement.click()})});e.observe(viewMoreElement)}
