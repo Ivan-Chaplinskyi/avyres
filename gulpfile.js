@@ -10,8 +10,8 @@ const Vinyl = require('vinyl');
 gulp.task("css", () => {
   return gulp
     .src("./src/css/*.css", { since: gulp.lastRun('css') })
-    .pipe(autoprefixer())
-    .pipe(cssnano())
+    // .pipe(autoprefixer())
+    // .pipe(cssnano())
     .pipe(gulp.dest("./assets"));
 });
 
