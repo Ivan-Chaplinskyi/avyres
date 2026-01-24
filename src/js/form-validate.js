@@ -1,68 +1,32 @@
-if (!customElements.get('form-validate')) {
-  class FormValidation extends HTMLElement {
+if (!customElements.get("form-validate")) {
+  class a extends HTMLElement {
     constructor() {
-      super();
-      this.form = this.querySelector('form');
-      if (!this.form) throw new Error('Form element does not exist');
+      if (super(), this.form = this.querySelector("form"), !this.form) throw new Error("Form element does not exist")
     }
-
-    toggleErrorMessage(input, field) {
-      const errorMessageWrapper =
-        field.querySelector('[data-message]');
-      errorMessageWrapper.classList.toggle(
-        'hidden',
-        input.validity.valid
-      );
-      errorMessageWrapper.parentElement.classList.toggle(
-        'has-error',
-        !input.validity.valid
-      );
-
-      errorMessageWrapper.innerHTML =
-        input.type === 'email' ?
-        window.validationStrings.invalidEmail :
-        input.validationMessage;
+    toggleErrorMessage(t, e) {
+      e = e.querySelector("[data-message]");
+      e.classList.toggle("hidden", t.validity.valid), e.parentElement.classList.toggle("has-error", !t.validity.valid), e.innerHTML = "email" === t.type ? window.validationStrings.invalidEmail : t.validationMessage
     }
-
-    setFieldValidity(input) {
-      input.setAttribute('aria-invalid', !input.validity.valid);
-      const field = input.closest('[data-input-wrapper]');
-      if (!field) return;
-      field.classList.toggle('has-error', !input.validity.valid);
-      this.toggleErrorMessage(input, field);
+    setFieldValidity(t) {
+      t.setAttribute("aria-invalid", !t.validity.valid);
+      var e = t.closest("[data-input-wrapper]");
+      e && (e.classList.toggle("has-error", !t.validity.valid), this.toggleErrorMessage(t, e))
     }
-
-    onSubmit(event) {
-      if (!this.form.reportValidity()) event.preventDefault();
-      this.form.submit();
+    onSubmit(t) {
+      this.form.reportValidity() || t.preventDefault(), this.form.submit()
     }
-
     setHandlers() {
-      this.form.addEventListener('submit', this.onSubmit.bind(this));
-      for (const input of this.form.elements) {
-        if (input.hasAttribute('data-no-validate')) continue;
-
-        ['input', 'blur', 'change', 'invalid'].forEach(eventName => {
-          input.addEventListener(
-            eventName,
-            this.setInputHandler.bind(this)
-          );
-        });
-      }
+      this.form.addEventListener("submit", this.onSubmit.bind(this));
+      for (let e of this.form.elements) e.hasAttribute("data-no-validate") || ["input", "blur", "change", "invalid"].forEach(t => {
+        e.addEventListener(t, this.setInputHandler.bind(this))
+      })
     }
-
-    setInputHandler(event) {
-      if (event.type === 'invalid') {
-        event.preventDefault();
-      }
-
-      this.setFieldValidity(event.target);
+    setInputHandler(t) {
+      "invalid" === t.type && t.preventDefault(), this.setFieldValidity(t.target)
     }
-
     connectedCallback() {
-      this.setHandlers();
+      this.setHandlers()
     }
   }
-
-  customElements.define('form-validate', FormValidation);
+  customElements.define("form-validate", a)
 }

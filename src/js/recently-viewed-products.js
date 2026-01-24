@@ -1,107 +1,25 @@
-if (!customElements.get('recently-viewed-products')) {
-  class RecentlyViewed extends customElements.get(
-    'card-product-slider'
-  ) {
+if (!customElements.get("recently-viewed-products")) {
+  class a extends customElements.get("card-product-slider") {
     constructor() {
-      super();
-
-      this.section = this.closest('.js-section');
-      this.sliderWrapper = this.querySelector('.swiper-wrapper');
-      this.productHandle = this.dataset.productHandle;
-
-      this.fetchRecentProducts();
-
-      if (document.querySelector("quick-cart-drawer") && this.querySelector('.swiper-slide')) {
-        document.querySelector("quick-cart-drawer").init();
-      }
-
-      if (Shopify.designMode) {
-        if (document.querySelector("quick-cart-drawer") && this.querySelector('.swiper-slide')) {
-          document.querySelector("quick-cart-drawer").init();
-        }
-      }
+      super(), this.section = this.closest(".js-section"), this.sliderWrapper = this.querySelector(".swiper-wrapper"), this.productHandle = this.dataset.productHandle, this.fetchRecentProducts(), document.querySelector("quick-cart-drawer") && this.querySelector(".swiper-slide") && document.querySelector("quick-cart-drawer").init(), Shopify.designMode && document.querySelector("quick-cart-drawer") && this.querySelector(".swiper-slide") && document.querySelector("quick-cart-drawer").init()
     }
-
     fetchRecentProducts() {
-      const productHandles = localStorage.getItem('recently-viewed');
-
-      if (!productHandles) {
-        return;
-      }
-
-      const productHandlesArray = productHandles
-        .split(',')
-        .filter(
-          productHandle =>
-          productHandle &&
-          productHandle !== this.productHandle &&
-          productHandle !== 'undefined'
-        );
-
-      if (productHandlesArray.length === 0) {
-        return;
-      }
-
-      productHandlesArray.forEach((productHandle, i) => {
-        const addRecentProducts = async () => {
-          try {
-            const productCardResponse = await fetch(
-              `${window.Shopify.routes.root}products/${productHandle}?view=card`
-            );
-
-            if (!productCardResponse.ok) {
-              const productHandles =
-                localStorage.getItem('recently-viewed');
-              const updatedProductHandles = productHandles
-                .replace(`${productHandle},`, '')
-                .replace(productHandle, '');
-
-              localStorage.setItem(
-                'recently-viewed',
-                updatedProductHandles
-              );
-
-              return;
+      var e = localStorage.getItem("recently-viewed");
+      if (e) {
+        let d = e.split(",").filter(e => e && e !== this.productHandle && "undefined" !== e);
+        0 !== d.length && d.forEach((i, s) => {
+          (async () => {
+            try {
+              var e, t, r, c = await fetch(window.Shopify.routes.root + `products/${i}?view=card`);
+              c.ok ? (t = await c.text(), (r = document.createElement("DIV")).classList.add("swiper-slide", "card-product-slider__slide"), r.insertAdjacentHTML("beforeend", t), r.querySelector("product-card") && r.querySelector(".product-card") && this.sliderWrapper.append(r)) : (e = localStorage.getItem("recently-viewed").replace(i + ",", "").replace(i, ""), localStorage.setItem("recently-viewed", e))
+            } catch (e) {} finally {
+              if (!(s === d.length - 1)) return;
+              this.initSlider(), this.section?.classList.remove("hidden")
             }
-
-            const productCardHTML = await productCardResponse.text();
-
-            const productSlide = document.createElement('DIV');
-
-            productSlide.classList.add(
-              'swiper-slide',
-              'card-product-slider__slide'
-            );
-            productSlide.insertAdjacentHTML(
-              'beforeend',
-              productCardHTML
-            );
-            if (
-              !productSlide.querySelector('product-card') ||
-              !productSlide.querySelector('.product-card')
-            )
-              return;
-
-            this.sliderWrapper.append(productSlide);
-          } catch (error) {
-            // console.log(error);
-          } finally {
-            const isLastIteration =
-              i === productHandlesArray.length - 1;
-
-            if (!isLastIteration) {
-              return;
-            }
-
-            this.initSlider();
-            this.section?.classList.remove('hidden');
-          }
-        };
-
-        addRecentProducts();
-      });
+          })()
+        })
+      }
     }
   }
-
-  customElements.define('recently-viewed-products', RecentlyViewed);
+  customElements.define("recently-viewed-products", a)
 }

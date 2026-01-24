@@ -1,73 +1,25 @@
 class PickupAvailability extends HTMLElement {
   constructor() {
-    super();
-
-    if (!this.hasAttribute('available')) return;
-
-    this.errorHtml =
-      this.querySelector(
-        'template'
-      ).content.firstElementChild.cloneNode(true);
-    this.onClickRefreshList = this.onClickRefreshList.bind(this);
-    this.fetchAvailability(this.dataset.variantId);
+    super(), this.hasAttribute("available") && (this.errorHtml = this.querySelector("template").content.firstElementChild.cloneNode(!0), this.onClickRefreshList = this.onClickRefreshList.bind(this), this.fetchAvailability(this.dataset.variantId))
   }
-
-  fetchAvailability(variantId) {
-    const rootUrl = !this.dataset.rootUrl.endsWith('/') ?
-      `${this.dataset.rootUrl}/` :
-      this.dataset.rootUrl;
-
-    const variantSectionUrl = `${rootUrl}variants/${variantId}/?section_id=pickup-availability`;
-
-    fetch(variantSectionUrl)
-      .then(response => response.text())
-      .then(text => {
-        const sectionInnerHTML = new DOMParser()
-          .parseFromString(text, 'text/html')
-          .querySelector('.shopify-section');
-        this.renderPreview(sectionInnerHTML);
-      })
-      .catch(e => {
-        const button = this.querySelector('button');
-
-        if (button)
-          button.removeEventListener(
-            'click',
-            this.onClickRefreshList
-          );
-
-        this.renderError();
-      });
+  fetchAvailability(t) {
+    var e = this.dataset.rootUrl.endsWith("/") ? this.dataset.rootUrl : this.dataset.rootUrl + "/";
+    fetch(e + `variants/${t}/?section_id=pickup-availability`).then(t => t.text()).then(t => {
+      t = (new DOMParser).parseFromString(t, "text/html").querySelector(".shopify-section");
+      this.renderPreview(t)
+    }).catch(t => {
+      var e = this.querySelector("button");
+      e && e.removeEventListener("click", this.onClickRefreshList), this.renderError()
+    })
   }
-
-  onClickRefreshList(event) {
-    this.fetchAvailability(this.dataset.variantId);
+  onClickRefreshList(t) {
+    this.fetchAvailability(this.dataset.variantId)
   }
-
   renderError() {
-    this.innerHTML = '';
-    this.appendChild(this.errorHtml);
-    this.querySelector('button').addEventListener(
-      'click',
-      this.onClickRefreshList
-    );
+    this.innerHTML = "", this.appendChild(this.errorHtml), this.querySelector("button").addEventListener("click", this.onClickRefreshList)
   }
-
-  renderPreview(sectionInnerHTML) {
-    if (
-      !sectionInnerHTML.querySelector('pickup-availability-preview')
-    ) {
-      this.innerHTML = '';
-      this.removeAttribute('available');
-
-      return;
-    }
-
-    this.innerHTML = sectionInnerHTML.querySelector(
-      'pickup-availability-preview'
-    ).outerHTML;
-    this.setAttribute('available', '');
+  renderPreview(t) {
+    t.querySelector("pickup-availability-preview") ? (this.innerHTML = t.querySelector("pickup-availability-preview").outerHTML, this.setAttribute("available", "")) : (this.innerHTML = "", this.removeAttribute("available"))
   }
 }
-
-customElements.define('pickup-availability', PickupAvailability);
+customElements.define("pickup-availability", PickupAvailability);

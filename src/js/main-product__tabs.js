@@ -1,70 +1,36 @@
 if (!customElements.get("product-tabs")) {
-  class ProductTabs extends HTMLElement {
+  class a extends HTMLElement {
     constructor() {
-      super();
-      this.id = this.getAttribute("id");
-
-      if (Shopify.designMode) {
-        window.addEventListener(
-          "shopify:section:load",
-          this.init.bind(this)
-        );
-      }
+      super(), this.id = this.getAttribute("id"), Shopify.designMode && window.addEventListener("shopify:section:load", this.init.bind(this))
     }
-
     connectedCallback() {
-      this.init();
+      this.init()
     }
-
     init() {
-      this.querySelectorAll(".product__tab--trigger").forEach(
-        tabTrigger => {
-          tabTrigger.addEventListener("click", evt => {
-            this.openTab(
-              evt,
-              tabTrigger.dataset.tab
-            );
-          });
-        }
-      );
-
-      this.openDefaultTab();
+      this.querySelectorAll(".product__tab--trigger").forEach(e => {
+        e.addEventListener("click", t => {
+          this.openTab(t, e.dataset.tab)
+        })
+      }), this.openDefaultTab()
     }
-
     openDefaultTab() {
-      const event = new MouseEvent("click", {
+      var t = new MouseEvent("click", {
         view: window,
-        bubbles: true,
-        cancelable: true
+        bubbles: !0,
+        cancelable: !0
       });
-
-      this.querySelector(
-        ".product__tab[data-default-open]"
-      )?.dispatchEvent(event);
+      this.querySelector(".product__tab[data-default-open]")?.dispatchEvent(t)
     }
-
-    openTab(evt, tabName) {
-      const tabcontents = this.querySelectorAll(
-        ".product__tab-content"
-      );
-      tabcontents.forEach(content => {
-        content.style.display = "none";
+    openTab(t, e) {
+      this.querySelectorAll(".product__tab-content").forEach(t => {
+        t.style.display = "none"
       });
-
-      const tablinks = this.querySelectorAll(".product__tab");
-      tablinks.forEach(link => {
-        link.classList.remove("active");
+      this.querySelectorAll(".product__tab").forEach(t => {
+        t.classList.remove("active")
       });
-
-      const currentTabContent = this.querySelector(`#${tabName}`);
-
-      if (currentTabContent) {
-        currentTabContent.style.display = "block";
-        if (evt.currentTarget) {
-          evt.currentTarget.classList.add("active");
-        }
-      }
+      e = this.querySelector("#" + e);
+      e && (e.style.display = "block", t.currentTarget) && t.currentTarget.classList.add("active")
     }
   }
-  customElements.define("product-tabs", ProductTabs);
+  customElements.define("product-tabs", a)
 }

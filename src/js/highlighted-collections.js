@@ -1,49 +1,27 @@
-if (!customElements.get('highlighted-collections')) {
-  class HighlightedCollections extends HTMLElement {
+if (!customElements.get("highlighted-collections")) {
+  class a extends HTMLElement {
     constructor() {
-      super();
-
-      if (Shopify.designMode) {
-        window.addEventListener('shopify:section:load', () => {
-          this.init();
-        });
-      }
-      if (window.innerWidth >= 990) {
-        this.init();
-      }
+      super(), Shopify.designMode && window.addEventListener("shopify:section:load", () => {
+        this.init()
+      }), 990 <= window.innerWidth && this.init()
     }
-
     init() {
-      this.displayImages();
+      this.displayImages()
     }
-
     displayImages() {
-      const collectionItems = this.querySelectorAll('.highlighted__collections-item-box');
-      const collectionImages = this.querySelectorAll('.highlighted__collections-image');
-
-      collectionItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-          collectionItems.forEach(item =>
-            item.classList.remove('highlighted__collections-active')
-          );
-
-          collectionImages.forEach(img => {
-            img.classList.remove("highlighted-img--active");
+      let t = this.querySelectorAll(".highlighted__collections-item-box"),
+        s = this.querySelectorAll(".highlighted__collections-image");
+      t.forEach(i => {
+        i.addEventListener("mouseenter", () => {
+          t.forEach(e => e.classList.remove("highlighted__collections-active")), s.forEach(e => {
+            e.classList.remove("highlighted-img--active")
           });
-
-          const dataImageValue = item.getAttribute('data-image');
-
-          const collectionImage = this.querySelector(
-            `[data-hover="image-${dataImageValue}"]`
-          );
-
-          if (collectionImage) {
-            collectionImage.classList.add('highlighted-img--active');
-          }
-        });
-      });
+          var e = i.getAttribute("data-image"),
+            e = this.querySelector(`[data-hover="image-${e}"]`);
+          e && e.classList.add("highlighted-img--active")
+        })
+      })
     }
   }
-
-  customElements.define('highlighted-collections', HighlightedCollections);
+  customElements.define("highlighted-collections", a)
 }

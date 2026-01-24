@@ -1,48 +1,28 @@
-if (!customElements.get('announcement-bar-slider')) {
-  class AnnouncementBarSlider extends HTMLElement {
+if (!customElements.get("announcement-bar-slider")) {
+  class a extends HTMLElement {
     constructor() {
       super();
-
-      const swiperOptions = JSON.parse(this.getAttribute('data-swiper-options')) || {};
-
-      this.initSlider(swiperOptions);
-
-      window.addEventListener('shopify:section:load', e => {
-        this.initSlider(swiperOptions);
-      });
+      let i = JSON.parse(this.getAttribute("data-swiper-options")) || {};
+      this.initSlider(i), window.addEventListener("shopify:section:load", e => {
+        this.initSlider(i)
+      })
     }
-
-    initSlider(swiperOptions) {
-
-      /*
-      // swiperOptions.disabledOnMobile = true;
-      if (swiperOptions.disabledOnMobile && window.innerWidth < mobileWidth) {
-        return;
-      }
-
-      // swiperOptions.disabledOnDesktop = true;
-      if (swiperOptions.disabledOnDesktop && window.innerWidth > mobileWidth) {
-        return;
-      }
-      */
-
-      let sliderOptions = {
-        slidesPerView: swiperOptions.slidesPerView || 1,
-        resistanceRatio: 0.72,
-        loop: swiperOptions.loop || false,
-        allowTouchMove: swiperOptions.allowTouchMove || true,
-        autoplay: swiperOptions.autoplay || false,
+    initSlider(e) {
+      e = {
+        slidesPerView: e.slidesPerView || 1,
+        resistanceRatio: .72,
+        loop: e.loop || !1,
+        allowTouchMove: e.allowTouchMove || !0,
+        autoplay: e.autoplay || !1,
         breakpoints: {
           750: {
-            slidesPerView: swiperOptions.slidesPerViewDesktop || 'auto',
-            loop: swiperOptions.loopDesktop || swiperOptions.loop || false,
+            slidesPerView: e.slidesPerViewDesktop || "auto",
+            loop: e.loopDesktop || e.loop || !1
           }
         }
       };
-
-      this.slider = new Swiper(this, sliderOptions);
+      this.slider = new Swiper(this, e)
     }
   }
-
-  customElements.define('announcement-bar-slider', AnnouncementBarSlider);
+  customElements.define("announcement-bar-slider", a)
 }

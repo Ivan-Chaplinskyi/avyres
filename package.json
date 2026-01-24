@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "shopify theme dev --store th3vvq-ca.myshopify.com",
+    "inst": "gulp init",
+    "dev": "gulp & shopify theme dev --store th3vvq-ca.myshopify.com",
     "push": "shopify theme push --store th3vvq-ca.myshopify.com",
-    "pull": "shopify theme pull --store th3vvq-ca.myshopify.com"
+    "pull": "shopify theme pull --store th3vvq-ca.myshopify.com",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -19,5 +21,15 @@
   "bugs": {
     "url": "https://github.com/Ivan-Chaplinskyi/avyres/issues"
   },
-  "homepage": "https://github.com/Ivan-Chaplinskyi/avyres#readme"
+  "homepage": "https://github.com/Ivan-Chaplinskyi/avyres#readme",
+  "dependencies": {
+    "gulp": "^5.0.1",
+    "gulp-beautify": "^3.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-cssbeautify": "^3.0.1",
+    "gulp-terser": "^2.1.0"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "8.0.0"
+  }
 }

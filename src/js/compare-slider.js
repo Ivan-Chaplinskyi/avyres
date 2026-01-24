@@ -1,67 +1,20 @@
-function slideBeforeAfter(sectionId) {
-  let slideValue = document.querySelector(
-    `#section-compare-slider-${sectionId} input[type="range"]`
-  ).value;
-
-  let handleValue = document.querySelector(
-    `#section-compare-slider-${sectionId} .compare-slider__handle .compare-slider__handle-line`
-  );
-
-  const compareSliderImageBefore = document.querySelector(
-    `#section-compare-slider-${sectionId} .compare-slider__image-before`
-  );
-  const compareSliderImageAfter = document.querySelector(
-    `#section-compare-slider-${sectionId} .compare-slider__image-after`
-  );
-  const compareSliderImageBeforeRTL = document.querySelector(
-    `[dir="rtl"] #section-compare-slider-${sectionId} .compare-slider__image-before`
-  );
-  const compareSliderImageAfterRTL = document.querySelector(
-    `[dir="rtl"] #section-compare-slider-${sectionId} .compare-slider__image-after`
-  );
-
-  compareSliderImageBefore.style.cssText = `clip-path: polygon(${slideValue}% 0, 100% 0, 100% 100%, ${slideValue}% 100%);`;
-  if (compareSliderImageBeforeRTL) {
-    compareSliderImageBeforeRTL.style.cssText = `clip-path: polygon(0 0, ${100 - slideValue}% 0, ${100 - slideValue}% 100%, 0 100%);`;
-  }
-
-  compareSliderImageAfter.style.cssText = `clip-path: polygon(0 0, ${slideValue}% 0, ${slideValue}% 100%, 0 100%);`;
-  if (compareSliderImageAfterRTL) {
-    compareSliderImageAfterRTL.style.cssText = `clip-path: polygon(${100 - slideValue}% 0, 100% 0, 100% 100%, ${100 - slideValue}% 100%);`;
-  }
-
-  handleValue.style.cssText = `inset-inline-start: ${slideValue}%;`;
+function slideBeforeAfter(e) {
+  var t = document.querySelector(`#section-compare-slider-${e} input[type="range"]`).value,
+    r = document.querySelector(`#section-compare-slider-${e} .compare-slider__handle .compare-slider__handle-line`),
+    o = document.querySelector(`#section-compare-slider-${e} .compare-slider__image-before`),
+    c = document.querySelector(`#section-compare-slider-${e} .compare-slider__image-after`),
+    i = document.querySelector(`[dir="rtl"] #section-compare-slider-${e} .compare-slider__image-before`),
+    e = document.querySelector(`[dir="rtl"] #section-compare-slider-${e} .compare-slider__image-after`);
+  o.style.cssText = `clip-path: polygon(${t}% 0, 100% 0, 100% 100%, ${t}% 100%);`, i && (i.style.cssText = `clip-path: polygon(0 0, ${100-t}% 0, ${100-t}% 100%, 0 100%);`), c.style.cssText = `clip-path: polygon(0 0, ${t}% 0, ${t}% 100%, 0 100%);`, e && (e.style.cssText = `clip-path: polygon(${100-t}% 0, 100% 0, 100% 100%, ${100-t}% 100%);`), r.style.cssText = `inset-inline-start: ${t}%;`
 }
-
-document.querySelectorAll(".section-compare-slider").forEach((item, i) => {
-  const sectionId = item.dataset.id;
-  const inputSelector = document.querySelector(
-    `#section-compare-slider-${sectionId} input[type="range"]`
-  );
-  inputSelector.addEventListener("input", event =>
-    slideBeforeAfter(sectionId)
-  );
-});
-
-if (Shopify.designMode) {
-  document.addEventListener("shopify:section:load", function(event) {
-    document.querySelectorAll(".section-compare-slider").forEach((item, i) => {
-      const sectionId = item.dataset.id;
-      const inputSelector = document.querySelector(
-        `#section-compare-slider-${sectionId} input[type="range"]`
-      );
-      inputSelector.addEventListener("input", () =>
-        slideBeforeAfter(sectionId)
-      );
-    });
-  });
-
-  document.addEventListener("change", e => {
-    if (
-      e.target.matches('.section-compare-slider input[type="range"]')
-    ) {
-      const sectionId = e.target.closest(".section-compare-slider").dataset.id;
-      slideBeforeAfter(sectionId);
-    }
-  });
-}
+document.querySelectorAll(".section-compare-slider").forEach((e, t) => {
+  let r = e.dataset.id;
+  document.querySelector(`#section-compare-slider-${r} input[type="range"]`).addEventListener("input", e => slideBeforeAfter(r))
+}), Shopify.designMode && (document.addEventListener("shopify:section:load", function(e) {
+  document.querySelectorAll(".section-compare-slider").forEach((e, t) => {
+    let r = e.dataset.id;
+    document.querySelector(`#section-compare-slider-${r} input[type="range"]`).addEventListener("input", () => slideBeforeAfter(r))
+  })
+}), document.addEventListener("change", e => {
+  e.target.matches('.section-compare-slider input[type="range"]') && slideBeforeAfter(e.target.closest(".section-compare-slider").dataset.id)
+}));

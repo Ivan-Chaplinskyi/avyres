@@ -1,33 +1,22 @@
-if (!customElements.get('cart-drawer-info-slider')) {
-  class CartDrawerInfoSlider extends HTMLElement {
+if (!customElements.get("cart-drawer-info-slider")) {
+  class a extends HTMLElement {
     constructor() {
-      super();
-
-      if (Shopify.designMode) {
-        window.addEventListener('shopify:section:load', (e) => {
-          this.init();
-        });
-      }
-      this.init();
-
-
+      super(), Shopify.designMode && window.addEventListener("shopify:section:load", e => {
+        this.init()
+      }), this.init()
     }
-
     init() {
-
-      var swiperArea = document.querySelector('.cart-drawer__swiper');
-
-      this.slider = new Swiper(swiperArea, {
-        direction: 'vertical',
+      var e = document.querySelector(".cart-drawer__swiper");
+      this.slider = new Swiper(e, {
+        direction: "vertical",
         slidesPerView: 1,
-        loop: true,
-        allowTouchMove: false,
+        loop: !0,
+        allowTouchMove: !1,
         autoplay: {
-          delay: 5000,
+          delay: 5e3
         }
-      });
+      })
     }
   }
-
-  customElements.define('cart-drawer-info-slider', CartDrawerInfoSlider);
+  customElements.define("cart-drawer-info-slider", a)
 }

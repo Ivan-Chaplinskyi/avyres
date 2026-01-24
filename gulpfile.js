@@ -1,33 +1,48 @@
 const gulp = require("gulp");
-const cssnano = require("gulp-cssnano");
-const uglify = require("gulp-uglify");
+const cleanCSS = require("gulp-clean-css"); // Заміна для cssnano
+const terser = require("gulp-terser");     // Заміна для uglify (підтримує ES6)
 const cssbeautify = require("gulp-cssbeautify");
 const beautify = require("gulp-beautify");
 const autoprefixer = require('gulp-autoprefixer');
 const fs = require('fs');
-const Vinyl = require('vinyl');
+
+// --- TASKS FOR MINIFICATION ---
 
 gulp.task("css", () => {
   return gulp
     .src("./src/css/*.css", { since: gulp.lastRun('css') })
-    // .pipe(autoprefixer())
-    // .pipe(cssnano())
+    .pipe(autoprefixer({
+      cascade: false
+    }))
+    .pipe(cleanCSS({ 
+      compatibility: 'ie11', // Або '*' для максимального стиснення
+      level: 2 // Глибока оптимізація (об'єднання селекторів тощо)
+    }))
     .pipe(gulp.dest("./assets"));
 });
 
 gulp.task("js", () => {
   return gulp
     .src("./src/js/*.js", { since: gulp.lastRun('js') })
-    .pipe(uglify())
+    .pipe(terser({
+      toplevel: true,
+      format: {
+        comments: false, // Видаляє всі коментарі
+      },
+    }))
+    .on('error', function (error) {
+      console.error("JS Error:", error.toString()); // Показує помилку, але не зупиняє watch
+      this.emit('end');
+    })
     .pipe(gulp.dest("./assets"));
 });
 
-// Unminify files
+// --- TASKS FOR UN-MINIFICATION (Reverse) ---
 
 gulp.task("unmin_css", () => {
   return gulp
     .src("./assets/*.css")
-    .pipe(cssbeautify())
+    .pipe(cssbeautify({ indent: '  ' }))
     .pipe(gulp.dest("./src/css/"));
 });
 
@@ -38,39 +53,43 @@ gulp.task("unmin_js", () =>
     .pipe(gulp.dest("./src/js/"))
 );
 
+// --- SYSTEM TASKS ---
+
 gulp.task("add_files", (done) => {
   const shopifyignore =
     "gulpfile.js \nsrc \nnode_modules \npackage-lock.json \npackage.json \n.gitignore \nyarn-error.log \nyarn.lock";
   const gitIgnore = "node_modules \nyarn-error.log \nyarn.lock \n./assets/*.css \n./assets/*.js";
 
-  const fileShopifyignore = new Vinyl({
-    cwd: './',
-    base: './',
-    path: './.shopifyignore',
-    contents: Buffer.from(shopifyignore)
-  })
+  // Використовуємо стандартний fs для простоти
+  fs.writeFile('.shopifyignore', shopifyignore, (err) => {
+    if (err) console.error(err);
+    else console.log('File .shopifyignore updated');
+  });
 
-  const fileGitIgnore = new Vinyl({
-    cwd: './',
-    base: './',
-    path: './.gitignore',
-    contents: Buffer.from(gitIgnore)
-  })
-
-  fs.writeFile(fileShopifyignore.path, fileShopifyignore.contents, () => console.log('File .shopifyignore added'));
-  fs.writeFile(fileGitIgnore.path, fileGitIgnore.contents, () => console.log('File .gitignore added'));
+  fs.writeFile('.gitignore', gitIgnore, (err) => {
+    if (err) console.error(err);
+    else console.log('File .gitignore updated');
+  });
 
   done();
 });
+
+// --- RUN COMMANDS ---
 
 gulp.task("init", gulp.series(["unmin_css", "unmin_js", "add_files"]));
-gulp.task("build", gulp.series(["css", "js"]));
+gulp.task("build", gulp.parallel("css", "js")); // Parallel швидше для білду
 
-// Wather
+// Watcher
 gulp.task("watch", (done) => {
-  gulp.watch("./src/css/*.css", gulp.series(["css"]));
-  gulp.watch("./src/js/*.js", gulp.series(["js"]));
-
+  // Watch CSS
+  gulp.watch("./src/css/*.css", gulp.series("css"));
+  
+  // Watch JS
+  gulp.watch("./src/js/*.js", gulp.series("js"));
+  
+  // Можна додати сповіщення про старт
+  console.log("🚀 Gulp watcher started...");
   done();
 });
-gulp.task("default", gulp.series(["watch"]));
+
+gulp.task("default", gulp.series("build", "watch"));

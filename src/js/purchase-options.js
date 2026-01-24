@@ -1,193 +1,60 @@
 class PurchaseOptions extends HTMLElement {
   constructor() {
-    super();
-    this.selectors = {
+    super(), this.selectors = {
       product: "[data-main-product]",
       sellingPlanGroups: "[data-selling-plan-group-selector]",
       sellingPlans: "[data-selling-plan-selector]",
       sellingPlansWrapper: "[data-selling-plans-wrapper]"
-    };
-    this.productBase = false;
-
-    this.productSelector = this.closest(
-      this.selectors.product
-    ).querySelector("product-selector");
-
-    if (!this.productSelector) {
-      this.productSelector = this.closest(this.selectors.product);
-      this.productBase = true;
-    }
-
-    this.productForm = this.closest(
-      this.selectors.product
-    ).querySelector("product-form");
+    }, this.productBase = !1, this.productSelector = this.closest(this.selectors.product).querySelector("product-selector"), this.productSelector || (this.productSelector = this.closest(this.selectors.product), this.productBase = !0), this.productForm = this.closest(this.selectors.product).querySelector("product-form")
   }
-
   connectedCallback() {
-    this.setHandlers();
+    this.setHandlers()
   }
-
   setHandlers() {
-    this.querySelector(
-      this.selectors.sellingPlanGroups
-    ).addEventListener(
-      "change",
-      this.onSellingGroupChange.bind(this)
-    );
-    this.querySelectorAll(this.selectors.sellingPlans).forEach(
-      sellingPlanSelector =>
-      sellingPlanSelector.addEventListener("change", event => {
-        event.target
-          .closest("dropdown-input")
-          ?.classList?.remove("has-error");
-        this.updateProductSelector(event.target.value);
-      })
-    );
+    this.querySelector(this.selectors.sellingPlanGroups).addEventListener("change", this.onSellingGroupChange.bind(this)), this.querySelectorAll(this.selectors.sellingPlans).forEach(e => e.addEventListener("change", e => {
+      e.target.closest("dropdown-input")?.classList?.remove("has-error"), this.updateProductSelector(e.target.value)
+    }))
   }
-
-  onSellingGroupChange(event) {
-    if (event.target.value == "one-time") {
-      Array.from(
-        this.querySelectorAll(this.selectors.sellingPlans)
-      ).map(select => {
-        select.value = "";
+  onSellingGroupChange(r) {
+    if ("one-time" == r.target.value) {
+      Array.from(this.querySelectorAll(this.selectors.sellingPlans)).map(e => {
+        e.value = ""
       });
-
-      const sellingPlansWrapper = this.querySelector(
-        this.selectors.sellingPlansWrapper
-      );
-      sellingPlansWrapper.style.maxHeight = "0";
-      sellingPlansWrapper.classList.add("is-hidden");
-
-
-      const sellingPlanInfo = this.closest('.product__purchase-options').querySelector('.product__purchase--info');
-      sellingPlanInfo.classList.add("hidden");
-
-      this.updateProductSelector();
-      return;
+      let e = this.querySelector(this.selectors.sellingPlansWrapper);
+      e.style.maxHeight = "0", e.classList.add("is-hidden"), this.closest(".product__purchase-options").querySelector(".product__purchase--info").classList.add("hidden"), void this.updateProductSelector()
+    } else {
+      let t = r.target.querySelector(`option[value="${r.target.value}"]`).dataset.id,
+        e = this.querySelector(this.selectors.sellingPlansWrapper);
+      e.querySelectorAll("[data-id]").forEach(e => {
+        e.classList.toggle("is-hidden", e.dataset.id !== t)
+      }), e.style.maxHeight = e.scrollHeight + "px", e.classList.remove("is-hidden")
     }
-
-    const sellingPlansWrapperId = event.target.querySelector(
-      `option[value="${event.target.value}"]`
-    ).dataset.id;
-
-    const sellingPlansWrapper = this.querySelector(
-      this.selectors.sellingPlansWrapper
-    );
-    sellingPlansWrapper
-      .querySelectorAll(`[data-id]`)
-      .forEach(sellingGroupWrapper => {
-        sellingGroupWrapper.classList.toggle(
-          "is-hidden",
-          sellingGroupWrapper.dataset.id !== sellingPlansWrapperId
-        );
-      });
-    sellingPlansWrapper.style.maxHeight = `${sellingPlansWrapper.scrollHeight}px`;
-    sellingPlansWrapper.classList.remove("is-hidden");
   }
-
   isOneTimePurchase() {
-    return (
-      this.querySelector('[name="selling_plan_group"]').value ===
-      "one-time"
-    );
+    return "one-time" === this.querySelector('[name="selling_plan_group"]').value
   }
-
   showError() {
-    const sellingPlanWrappers = this.querySelectorAll(
-      this.selectors.sellingPlansWrapper
-    );
-    const activeSellingPlanWrapper = [...sellingPlanWrappers].filter(
-      sellingPlanWrapper =>
-      !sellingPlanWrapper.classList.contains("is-hidden")
-    )[0];
-    activeSellingPlanWrapper
-      .querySelectorAll("dropdown-input")
-      .forEach(dropdownInput =>
-        dropdownInput.classList.add("has-error")
-      );
+    [...this.querySelectorAll(this.selectors.sellingPlansWrapper)].filter(e => !e.classList.contains("is-hidden"))[0].querySelectorAll("dropdown-input").forEach(e => e.classList.add("has-error"))
   }
-
-  updateProductSelector(sellingPlanId) {
-    if (this.productBase) {
-      this.updateProductBase(sellingPlanId);
-      return;
-    }
-
-    if (!this.productSelector.currentVariant) {
-      this.productSelector.updateVariant();
-    }
-
-    this.productSelector.updateURL(sellingPlanId);
-    this.productSelector.renderProductInfo();
-    if (
-      this.productSelector.currentVariant.available &&
-      sellingPlanId
-    ) {
-      this.productForm.setAttribute("data-has-selling-plan", "true");
-      this.productForm.toggleAddButton(false, "");
-      return;
-    }
-
-    this.productForm.removeAttribute("data-has-selling-plan", true);
-    this.productForm.toggleAddButton(false, "");
+  updateProductSelector(e) {
+    this.productBase ? this.updateProductBase(e) : (this.productSelector.currentVariant || this.productSelector.updateVariant(), this.productSelector.updateURL(e), this.productSelector.renderProductInfo(), this.productSelector.currentVariant.available && e ? this.productForm.setAttribute("data-has-selling-plan", "true") : this.productForm.removeAttribute("data-has-selling-plan", !0), this.productForm.toggleAddButton(!1, ""))
   }
-
-  updateProductBase(sellingPlanId) {
-    const selectedVariant = this.productSelector.getSelectedVariant(
-      this.productSelector
-    );
-
-    this.productSelector.updateSellingPlanURL(
-      sellingPlanId,
-      selectedVariant.id
-    );
-    this.renderPurchaseInfo(selectedVariant.id);
-
-    if (selectedVariant.available && sellingPlanId) {
-      this.productForm.setAttribute("data-has-selling-plan", "true");
-      this.productForm.toggleSubmitButton(false, "");
-      return;
-    }
-
-    this.productForm.removeAttribute("data-has-selling-plan");
-    this.productForm.toggleSubmitButton(false, "");
+  updateProductBase(e) {
+    var t = this.productSelector.getSelectedVariant(this.productSelector);
+    this.productSelector.updateSellingPlanURL(e, t.id), this.renderPurchaseInfo(t.id), t.available && e ? this.productForm.setAttribute("data-has-selling-plan", "true") : this.productForm.removeAttribute("data-has-selling-plan"), this.productForm.toggleSubmitButton(!1, "")
   }
-
-  renderPurchaseInfo(selectedVariantId) {
-    const params = new URLSearchParams(window.location.search);
-    params[params.has("variant") ? "set" : "append"](
-      "variant",
-      selectedVariantId
-    );
-
-    fetch(`${this.productSelector.dataset.url}?${params.toString()}`)
-      .then(response => response.text())
-      .then(responseText => {
-        const html = new DOMParser().parseFromString(
-          responseText,
-          "text/html"
-        );
-        [
-          `#Product-Purchase-Options-${this.productSelector.dataset.section}`,
-          `#ProductPurchaseInfo-${this.productSelector.dataset.section}`
-        ].map(
-          liveRegionSelector => {
-            const destination = document.querySelector(
-              liveRegionSelector
-            );
-            const source = html.querySelector(liveRegionSelector);
-            if (destination && source) {
-              destination.classList.remove("hidden");
-              destination.innerHTML = source.innerHTML;
-            }
-          }
-        );
+  renderPurchaseInfo(e) {
+    var t = new URLSearchParams(window.location.search);
+    t[t.has("variant") ? "set" : "append"]("variant", e), fetch(this.productSelector.dataset.url + "?" + t.toString()).then(e => e.text()).then(e => {
+      let r = (new DOMParser).parseFromString(e, "text/html");
+      ["#Product-Purchase-Options-" + this.productSelector.dataset.section, "#ProductPurchaseInfo-" + this.productSelector.dataset.section].map(e => {
+        var t = document.querySelector(e),
+          e = r.querySelector(e);
+        t && e && (t.classList.remove("hidden"), t.innerHTML = e.innerHTML)
       })
-      .catch(error => {
-        console.error(error);
-      });
+    }).catch(e => {
+      console.error(e)
+    })
   }
 }
-
-customElements.define('purchase-options', PurchaseOptions);
+customElements.define("purchase-options", PurchaseOptions);

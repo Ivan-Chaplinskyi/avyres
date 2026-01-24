@@ -1,1 +1,1 @@
-let viewMoreElement=document.querySelector(".js-btn-load-more");if(viewMoreElement){let e=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&viewMoreElement.click()})});e.observe(viewMoreElement)}
+let e=document.querySelector(".js-btn-load-more");if(e){new IntersectionObserver(r=>{r.forEach(r=>{r.isIntersecting&&e.click()})}).observe(e)}
