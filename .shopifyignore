@@ -1,8 +1,0 @@
-gulpfile.js 
-src 
-node_modules 
-package-lock.json 
-package.json 
-.gitignore 
-yarn-error.log 
-yarn.lock
