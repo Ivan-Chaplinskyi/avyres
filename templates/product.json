@@ -12,6 +12,10 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "breadcrumbs_TA94Lr": {
+          "type": "breadcrumbs",
+          "settings": {}
+        },
         "badge_Hkd38r": {
           "type": "badge",
           "settings": {
@@ -160,6 +164,7 @@
         }
       },
       "block_order": [
+        "breadcrumbs_TA94Lr",
         "badge_Hkd38r",
         "1e0c79e9-7de0-4eee-b9c5-f27132635fb8",
         "8effeb43-55b7-4ec4-ab9b-68bcd89b865b",
