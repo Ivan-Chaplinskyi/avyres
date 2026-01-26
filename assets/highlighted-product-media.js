@@ -1,1 +1,198 @@
-if(!customElements.get("product-media")){class e extends HTMLElement{constructor(){super(),this.selectors={slider:"[data-slider]",mediaItem:"[data-media-id]",modalOpeners:"[data-modal-opener-id]",zoomImages:"[data-pswp-image]",btnXr:"[data-shopify-xr]",mediaCounterIndex:"[data-media-counter-index]"},this.selectedMediaIndex=Number(this.querySelector(this.selectors.slider).querySelector("[data-selected]")?.dataset.index)||0;var e=JSON.parse(this.querySelector(this.selectors.slider).getAttribute("data-swiper-options")),t=this.dataset.withThumbs;this.settings={sliderElement:()=>{var e,t=this.querySelector(this.selectors.slider);if(t)return""!==(e=t.dataset.slider)?document.getElementById(e):t},sliderInstance:null,options:{initialSlide:0,navigation:{prevEl:this.querySelector(".swiper-button--prev"),nextEl:this.querySelector(".swiper-button--next")},pagination:{el:".swiper-pagination",clickable:!0},spaceBetween:8,watchOverflow:!0,watchSlidesVisibility:!0,watchSlidesProgress:!0,preventInteractionOnTransition:!0,autoHeight:this.dataset.autoHeight,on:{afterInit:e=>{var t;this.settings.sliderElement().removeAttribute("style"),1<e.slides.length&&((t=(e=e.slides[0]).querySelector("video"))&&this.playPromise(t),(t=e.querySelector(".js-youtube"))&&this.playYoutubeVideo(t),t=e.querySelector(".js-vimeo"))&&this.playVimeoVideo(t),this.addFocusListeners()},slideChangeTransitionEnd:e=>{this.setActiveModalOpener(e)},transitionStart:e=>{e=e.el.querySelectorAll("video"),Array.from(e).forEach(e=>{e.pause()})},transitionEnd:e=>{var t,i,s;1<e.slides.length&&(e.activeIndex,t=e.slides[0].offsetWidth,Math.abs(Math.floor(e.translate/[t])),e=(t=Array.from(e.slides).find(e=>e.classList.contains("swiper-slide-active"))).querySelector("video"),i=t.nextElementSibling?.querySelector("video"),(s=e=>{e&&e.paused?this.playPromise(e):e&&e.pause()})(e),s(i),(e=t.querySelector(".js-youtube"))&&this.playYoutubeVideo(e),s=t.querySelector(".js-vimeo"))&&this.playVimeoVideo(s)},activeIndexChange:e=>{this.querySelector(this.selectors.mediaCounterIndex)&&(this.querySelector(this.selectors.mediaCounterIndex).textContent=e.activeIndex+1)},touchStart:()=>{this.querySelectorAll(".media video").forEach(e=>{e.removeAttribute("controls")})},touchEnd:()=>{this.querySelectorAll(".media video").forEach(e=>{e.setAttribute("controls","controls")})}}}},e&&(this.settings.options.breakpoints={750:{slidesPerView:e.slidesPerViewDesktop}}),"true"===t?(t={swiper:{el:".swiper-thumbs",initialSlide:this.selectedMediaIndex,centeredSlides:!0,centeredSlidesBounds:!0,centerInsufficientSlides:!0,freeMode:{enabled:!0},direction:"horizontal",mousewheel:!0,slidesPerView:6,spaceBetween:2,breakpoints:{750:{direction:e.thumbsDirectionDesktop,spaceBetween:16,slidesPerView:"auto",slidesOffsetAfter:400}},on:{afterInit:e=>{0!==e.activeIndex&&e.slideTo(0);let t=e.wrapperEl,i=new MutationObserver(function(){t.hasAttribute("style")&&t.style?.transform&&"translate3d(0px, 0px, 0px)"!==t.style?.transform?t.style.transform="translate3d(0px, 0px, 0px)":t.hasAttribute("style")&&t.style?.transform&&"translate3d(0px, 0px, 0px)"===t.style?.transform&&setTimeout(()=>{t.hasAttribute("style")&&t.style?.transform&&"translate3d(0px, 0px, 0px)"===t.style?.transform&&i.disconnect()},500)});i.observe(t,{attributes:!0})}}}},this.settings.options.thumbs=t,this.settings.options.breakpoints={990:{slidesPerView:e.slidesPerViewDesktop}},this.settings.options.on.init=e=>{setTimeout(()=>{e.thumbs.swiper.el.classList.add("swiper-thumbs--visible")},10)},this.settings.options.on.slideChangeTransitionStart=e=>{var t=e.thumbs.swiper;(e=e.activeIndex)!==t.activeIndex&&t.slideTo(e)}):this.settings.options.slidesPerView=1,Shopify.designMode&&window.addEventListener("shopify:section:load",this.init.bind(this))}connectedCallback(){this.init()}init(){"false"===this.dataset.mediaZoom&&this.photoSwipeLightboxInit(),this.swiperInit(),window.onresize=()=>{this.swiperInit()}}swiperInit(){this.settings.sliderInstance=new Swiper(this.settings.sliderElement(),this.settings.options)}addFocusListeners(){this.settings.sliderElement().querySelectorAll(".swiper-slide").forEach((e,t)=>{e.setAttribute("tabindex","0"),e.addEventListener("focus",()=>{this.settings.sliderInstance.slideTo(t+1)})})}photoSwipeLightboxInit(){let[,,e,t,i]=[this.offsetWidth,this.offsetHeight,this.querySelector("[data-close-icon]"),this.querySelector("[data-prev-icon]"),this.querySelector("[data-next-icon]")];function s(){return window.innerWidth<750}var r=new PhotoSwipeLightbox({gallery:"#product-media--photoswipe",children:"a.product__gallery-toggle",mainClass:"pswp--product-media-gallery",loop:!1,showHideAnimationType:"zoom",initialZoomLevel:e=>s()?e.vFill:e.fit,secondaryZoomLevel:e=>s()?e.fit:1,pswpModule:PhotoSwipe});r.addFilter("uiElement",(s,r)=>("close"===r.name?s.innerHTML=e.innerHTML:"arrowPrev"===r.name?s.innerHTML=t.innerHTML:"arrowNext"===r.name&&(s.innerHTML=i.innerHTML),s)),r.addFilter("itemData",(e,t)=>"html"===e.type&&e.element?{html:e.element.dataset.pswpHtml}:e),r.init(),r.on("beforeOpen",()=>{document.body.classList.add("oveflow-hidden");var e=this.querySelectorAll("video");Array.from(e).forEach(e=>{e.play().then(()=>{}).catch(t=>{e.pause()})})}),r.on("closingAnimationStart",()=>{document.body.classList.remove("oveflow-hidden")}),this.addEventListener("dragstart",e=>{e.preventDefault()})}setActiveMedia(e){var t=Array.from(this.querySelectorAll(this.selectors.mediaItem)).find(t=>Number(t.dataset.mediaId)===e);t&&this.settings.sliderInstance.slideTo(Number(t.dataset.index))}setActiveModalOpener(e){var t;(e=e.slides.filter(e=>e.classList.contains("swiper-slide-active"))[0])&&(t=e.dataset.mediaId,this.querySelector(this.selectors.modalOpeners+".is-active")?.classList.remove("is-active"),this.querySelector(this.selectors.modalOpeners+` [data-media-id="${t}"]`)?.parentElement.classList.add("is-active"),"model"===e.dataset.mediaType)&&(this.querySelector(this.selectors.btnXr).dataset.shopifyModel3dId=t)}playPromise(e){var t=e.play();void 0!==t&&t.then(()=>{}).catch(t=>{e.pause()})}playYoutubeVideo(e){e.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}',"*")}playVimeoVideo(e){e.contentWindow.postMessage('{"method":"play"}',"*")}}customElements.define("product-media",e)}
+if (!customElements.get("product-media")) {
+  class a extends HTMLElement {
+    constructor() {
+      super(), this.selectors = {
+        slider: "[data-slider]",
+        mediaItem: "[data-media-id]",
+        modalOpeners: "[data-modal-opener-id]",
+        zoomImages: "[data-pswp-image]",
+        btnXr: "[data-shopify-xr]",
+        mediaCounterIndex: "[data-media-counter-index]"
+      }, this.selectedMediaIndex = Number(this.querySelector(this.selectors.slider).querySelector("[data-selected]")?.dataset.index) || 0;
+      var e = JSON.parse(this.querySelector(this.selectors.slider).getAttribute("data-swiper-options")),
+        t = this.dataset.withThumbs;
+      this.settings = {
+        sliderElement: () => {
+          var e, t = this.querySelector(this.selectors.slider);
+          if (t) return "" !== (e = t.dataset.slider) ? document.getElementById(e) : t
+        },
+        sliderInstance: null,
+        options: {
+          initialSlide: 0,
+          navigation: {
+            prevEl: this.querySelector(".swiper-button--prev"),
+            nextEl: this.querySelector(".swiper-button--next")
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: !0
+          },
+          spaceBetween: 8,
+          watchOverflow: !0,
+          watchSlidesVisibility: !0,
+          watchSlidesProgress: !0,
+          preventInteractionOnTransition: !0,
+          autoHeight: this.dataset.autoHeight,
+          on: {
+            afterInit: e => {
+              var t;
+              this.settings.sliderElement().removeAttribute("style"), 1 < e.slides.length && ((t = (e = e.slides[0]).querySelector("video")) && this.playPromise(t), (t = e.querySelector(".js-youtube")) && this.playYoutubeVideo(t), t = e.querySelector(".js-vimeo")) && this.playVimeoVideo(t), this.addFocusListeners()
+            },
+            slideChangeTransitionEnd: e => {
+              this.setActiveModalOpener(e)
+            },
+            transitionStart: e => {
+              e = e.el.querySelectorAll("video");
+              Array.from(e).forEach(e => {
+                e.pause()
+              })
+            },
+            transitionEnd: e => {
+              var t, i, s;
+              1 < e.slides.length && (e.activeIndex, t = e.slides[0].offsetWidth, Math.abs(Math.floor(e.translate / [t])), e = (t = Array.from(e.slides).find(e => e.classList.contains("swiper-slide-active"))).querySelector("video"), i = t.nextElementSibling?.querySelector("video"), (s = e => {
+                e && e.paused ? this.playPromise(e) : e && e.pause()
+              })(e), s(i), (e = t.querySelector(".js-youtube")) && this.playYoutubeVideo(e), s = t.querySelector(".js-vimeo")) && this.playVimeoVideo(s)
+            },
+            activeIndexChange: e => {
+              this.querySelector(this.selectors.mediaCounterIndex) && (this.querySelector(this.selectors.mediaCounterIndex).textContent = e.activeIndex + 1)
+            },
+            touchStart: () => {
+              this.querySelectorAll(".media video").forEach(e => {
+                e.removeAttribute("controls")
+              })
+            },
+            touchEnd: () => {
+              this.querySelectorAll(".media video").forEach(e => {
+                e.setAttribute("controls", "controls")
+              })
+            }
+          }
+        }
+      }, e && (this.settings.options.breakpoints = {
+        750: {
+          slidesPerView: e.slidesPerViewDesktop
+        }
+      }), "true" === t ? (t = {
+        swiper: {
+          el: ".swiper-thumbs",
+          initialSlide: this.selectedMediaIndex,
+          centeredSlides: !0,
+          centeredSlidesBounds: !0,
+          centerInsufficientSlides: !0,
+          freeMode: {
+            enabled: !0
+          },
+          direction: "horizontal",
+          mousewheel: !0,
+          slidesPerView: 6,
+          spaceBetween: 2,
+          breakpoints: {
+            750: {
+              direction: e.thumbsDirectionDesktop,
+              spaceBetween: 16,
+              slidesPerView: "auto",
+              slidesOffsetAfter: 400
+            }
+          },
+          on: {
+            afterInit: e => {
+              0 !== e.activeIndex && e.slideTo(0);
+              let t = e.wrapperEl,
+                i = new MutationObserver(function() {
+                  t.hasAttribute("style") && t.style?.transform && "translate3d(0px, 0px, 0px)" !== t.style?.transform ? t.style.transform = "translate3d(0px, 0px, 0px)" : t.hasAttribute("style") && t.style?.transform && "translate3d(0px, 0px, 0px)" === t.style?.transform && setTimeout(() => {
+                    t.hasAttribute("style") && t.style?.transform && "translate3d(0px, 0px, 0px)" === t.style?.transform && i.disconnect()
+                  }, 500)
+                });
+              i.observe(t, {
+                attributes: !0
+              })
+            }
+          }
+        }
+      }, this.settings.options.thumbs = t, this.settings.options.breakpoints = {
+        990: {
+          slidesPerView: e.slidesPerViewDesktop
+        }
+      }, this.settings.options.on.init = e => {
+        setTimeout(() => {
+          e.thumbs.swiper.el.classList.add("swiper-thumbs--visible")
+        }, 10)
+      }, this.settings.options.on.slideChangeTransitionStart = e => {
+        var t = e.thumbs.swiper,
+          e = e.activeIndex;
+        e !== t.activeIndex && t.slideTo(e)
+      }) : this.settings.options.slidesPerView = 1, Shopify.designMode && window.addEventListener("shopify:section:load", this.init.bind(this))
+    }
+    connectedCallback() {
+      this.init()
+    }
+    init() {
+      "false" === this.dataset.mediaZoom && this.photoSwipeLightboxInit(), this.swiperInit(), window.onresize = () => {
+        this.swiperInit()
+      }
+    }
+    swiperInit() {
+      this.settings.sliderInstance = new Swiper(this.settings.sliderElement(), this.settings.options)
+    }
+    addFocusListeners() {
+      this.settings.sliderElement().querySelectorAll(".swiper-slide").forEach((e, t) => {
+        e.setAttribute("tabindex", "0"), e.addEventListener("focus", () => {
+          this.settings.sliderInstance.slideTo(t + 1)
+        })
+      })
+    }
+    photoSwipeLightboxInit() {
+      let [, , i, s, r] = [this.offsetWidth, this.offsetHeight, this.querySelector("[data-close-icon]"), this.querySelector("[data-prev-icon]"), this.querySelector("[data-next-icon]")];
+
+      function t() {
+        return window.innerWidth < 750
+      }
+      var e = new PhotoSwipeLightbox({
+        gallery: "#product-media--photoswipe",
+        children: "a.product__gallery-toggle",
+        mainClass: "pswp--product-media-gallery",
+        loop: !1,
+        showHideAnimationType: "zoom",
+        initialZoomLevel: e => t() ? e.vFill : e.fit,
+        secondaryZoomLevel: e => t() ? e.fit : 1,
+        pswpModule: PhotoSwipe
+      });
+      e.addFilter("uiElement", (e, t) => ("close" === t.name ? e.innerHTML = i.innerHTML : "arrowPrev" === t.name ? e.innerHTML = s.innerHTML : "arrowNext" === t.name && (e.innerHTML = r.innerHTML), e)), e.addFilter("itemData", (e, t) => "html" === e.type && e.element ? {
+        html: e.element.dataset.pswpHtml
+      } : e), e.init(), e.on("beforeOpen", () => {
+        document.body.classList.add("oveflow-hidden");
+        var e = this.querySelectorAll("video");
+        Array.from(e).forEach(t => {
+          t.play().then(() => {}).catch(e => {
+            t.pause()
+          })
+        })
+      }), e.on("closingAnimationStart", () => {
+        document.body.classList.remove("oveflow-hidden")
+      }), this.addEventListener("dragstart", e => {
+        e.preventDefault()
+      })
+    }
+    setActiveMedia(t) {
+      var e = Array.from(this.querySelectorAll(this.selectors.mediaItem)).find(e => Number(e.dataset.mediaId) === t);
+      e && this.settings.sliderInstance.slideTo(Number(e.dataset.index))
+    }
+    setActiveModalOpener(e) {
+      var t, e = e.slides.filter(e => e.classList.contains("swiper-slide-active"))[0];
+      e && (t = e.dataset.mediaId, this.querySelector(this.selectors.modalOpeners + ".is-active")?.classList.remove("is-active"), this.querySelector(this.selectors.modalOpeners + ` [data-media-id="${t}"]`)?.parentElement.classList.add("is-active"), "model" === e.dataset.mediaType) && (this.querySelector(this.selectors.btnXr).dataset.shopifyModel3dId = t)
+    }
+    playPromise(t) {
+      var e = t.play();
+      void 0 !== e && e.then(() => {}).catch(e => {
+        t.pause()
+      })
+    }
+    playYoutubeVideo(e) {
+      e.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*")
+    }
+    playVimeoVideo(e) {
+      e.contentWindow.postMessage('{"method":"play"}', "*")
+    }
+  }
+  customElements.define("product-media", a)
+}

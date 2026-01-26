@@ -1,1 +1,174 @@
-class e extends HTMLElement{constructor(){super(),this.onActiveFilterClick=this.onActiveFilterClick.bind(this),this.debouncedOnSubmit=debounce(e=>{this.onSubmitHandler(e)},800),this.querySelector("form").addEventListener("input",this.debouncedOnSubmit.bind(this));var e=this.querySelector("#FacetsWrapperDesktop");e&&e.addEventListener("keyup",onKeyUpEscape)}static setListeners(){window.addEventListener("popstate",t=>{(t=t.state?t.state.searchParams:e.searchParamsInitial)!==e.searchParamsPrev&&e.renderPage(t,null,!1)})}static toggleActiveFacets(e=!0){document.querySelectorAll(".js-facet-remove").forEach(t=>{t.classList.toggle("disabled",e)})}static renderPage(t,r,n=!0){e.searchParamsPrev=t;var a=e.getSections(),i=document.getElementById("ProductCount"),o=document.getElementById("ProductCountDesktop");document.getElementById("ProductGridContainer").querySelector(".collection-grid-container").classList.add("loading"),i&&i.classList.add("loading"),o&&o.classList.add("loading"),a.forEach(n=>{let a=`${window.location.pathname}?section_id=${n.section}&`+t;n=e=>e.url===a,e.filterData.some(n)?e.renderSectionFromCache(n,r):e.renderSectionFromFetch(a,r)}),n&&e.updateURLHash(t)}static renderSectionFromFetch(t,r){fetch(t).then(e=>e.text()).then(n=>{e.filterData=[...e.filterData,{html:n,url:t}],e.renderFilters(n,r),e.renderProductGridContainer(n),e.renderProductCount(n),document.getElementById("SortBy")&&document.getElementById("SortBy").dispatchEvent(new Event("change",{bubbles:!0})),"function"==typeof initializeScrollAnimationTrigger&&initializeScrollAnimationTrigger(n.innerHTML)})}static renderSectionFromCache(t,r){t=e.filterData.find(t).html,e.renderFilters(t,r),e.renderProductGridContainer(t),e.renderProductCount(t),document.getElementById("SortBy")&&document.getElementById("SortBy").dispatchEvent(new Event("change",{bubbles:!0})),"function"==typeof initializeScrollAnimationTrigger&&initializeScrollAnimationTrigger(t.innerHTML)}static renderProductGridContainer(e){document.getElementById("ProductGridContainer").innerHTML=(new DOMParser).parseFromString(e,"text/html").getElementById("ProductGridContainer").innerHTML,document.getElementById("ProductGridContainer").querySelectorAll(".scroll-trigger").forEach(e=>{e.classList.add("scroll-trigger--cancel")})}static renderProductCount(e){e=(new DOMParser).parseFromString(e,"text/html").getElementById("ProductCount").innerHTML;var t=document.getElementById("ProductCount"),r=document.getElementById("ProductCountDesktop");t.innerHTML=e,t.classList.remove("loading"),r&&(r.innerHTML=e,r.classList.remove("loading"))}static renderFilters(t,r){let n=(t=(new DOMParser).parseFromString(t,"text/html")).querySelectorAll("#FacetFiltersForm .js-filter");var a=document.querySelectorAll("#FacetFiltersForm .js-filter");Array.from(a).forEach(e=>{Array.from(n).some(({id:t})=>e.id===t)||e.remove()});let i=e=>{var t=r?r.target.closest(".js-filter"):void 0;return!!t&&e.id===t.id},o=Array.from(n).filter(e=>!i(e));a=Array.from(n).find(i);o.forEach((e,t)=>{var r;document.getElementById(e.id)?document.getElementById(e.id).innerHTML=e.innerHTML:0<t&&(({className:t,id:r}=o[t-1]),e.className===t)&&document.getElementById(r).after(e)}),e.renderActiveFacets(t),a&&(t=r.target.closest(".js-filter").id)&&(e.renderCounts(a,r.target.closest(".js-filter")),a=document.getElementById(t).querySelector(".facets__summary"),t="text"===r.target.getAttribute("type"),a)&&!t&&a.focus()}static renderActiveFacets(t){[".active-facets"].forEach(e=>{var r=t.querySelector(e);r&&(document.querySelector(e).innerHTML=r.innerHTML)}),e.toggleActiveFacets(!1)}static renderCounts(e,t){var r,n=t.querySelector(".facets__summary");(r=e.querySelector(".facets__summary"))&&n&&(n.outerHTML=r.outerHTML),n=t.querySelector(".facets__header"),(r=e.querySelector(".facets__header"))&&n&&(n.outerHTML=r.outerHTML),n=t.querySelector(".facets-wrap");(r=e.querySelector(".facets-wrap"))&&n&&(Boolean(t.querySelector("show-more-button .label-show-more.hidden"))&&r.querySelectorAll(".facets__item.hidden").forEach(e=>e.classList.replace("hidden","show-more-item")),n.outerHTML=r.outerHTML)}static updateURLHash(e){history.pushState({searchParams:e},"",""+window.location.pathname+(e&&"?".concat(e)))}static getSections(){return[{section:document.getElementById("product-grid").dataset.id}]}createSearchParams(e){return e=new FormData(e),new URLSearchParams(e).toString()}onSubmitForm(t,r){e.renderPage(t,r)}onSubmitHandler(e){e.preventDefault();let t=new URLSearchParams;var r;(r=((r=new URL(window.location.href).searchParams.get("sort_by"))&&t.set("sort_by",r),document.getElementById("SortBy")))&&r.value&&t.set("sort_by",r.value),document.querySelectorAll("facet-filters-form form").forEach(e=>{e.querySelectorAll('input[type="checkbox"]').forEach(e=>{e.checked&&t.append(e.name,e.value)}),e.querySelectorAll('input:not([type="checkbox"])').forEach(e=>{e.value&&"sort_by"!==e.name&&t.set(e.name,e.value)}),e.querySelectorAll("select").forEach(e=>{e.value&&"sort_by"===e.name&&t.set("sort_by",e.value)})}),this.onSubmitForm(t.toString(),e)}onActiveFilterClick(t){t.preventDefault(),e.toggleActiveFacets(),t=-1==t.currentTarget.href.indexOf("?")?"":t.currentTarget.href.slice(t.currentTarget.href.indexOf("?")+1),e.renderPage(t)}}e.filterData=[],e.searchParamsInitial=window.location.search.slice(1),e.searchParamsPrev=window.location.search.slice(1),customElements.define("facet-filters-form",e),e.setListeners();class t extends HTMLElement{constructor(){super(),this.querySelectorAll("input").forEach(e=>{e.addEventListener("change",this.onRangeChange.bind(this)),e.addEventListener("keydown",this.onKeyDown.bind(this))}),this.setMinAndMaxValues()}onRangeChange(e){this.adjustToValidValues(e.currentTarget),this.setMinAndMaxValues()}onKeyDown(e){["Backspace","Tab","Enter","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","Delete","Escape"].includes(e.key)||/[0-9.,]/.test(e.key)||e.preventDefault()}setMinAndMaxValues(){var e,t=(e=this.querySelectorAll("input"))[0];(e=e[1]).value?t.setAttribute("data-max",e.value):t.setAttribute("data-max",e.getAttribute("max")),t.value?e.setAttribute("data-min",t.value):e.setAttribute("data-min",t.getAttribute("min"))}adjustToValidValues(e){var t=Number(e.value),r=Number(e.getAttribute("min"))||0,n=Number(e.getAttribute("max"));!isNaN(r)&&t<r&&(e.value=r),!isNaN(n)&&n<t&&(e.value=n)}}customElements.define("price-range",t);class r extends HTMLElement{constructor(){super();var e=this.querySelector("a");e.setAttribute("role","button"),e.addEventListener("click",this.closeFilter.bind(this)),e.addEventListener("keyup",e=>{e.preventDefault(),"SPACE"===e.code.toUpperCase()&&this.closeFilter(e)})}closeFilter(e){e.preventDefault(),(this.closest("facet-filters-form")||document.querySelector("facet-filters-form")).onActiveFilterClick(e)}}customElements.define("facet-remove",r);
+class FacetFiltersForm extends HTMLElement {
+  constructor() {
+    super(), this.onActiveFilterClick = this.onActiveFilterClick.bind(this), this.debouncedOnSubmit = debounce(e => {
+      this.onSubmitHandler(e)
+    }, 800);
+    this.querySelector("form").addEventListener("input", this.debouncedOnSubmit.bind(this));
+    var e = this.querySelector("#FacetsWrapperDesktop");
+    e && e.addEventListener("keyup", onKeyUpEscape)
+  }
+  static setListeners() {
+    window.addEventListener("popstate", e => {
+      e = e.state ? e.state.searchParams : FacetFiltersForm.searchParamsInitial;
+      e !== FacetFiltersForm.searchParamsPrev && FacetFiltersForm.renderPage(e, null, !1)
+    })
+  }
+  static toggleActiveFacets(t = !0) {
+    document.querySelectorAll(".js-facet-remove").forEach(e => {
+      e.classList.toggle("disabled", t)
+    })
+  }
+  static renderPage(r, a, e = !0) {
+    FacetFiltersForm.searchParamsPrev = r;
+    var t = FacetFiltersForm.getSections(),
+      n = document.getElementById("ProductCount"),
+      i = document.getElementById("ProductCountDesktop");
+    document.getElementById("ProductGridContainer").querySelector(".collection-grid-container").classList.add("loading"), n && n.classList.add("loading"), i && i.classList.add("loading"), t.forEach(e => {
+      let t = `${window.location.pathname}?section_id=${e.section}&` + r;
+      e = e => e.url === t;
+      FacetFiltersForm.filterData.some(e) ? FacetFiltersForm.renderSectionFromCache(e, a) : FacetFiltersForm.renderSectionFromFetch(t, a)
+    }), e && FacetFiltersForm.updateURLHash(r)
+  }
+  static renderSectionFromFetch(t, r) {
+    fetch(t).then(e => e.text()).then(e => {
+      FacetFiltersForm.filterData = [...FacetFiltersForm.filterData, {
+        html: e,
+        url: t
+      }], FacetFiltersForm.renderFilters(e, r), FacetFiltersForm.renderProductGridContainer(e), FacetFiltersForm.renderProductCount(e), document.getElementById("SortBy") && document.getElementById("SortBy").dispatchEvent(new Event("change", {
+        bubbles: !0
+      })), "function" == typeof initializeScrollAnimationTrigger && initializeScrollAnimationTrigger(e.innerHTML)
+    })
+  }
+  static renderSectionFromCache(e, t) {
+    e = FacetFiltersForm.filterData.find(e).html;
+    FacetFiltersForm.renderFilters(e, t), FacetFiltersForm.renderProductGridContainer(e), FacetFiltersForm.renderProductCount(e), document.getElementById("SortBy") && document.getElementById("SortBy").dispatchEvent(new Event("change", {
+      bubbles: !0
+    })), "function" == typeof initializeScrollAnimationTrigger && initializeScrollAnimationTrigger(e.innerHTML)
+  }
+  static renderProductGridContainer(e) {
+    document.getElementById("ProductGridContainer").innerHTML = (new DOMParser).parseFromString(e, "text/html").getElementById("ProductGridContainer").innerHTML, document.getElementById("ProductGridContainer").querySelectorAll(".scroll-trigger").forEach(e => {
+      e.classList.add("scroll-trigger--cancel")
+    })
+  }
+  static renderProductCount(e) {
+    var e = (new DOMParser).parseFromString(e, "text/html").getElementById("ProductCount").innerHTML,
+      t = document.getElementById("ProductCount"),
+      r = document.getElementById("ProductCountDesktop");
+    t.innerHTML = e, t.classList.remove("loading"), r && (r.innerHTML = e, r.classList.remove("loading"))
+  }
+  static renderFilters(e, r) {
+    e = (new DOMParser).parseFromString(e, "text/html");
+    let a = e.querySelectorAll("#FacetFiltersForm .js-filter");
+    var t = document.querySelectorAll("#FacetFiltersForm .js-filter");
+    Array.from(t).forEach(t => {
+      Array.from(a).some(({
+        id: e
+      }) => t.id === e) || t.remove()
+    });
+    let n = e => {
+        var t = r ? r.target.closest(".js-filter") : void 0;
+        return !!t && e.id === t.id
+      },
+      i = Array.from(a).filter(e => !n(e));
+    var t = Array.from(a).find(n);
+    i.forEach((e, t) => {
+      var r;
+      document.getElementById(e.id) ? document.getElementById(e.id).innerHTML = e.innerHTML : 0 < t && ({
+        className: t,
+        id: r
+      } = i[t - 1], e.className === t) && document.getElementById(r).after(e)
+    }), FacetFiltersForm.renderActiveFacets(e), t && (e = r.target.closest(".js-filter").id) && (FacetFiltersForm.renderCounts(t, r.target.closest(".js-filter")), t = document.getElementById(e).querySelector(".facets__summary"), e = "text" === r.target.getAttribute("type"), t) && !e && t.focus()
+  }
+  static renderActiveFacets(r) {
+    [".active-facets"].forEach(e => {
+      var t = r.querySelector(e);
+      t && (document.querySelector(e).innerHTML = t.innerHTML)
+    }), FacetFiltersForm.toggleActiveFacets(!1)
+  }
+  static renderCounts(e, t) {
+    var r = t.querySelector(".facets__summary"),
+      a = e.querySelector(".facets__summary"),
+      r = (a && r && (r.outerHTML = a.outerHTML), t.querySelector(".facets__header")),
+      a = e.querySelector(".facets__header"),
+      r = (a && r && (r.outerHTML = a.outerHTML), t.querySelector(".facets-wrap")),
+      a = e.querySelector(".facets-wrap");
+    a && r && (Boolean(t.querySelector("show-more-button .label-show-more.hidden")) && a.querySelectorAll(".facets__item.hidden").forEach(e => e.classList.replace("hidden", "show-more-item")), r.outerHTML = a.outerHTML)
+  }
+  static updateURLHash(e) {
+    history.pushState({
+      searchParams: e
+    }, "", "" + window.location.pathname + (e && "?".concat(e)))
+  }
+  static getSections() {
+    return [{
+      section: document.getElementById("product-grid").dataset.id
+    }]
+  }
+  createSearchParams(e) {
+    e = new FormData(e);
+    return new URLSearchParams(e).toString()
+  }
+  onSubmitForm(e, t) {
+    FacetFiltersForm.renderPage(e, t)
+  }
+  onSubmitHandler(e) {
+    e.preventDefault();
+    let t = new URLSearchParams;
+    var r = new URL(window.location.href).searchParams.get("sort_by"),
+      r = (r && t.set("sort_by", r), document.getElementById("SortBy"));
+    r && r.value && t.set("sort_by", r.value), document.querySelectorAll("facet-filters-form form").forEach(e => {
+      e.querySelectorAll('input[type="checkbox"]').forEach(e => {
+        e.checked && t.append(e.name, e.value)
+      }), e.querySelectorAll('input:not([type="checkbox"])').forEach(e => {
+        e.value && "sort_by" !== e.name && t.set(e.name, e.value)
+      }), e.querySelectorAll("select").forEach(e => {
+        e.value && "sort_by" === e.name && t.set("sort_by", e.value)
+      })
+    }), this.onSubmitForm(t.toString(), e)
+  }
+  onActiveFilterClick(e) {
+    e.preventDefault(), FacetFiltersForm.toggleActiveFacets();
+    e = -1 == e.currentTarget.href.indexOf("?") ? "" : e.currentTarget.href.slice(e.currentTarget.href.indexOf("?") + 1);
+    FacetFiltersForm.renderPage(e)
+  }
+}
+FacetFiltersForm.filterData = [], FacetFiltersForm.searchParamsInitial = window.location.search.slice(1), FacetFiltersForm.searchParamsPrev = window.location.search.slice(1), customElements.define("facet-filters-form", FacetFiltersForm), FacetFiltersForm.setListeners();
+class PriceRange extends HTMLElement {
+  constructor() {
+    super(), this.querySelectorAll("input").forEach(e => {
+      e.addEventListener("change", this.onRangeChange.bind(this)), e.addEventListener("keydown", this.onKeyDown.bind(this))
+    }), this.setMinAndMaxValues()
+  }
+  onRangeChange(e) {
+    this.adjustToValidValues(e.currentTarget), this.setMinAndMaxValues()
+  }
+  onKeyDown(e) {
+    ["Backspace", "Tab", "Enter", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Delete", "Escape"].includes(e.key) || /[0-9.,]/.test(e.key) || e.preventDefault()
+  }
+  setMinAndMaxValues() {
+    var e = this.querySelectorAll("input"),
+      t = e[0],
+      e = e[1];
+    e.value ? t.setAttribute("data-max", e.value) : t.setAttribute("data-max", e.getAttribute("max")), t.value ? e.setAttribute("data-min", t.value) : e.setAttribute("data-min", t.getAttribute("min"))
+  }
+  adjustToValidValues(e) {
+    var t = Number(e.value),
+      r = Number(e.getAttribute("min")) || 0,
+      a = Number(e.getAttribute("max"));
+    !isNaN(r) && t < r && (e.value = r), !isNaN(a) && a < t && (e.value = a)
+  }
+}
+customElements.define("price-range", PriceRange);
+class FacetRemove extends HTMLElement {
+  constructor() {
+    super();
+    var e = this.querySelector("a");
+    e.setAttribute("role", "button"), e.addEventListener("click", this.closeFilter.bind(this)), e.addEventListener("keyup", e => {
+      e.preventDefault(), "SPACE" === e.code.toUpperCase() && this.closeFilter(e)
+    })
+  }
+  closeFilter(e) {
+    e.preventDefault(), (this.closest("facet-filters-form") || document.querySelector("facet-filters-form")).onActiveFilterClick(e)
+  }
+}
+customElements.define("facet-remove", FacetRemove);

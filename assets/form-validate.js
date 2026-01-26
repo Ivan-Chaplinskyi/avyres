@@ -1,1 +1,32 @@
-if(!customElements.get("form-validate")){class t extends HTMLElement{constructor(){if(super(),this.form=this.querySelector("form"),!this.form)throw new Error("Form element does not exist")}toggleErrorMessage(t,e){(e=e.querySelector("[data-message]")).classList.toggle("hidden",t.validity.valid),e.parentElement.classList.toggle("has-error",!t.validity.valid),e.innerHTML="email"===t.type?window.validationStrings.invalidEmail:t.validationMessage}setFieldValidity(t){t.setAttribute("aria-invalid",!t.validity.valid);var e=t.closest("[data-input-wrapper]");e&&(e.classList.toggle("has-error",!t.validity.valid),this.toggleErrorMessage(t,e))}onSubmit(t){this.form.reportValidity()||t.preventDefault(),this.form.submit()}setHandlers(){this.form.addEventListener("submit",this.onSubmit.bind(this));for(let t of this.form.elements)t.hasAttribute("data-no-validate")||["input","blur","change","invalid"].forEach(e=>{t.addEventListener(e,this.setInputHandler.bind(this))})}setInputHandler(t){"invalid"===t.type&&t.preventDefault(),this.setFieldValidity(t.target)}connectedCallback(){this.setHandlers()}}customElements.define("form-validate",t)}
+if (!customElements.get("form-validate")) {
+  class a extends HTMLElement {
+    constructor() {
+      if (super(), this.form = this.querySelector("form"), !this.form) throw new Error("Form element does not exist")
+    }
+    toggleErrorMessage(t, e) {
+      e = e.querySelector("[data-message]");
+      e.classList.toggle("hidden", t.validity.valid), e.parentElement.classList.toggle("has-error", !t.validity.valid), e.innerHTML = "email" === t.type ? window.validationStrings.invalidEmail : t.validationMessage
+    }
+    setFieldValidity(t) {
+      t.setAttribute("aria-invalid", !t.validity.valid);
+      var e = t.closest("[data-input-wrapper]");
+      e && (e.classList.toggle("has-error", !t.validity.valid), this.toggleErrorMessage(t, e))
+    }
+    onSubmit(t) {
+      this.form.reportValidity() || t.preventDefault(), this.form.submit()
+    }
+    setHandlers() {
+      this.form.addEventListener("submit", this.onSubmit.bind(this));
+      for (let e of this.form.elements) e.hasAttribute("data-no-validate") || ["input", "blur", "change", "invalid"].forEach(t => {
+        e.addEventListener(t, this.setInputHandler.bind(this))
+      })
+    }
+    setInputHandler(t) {
+      "invalid" === t.type && t.preventDefault(), this.setFieldValidity(t.target)
+    }
+    connectedCallback() {
+      this.setHandlers()
+    }
+  }
+  customElements.define("form-validate", a)
+}

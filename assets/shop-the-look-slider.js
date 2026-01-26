@@ -1,1 +1,44 @@
-if(!customElements.get("shop-the-look-slider")){class e extends(customElements.get("card-product-slider")){constructor(){super(),this.dotsList=this.querySelector(".js-dots-list"),this.pagination=this.querySelector(".shop-the-look--pagination"),this.nextArrow=this.querySelector(".shop-the-look--next"),this.prevArrow=this.querySelector(".shop-the-look--prev"),this.sliderOptions.breakpoints={750:{slidesPerView:1,spaceBetween:72},990:{spaceBetween:100},1100:{spaceBetween:130},1200:{spaceBetween:156}},this.sliderOptions.navigation={prevEl:this.prevArrow,nextEl:this.nextArrow},this.sliderOptions.pagination={el:this.pagination,type:"progressbar"},Shopify.designMode&&window.addEventListener("shopify:section:load",e=>{this.initSlider(this.querySelector(".js-slider"))}),this.initSlider(this.querySelector(".js-slider")),this.dotsList?.addEventListener("click",e=>{var t;e.target.classList.contains("js-btn")&&(e.preventDefault(),(e=e.target).classList.contains("is-current")||(t=+e.dataset.index,this.updateActiveDot(e),this.slider.slideTo(t,300)))}),this.slider?.on("slideChange",e=>{e=e.realIndex,e=this.dotsList?.querySelector(`.js-btn[data-index="${e}"]`),this.updateActiveDot(e)}),this.initDrawer()}connectedCallback(){}updateActiveDot(e){var t=this.dotsList?.querySelector(".js-btn.is-current");t.classList.remove("is-current"),t.setAttribute("aria-current",!1),e.classList.add("is-current"),e.setAttribute("aria-current",!0)}initDrawer(){document.querySelector(".shop-the-look-drawer__blocks"),document.querySelector("shop-the-look-drawer")}}customElements.define("shop-the-look-slider",e)}
+if (!customElements.get("shop-the-look-slider")) {
+  class a extends customElements.get("card-product-slider") {
+    constructor() {
+      super(), this.dotsList = this.querySelector(".js-dots-list"), this.pagination = this.querySelector(".shop-the-look--pagination"), this.nextArrow = this.querySelector(".shop-the-look--next"), this.prevArrow = this.querySelector(".shop-the-look--prev"), this.sliderOptions.breakpoints = {
+        750: {
+          slidesPerView: 1,
+          spaceBetween: 72
+        },
+        990: {
+          spaceBetween: 100
+        },
+        1100: {
+          spaceBetween: 130
+        },
+        1200: {
+          spaceBetween: 156
+        }
+      }, this.sliderOptions.navigation = {
+        prevEl: this.prevArrow,
+        nextEl: this.nextArrow
+      }, this.sliderOptions.pagination = {
+        el: this.pagination,
+        type: "progressbar"
+      }, Shopify.designMode && window.addEventListener("shopify:section:load", e => {
+        this.initSlider(this.querySelector(".js-slider"))
+      }), this.initSlider(this.querySelector(".js-slider")), this.dotsList?.addEventListener("click", e => {
+        var t;
+        e.target.classList.contains("js-btn") && (e.preventDefault(), (e = e.target).classList.contains("is-current") || (t = +e.dataset.index, this.updateActiveDot(e), this.slider.slideTo(t, 300)))
+      }), this.slider?.on("slideChange", e => {
+        e = e.realIndex, e = this.dotsList?.querySelector(`.js-btn[data-index="${e}"]`);
+        this.updateActiveDot(e)
+      }), this.initDrawer()
+    }
+    connectedCallback() {}
+    updateActiveDot(e) {
+      var t = this.dotsList?.querySelector(".js-btn.is-current");
+      t.classList.remove("is-current"), t.setAttribute("aria-current", !1), e.classList.add("is-current"), e.setAttribute("aria-current", !0)
+    }
+    initDrawer() {
+      document.querySelector(".shop-the-look-drawer__blocks"), document.querySelector("shop-the-look-drawer")
+    }
+  }
+  customElements.define("shop-the-look-slider", a)
+}

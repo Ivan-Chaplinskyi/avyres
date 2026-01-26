@@ -1,1 +1,67 @@
-if(!customElements.get("card-product-slider")){class e extends HTMLElement{constructor(){super();var e=JSON.parse(this.getAttribute("data-swiper-options"))||{};this.sliderWrapper=this.querySelector(".swiper-wrapper"),this.requiresFetch=this.hasAttribute("data-url"),this.parent=this.closest("[data-section-id]"),this.sliderOptions={a11y:!1,threshold:3,spaceBetween:e.spaceBetweenMobile||2,slidesPerView:e.slidesPerViewMobile||"auto",resistanceRatio:.72,breakpoints:{750:{slidesPerView:3,spaceBetween:e.spaceBetweenDesktop||2},1100:{slidesPerView:4,spaceBetween:e.spaceBetweenDesktop||2}}},e.navigation&&(this.sliderOptions.navigation={...e.navigation}),e.autoplay&&(this.sliderOptions.autoplay={...e.autoplay}),e.loop&&(this.sliderOptions.loop=e.loop)}connectedCallback(){this.requiresFetch?this.fetchItems():(this.initSlider(),this.syncHeights(),window.addEventListener("resize",()=>this.syncHeights()))}syncHeights(){var e=this.querySelector(".products-feed__card-text-custom-slide"),t=this.querySelector(".product-card__actions");e&&t&&(t=t.offsetHeight,e.style.height=t+"px")}fetchItems(){if(!this.parent)throw new Error("Parent is missing");fetch(this.getAttribute("data-url")).then(e=>e.text()).then(e=>{(e=(new DOMParser).parseFromString(e,"text/html").querySelector(".swiper-wrapper"))&&e.innerHTML.trim().length&&(this.querySelector(".swiper-wrapper").innerHTML=e.innerHTML,this.parent.classList.remove("hidden"),this.initSlider())}).catch(e=>{console.error(e)})}initSlider(e=this){this.slider=new Swiper(e,this.sliderOptions),this.slider.wrapperEl.setAttribute("aria-live","polite"),this.slider.wrapperEl.id="swiper-wrapper-"+this.dataset.sectionId,this.slider.slides.forEach((e,t)=>{e.setAttribute("role","group"),e.setAttribute("aria-label",t+1+" / "+this.slider.slides.length),e.dataset.index=t}),this.swiperOptions?.navigation&&[this.slider.navigation.prevEl,this.slider.navigation.nextEl].forEach((e,t)=>{let i=1===t?"Next":"Previous";e.setAttribute("aria-label",i+" slide"),e.setAttribute("aria-controls",this.slider.wrapperEl.id)}),this.slider.wrapperEl.addEventListener("focusin",e=>{this.slider.el.scrollLeft=0;var t=+(e=e.target.closest(".swiper-slide")).dataset.index,i=t==this.slider.slides.length-1;0==t||i?this.slider.slideTo(t,0):(i=e.getBoundingClientRect(),t=this.slider.wrapperEl.clientWidth,(e=i.x+i.width-(document.body.clientWidth-t)/2)<=t&&e>=i.width||(i.width<=e?this.slider.slideNext(0):this.slider.slidePrev(0)))});let t=JSON.parse(this.getAttribute("data-swiper-options"))||{};this.slider.wrapperEl.addEventListener("mouseenter",()=>this.slider.autoplay.stop()),this.slider.wrapperEl.addEventListener("mouseleave",()=>{!this.classList.contains("product--open-on-quick-cart")&&this.sliderOptions.autoplay&&this.slider.autoplay.start(),!1===t.autoplay&&this.slider.autoplay.stop()}),this.hasAttribute("data-init-quick-cart")&&document.querySelector("quick-cart-drawer")&&this.querySelector(".swiper-slide")&&document.querySelector("quick-cart-drawer").init(),this.querySelectorAll("product-card").forEach(e=>{e.init()}),Shopify.designMode&&this.hasAttribute("data-init-quick-cart")&&document.querySelector("quick-cart-drawer")&&this.querySelector(".swiper-slide")&&document.querySelector("quick-cart-drawer").init()}}customElements.define("card-product-slider",e)}
+if (!customElements.get("card-product-slider")) {
+  class a extends HTMLElement {
+    constructor() {
+      super();
+      var e = JSON.parse(this.getAttribute("data-swiper-options")) || {};
+      this.sliderWrapper = this.querySelector(".swiper-wrapper"), this.requiresFetch = this.hasAttribute("data-url"), this.parent = this.closest("[data-section-id]"), this.sliderOptions = {
+        a11y: !1,
+        threshold: 3,
+        spaceBetween: e.spaceBetweenMobile || 2,
+        slidesPerView: e.slidesPerViewMobile || "auto",
+        resistanceRatio: .72,
+        breakpoints: {
+          750: {
+            slidesPerView: 3,
+            spaceBetween: e.spaceBetweenDesktop || 2
+          },
+          1100: {
+            slidesPerView: 4,
+            spaceBetween: e.spaceBetweenDesktop || 2
+          }
+        }
+      }, e.navigation && (this.sliderOptions.navigation = {
+        ...e.navigation
+      }), e.autoplay && (this.sliderOptions.autoplay = {
+        ...e.autoplay
+      }), e.loop && (this.sliderOptions.loop = e.loop)
+    }
+    connectedCallback() {
+      this.requiresFetch ? this.fetchItems() : (this.initSlider(), this.syncHeights(), window.addEventListener("resize", () => this.syncHeights()))
+    }
+    syncHeights() {
+      var e = this.querySelector(".products-feed__card-text-custom-slide"),
+        t = this.querySelector(".product-card__actions");
+      e && t && (t = t.offsetHeight, e.style.height = t + "px")
+    }
+    fetchItems() {
+      if (!this.parent) throw new Error("Parent is missing");
+      fetch(this.getAttribute("data-url")).then(e => e.text()).then(e => {
+        e = (new DOMParser).parseFromString(e, "text/html").querySelector(".swiper-wrapper");
+        e && e.innerHTML.trim().length && (this.querySelector(".swiper-wrapper").innerHTML = e.innerHTML, this.parent.classList.remove("hidden"), this.initSlider())
+      }).catch(e => {
+        console.error(e)
+      })
+    }
+    initSlider(e = this) {
+      this.slider = new Swiper(e, this.sliderOptions), this.slider.wrapperEl.setAttribute("aria-live", "polite"), this.slider.wrapperEl.id = "swiper-wrapper-" + this.dataset.sectionId, this.slider.slides.forEach((e, t) => {
+        e.setAttribute("role", "group"), e.setAttribute("aria-label", t + 1 + " / " + this.slider.slides.length), e.dataset.index = t
+      }), this.swiperOptions?.navigation && [this.slider.navigation.prevEl, this.slider.navigation.nextEl].forEach((e, t) => {
+        let i = 1 === t ? "Next" : "Previous";
+        e.setAttribute("aria-label", i + " slide"), e.setAttribute("aria-controls", this.slider.wrapperEl.id)
+      }), this.slider.wrapperEl.addEventListener("focusin", e => {
+        this.slider.el.scrollLeft = 0;
+        var e = e.target.closest(".swiper-slide"),
+          t = +e.dataset.index,
+          i = t == this.slider.slides.length - 1;
+        0 == t || i ? this.slider.slideTo(t, 0) : (i = e.getBoundingClientRect(), t = this.slider.wrapperEl.clientWidth, (e = i.x + i.width - (document.body.clientWidth - t) / 2) <= t && e >= i.width || (i.width <= e ? this.slider.slideNext(0) : this.slider.slidePrev(0)))
+      });
+      let t = JSON.parse(this.getAttribute("data-swiper-options")) || {};
+      this.slider.wrapperEl.addEventListener("mouseenter", () => this.slider.autoplay.stop()), this.slider.wrapperEl.addEventListener("mouseleave", () => {
+        !this.classList.contains("product--open-on-quick-cart") && this.sliderOptions.autoplay && this.slider.autoplay.start(), !1 === t.autoplay && this.slider.autoplay.stop()
+      }), this.hasAttribute("data-init-quick-cart") && document.querySelector("quick-cart-drawer") && this.querySelector(".swiper-slide") && document.querySelector("quick-cart-drawer").init(), this.querySelectorAll("product-card").forEach(e => {
+        e.init()
+      }), Shopify.designMode && this.hasAttribute("data-init-quick-cart") && document.querySelector("quick-cart-drawer") && this.querySelector(".swiper-slide") && document.querySelector("quick-cart-drawer").init()
+    }
+  }
+  customElements.define("card-product-slider", a)
+}

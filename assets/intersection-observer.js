@@ -1,1 +1,72 @@
-let e=300,t=900,a=(e,t)=>(e=parseInt(e),isNaN(e)?t:e);document.querySelectorAll("[data-intersection-observer]").forEach((i,n)=>{let s=i.dataset.id,o=document.querySelector(`[data-id="${s}"]`);if(o){let n="false"!==o.dataset.intersectOnce;i={rootMargin:"0px 0px -50% 0px",threshold:0,...(()=>{try{return JSON.parse(o.dataset.intersectionObserver||"{}")}catch{return{}}})()};let r=o.querySelector(".full-width-banner__animation--body"),l=o.querySelectorAll(".full-width-banner__animation"),m=new IntersectionObserver(i=>{i.forEach(i=>{var d;i.isIntersecting&&s===i.target.dataset.id&&(i=window.innerWidth<750,d="false"!==o.dataset.animationMobile,i&&!d||o.classList.contains("isAnimated")&&n||(o.classList.remove("inAnimation","isAnimated"),i=r?a(r.dataset.animationDelay,e):e,d=r?a(r.dataset.animationDuration,t):t,(i=>{let{observerElement:n,animationBody:s,animationElements:o}=i;if(o?.length){let i=s?a(s.dataset.animationDelay,e):e,r=s?a(s.dataset.animationDuration,t):t,l=(n.classList.add("inAnimation"),0),m=o.length;o.forEach((e,t)=>{e&&((e,t)=>{var s=a(e.dataset.animationDelay,i);let o=a(e.dataset.animationDuration,r);s=(t=(t+1)*s)+o,setTimeout(()=>{requestAnimationFrame(()=>{e.classList.add("inAnimation");var t=e.querySelector("*");t&&(t.style.animationDuration=o+"ms")})},t),setTimeout(()=>{requestAnimationFrame(()=>{var t=e.querySelector("*");t&&(t.style.animationDuration="",t.style.length||t.removeAttribute("style")),e.classList.remove("inAnimation"),e.classList.add("isAnimated"),++l===m&&(n.classList.remove("inAnimation"),n.classList.add("isAnimated"))})},s)})(e,t)})}else n.classList.add("isAnimated")})({observerElement:o,animationBody:r,animationElements:l}),i=l.length*i+(i+d),setTimeout(()=>{o.classList.contains("isAnimated")&&n?m.unobserve(o):o.classList.contains("isAnimated")&&!n&&o.classList.remove("isAnimated")},i)))})},i);m.observe(o)}else console.warn("Observer element not found for ID: "+s)});
+let MOBILE_BREAKPOINT = 750,
+  DEFAULT_DELAY = 300,
+  DEFAULT_DURATION = 900,
+  parseIntSafe = (e, t) => {
+    e = parseInt(e);
+    return isNaN(e) ? t : e
+  },
+  isMobileDevice = () => window.innerWidth < MOBILE_BREAKPOINT;
+document.querySelectorAll("[data-intersection-observer]").forEach((e, t) => {
+  let r = e.dataset.id,
+    o = document.querySelector(`[data-id="${r}"]`);
+  if (o) {
+    let a = "false" !== o.dataset.intersectOnce;
+    e = {
+      rootMargin: "0px 0px -50% 0px",
+      threshold: 0,
+      ...(() => {
+        try {
+          return JSON.parse(o.dataset.intersectionObserver || "{}")
+        } catch {
+          return {}
+        }
+      })()
+    };
+    let i = o.querySelector(".full-width-banner__animation--body"),
+      n = o.querySelectorAll(".full-width-banner__animation"),
+      s = new IntersectionObserver(e => {
+        e.forEach(e => {
+          var t;
+          e.isIntersecting && r === e.target.dataset.id && (e = isMobileDevice(), t = "false" !== o.dataset.animationMobile, e && !t || o.classList.contains("isAnimated") && a || (o.classList.remove("inAnimation", "isAnimated"), e = i ? parseIntSafe(i.dataset.animationDelay, DEFAULT_DELAY) : DEFAULT_DELAY, t = i ? parseIntSafe(i.dataset.animationDuration, DEFAULT_DURATION) : DEFAULT_DURATION, (e => {
+            let {
+              observerElement: l,
+              animationBody: t,
+              animationElements: a
+            } = e;
+            if (a?.length) {
+              let n = t ? parseIntSafe(t.dataset.animationDelay, DEFAULT_DELAY) : DEFAULT_DELAY,
+                s = t ? parseIntSafe(t.dataset.animationDuration, DEFAULT_DURATION) : DEFAULT_DURATION,
+                r = (l.classList.add("inAnimation"), 0),
+                o = a.length;
+              a.forEach((e, t) => {
+                e && ((t, e) => {
+                  var a = parseIntSafe(t.dataset.animationDelay, n);
+                  let i = parseIntSafe(t.dataset.animationDuration, s);
+                  e = (e + 1) * a, a = e + i;
+                  setTimeout(() => {
+                    requestAnimationFrame(() => {
+                      t.classList.add("inAnimation");
+                      var e = t.querySelector("*");
+                      e && (e.style.animationDuration = i + "ms")
+                    })
+                  }, e), setTimeout(() => {
+                    requestAnimationFrame(() => {
+                      var e = t.querySelector("*");
+                      e && (e.style.animationDuration = "", e.style.length || e.removeAttribute("style")), t.classList.remove("inAnimation"), t.classList.add("isAnimated"), ++r === o && (l.classList.remove("inAnimation"), l.classList.add("isAnimated"))
+                    })
+                  }, a)
+                })(e, t)
+              })
+            } else l.classList.add("isAnimated")
+          })({
+            observerElement: o,
+            animationBody: i,
+            animationElements: n
+          }), e = n.length * e + (e + t), setTimeout(() => {
+            o.classList.contains("isAnimated") && a ? s.unobserve(o) : o.classList.contains("isAnimated") && !a && o.classList.remove("isAnimated")
+          }, e)))
+        })
+      }, e);
+    s.observe(o)
+  } else console.warn("Observer element not found for ID: " + r)
+});

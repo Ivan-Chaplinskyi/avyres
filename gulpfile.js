@@ -24,12 +24,12 @@ gulp.task("css", () => {
 gulp.task("js", () => {
   return gulp
     .src("./src/js/*.js", { since: gulp.lastRun('js') })
-    .pipe(terser({
-      toplevel: true,
-      format: {
-        comments: false, // Видаляє всі коментарі
-      },
-    }))
+    // .pipe(terser({
+    //   toplevel: true,
+    //   format: {
+    //     comments: false, // Видаляє всі коментарі
+    //   },
+    // }))
     .on('error', function (error) {
       console.error("JS Error:", error.toString()); // Показує помилку, але не зупиняє watch
       this.emit('end');

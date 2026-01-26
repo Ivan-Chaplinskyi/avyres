@@ -1,1 +1,222 @@
-class e extends HTMLElement{constructor(){super(),this.handle=this.getAttribute("handle"),this.swiperInitialized=!1}static get observedAttributes(){return["handle"]}init(){this.swiperInitialized||(this.swiperInitialized=!0,this.options=this.setOptions(),this.instance=new Swiper(".swiper--"+this.handle,this.options),this.setInteractions())}connectedCallback(){Shopify.designMode?(window.addEventListener("shopify:section:load",()=>this.init()),window.addEventListener("shopify:section:select",()=>this.init()),setTimeout(()=>{this.swiperInitialized||this.init()},100)):window.addEventListener("load",()=>this.init())}disconnectedCallback(){this.instance&&this.instance.destroy&&this.instance.destroy()}setOptions(){return this.debug&&console.log("setOptions"),this._options=this.getOptionsAsJsonScripts(),this._options}getOptionsAsJsonScripts(){this.debug&&console.log("getOptionsAsJsonScripts");var e=this.querySelector(`script#swiper--${this.handle}--automated-options`),t=this.querySelector(`script#swiper--${this.handle}--overwrite-options`);let i={};if(e&&e.textContent)try{i={...i,...JSON.parse(e.textContent)}}catch(i){console.error("Error parsing JSON",i,e?.textContent)}if(t&&t.textContent)try{i={...i,...JSON.parse(t.textContent)}}catch(i){console.error("Error parsing JSON",i,t?.textContent)}return i}getThumbsInstance(){if(this.isThumbsActive)return document.querySelector(`[handle="${this.getAttribute("thumbs")}"]`)?.instance}setInteractions(){this.debug&&console.log("setInteractions")}}customElements.get("swiper-product-thumbs")||customElements.define("swiper-product-thumbs",class extends e{constructor(){super()}setOptions(){return super.setOptions(),this.setCenteredSlides(),this._options}setCenteredSlides(){"product-thumbs"===this.handle&&(this.debug&&console.log("setCenteredSlides"),this._options={...this._options,on:{...this._options.on||{},afterInit:e=>{0!==e.activeIndex&&e.slideTo(0),this.debug&&console.log("afterInit");let t=e.wrapperEl,i=new MutationObserver(function(){t.hasAttribute("style")&&t.style?.transform&&"translate3d(0px, 0px, 0px)"!==t.style?.transform?(t.style.transform="translate3d(0px, 0px, 0px)",this.debug&&console.log("swiperWrapper observer removed styles!")):t.hasAttribute("style")&&t.style?.transform&&"translate3d(0px, 0px, 0px)"===t.style?.transform&&setTimeout(()=>{t.hasAttribute("style")&&t.style?.transform&&"translate3d(0px, 0px, 0px)"===t.style?.transform&&(i.disconnect(),this.debug)&&console.log("swiperWrapper observer disconnect!")},500)});i.observe(t,{attributes:!0});let s=(this.querySelector(".swiper-slide").clientHeight+16)*this.querySelectorAll(".swiper-slide").length,o=this.parentElement;function n(){o.offsetHeight>s?o.style.height=s-16+"px":o.removeAttribute("style")}window.addEventListener("resize",n),setTimeout(()=>{n()},2500)}}})}});customElements.get("swiper-product-gallery")||customElements.define("swiper-product-gallery",class extends e{constructor(){super(),this.isThumbsActive=this.hasAttribute("thumbs"),this.isZoomActive=this.hasAttribute("zoom"),this.modelViewerBtn=this.querySelector(".model-viewer-btn"),this.modelViewer=this.querySelector("model-viewer"),this.isModelActive=!1}static get observedAttributes(){return["thumbs","zoom"]}setOptions(){return super.setOptions(),this.setThumbOptions(),this._options}setThumbOptions(){var e;this.isThumbsActive&&(this.debug&&console.log("setThumbOptions"),e=super.getThumbsInstance(),this.debug&&console.log("thumbsInstance",e),this._options={...this._options,thumbs:{swiper:e}})}setInteractions(){this.isThumbsActive&&this.setThumbsInteraction(),this.isZoomActive&&this.photoSwipeLightboxInit(),this.initModelViewer(),document.querySelectorAll('.swiper-slide[data-media-type="model"]').forEach(e=>{e.addEventListener("click",()=>this.enableSwiper())}),this.instance.on("slideChange",e=>{window.innerWidth<750&&(e.pagination.update(),this.debug)&&console.log("Pagination updated manually on mobile.")}),this.instance.on("scroll",e=>{clearTimeout(this.scrollTimeout),this.scrollTimeout=setTimeout(()=>{e.pagination.update(),this.debug&&console.log("Pagination updated after scroll.")},200)})}initModelViewer(){var e,t;this.querySelectorAll('.swiper-slide[data-media-type="model"]').forEach(e=>{let t=e.querySelector(".model-viewer-btn");e=e.querySelector(".model-viewer-container");let i=e?.querySelector("model-viewer");t&&e&&i&&((t.modelViewer=i).controlButton=t,e.addEventListener("click",e=>{t.classList.contains("is-active")||(e.preventDefault(),e.stopPropagation(),t.click())}),t.addEventListener("click",e=>{e.preventDefault(),this.toggleModelViewer(t,i)}),i.addEventListener("mousedown",e=>{t.classList.contains("is-active")||(e.preventDefault(),e.stopPropagation())}))}),this.instance.navigation&&(({nextEl:e,prevEl:t}=this.instance.navigation),e&&e.addEventListener("click",()=>{this.resetAllModelViewers(),this.enableSwiper(!0)}),t)&&t.addEventListener("click",()=>{this.resetAllModelViewers(),this.enableSwiper(!0)})}resetAllModelViewers(){this.querySelectorAll('.swiper-slide[data-media-type="model"]').forEach(e=>{var t=e.querySelector(".model-viewer-btn");e=e.querySelector("model-viewer");t&&e&&(t.classList.remove("is-active"),e.interactionPrompt="none",e.cameraControls=!1)}),this.isModelActive=!1,this.instance.allowTouchMove=!0}toggleModelViewer(e,t){var i=e.classList.contains("is-active");this.resetAllModelViewers(),i||(this.isModelActive=!0,this.instance.allowTouchMove=!1,t.interactionPrompt="auto",t.cameraControls=!0,e.classList.add("is-active"))}temporarilyDisableSwiper(){this.instance.allowTouchMove=!1,this.swiperTimeout=setTimeout(()=>{this.isModelActive||this.enableSwiper()},100)}enableSwiper(e=!1){this.swiperTimeout&&clearTimeout(this.swiperTimeout),!e&&this.isModelActive||(this.instance.allowTouchMove=!0,e&&this.isModelActive&&(this.isModelActive=!1,this.modelViewer&&(this.modelViewer.interactionPrompt="none",this.modelViewer.cameraControls=!1),this.modelViewerBtn.classList.remove("is-active")))}setThumbsInteraction(){if(this.isThumbsActive&&this.instance){this.debug&&console.log("setThumbsInteraction");let e=this.options.thumbs.swiper;e.el.addEventListener("click",()=>{this.enableSwiper(!0),this.modelViewerBtn.classList.remove("btn--active")}),this.instance.on("slideChangeTransitionStart",function(t){t=t.activeIndex;var i=e.activeIndex;this.debug&&console.log("slideChangeTransitionStart",t,i),t!==i&&e.slideTo(t)})}}photoSwipeLightboxInit(){let[,,e,t,i]=[this.offsetWidth,this.offsetHeight,document.querySelector("[data-close-icon]"),document.querySelector("[data-prev-icon]"),document.querySelector("[data-next-icon]")];function s(){return window.innerWidth<750}var o=new PhotoSwipeLightbox({gallery:".photoswipe-wrapper",children:"a.product__gallery-toggle",mainClass:"pswp--product-media-gallery",loop:!1,showHideAnimationType:"zoom",initialZoomLevel:e=>s()?e.vFill:e.fit,secondaryZoomLevel:e=>s()?e.fit:1,pswpModule:PhotoSwipe});o.addFilter("uiElement",(s,o)=>("close"===o.name?s.innerHTML=e.innerHTML:"arrowPrev"===o.name?s.innerHTML=t.innerHTML:"arrowNext"===o.name&&(s.innerHTML=i.innerHTML),s)),o.addFilter("itemData",(e,t)=>"html"===e.type&&e.element?{html:e.element.dataset.pswpHtml}:e),o.init(),o.on("beforeOpen",()=>{document.body.classList.add("oveflow-hidden");var e=this.querySelectorAll("video");Array.from(e).forEach(e=>{e.play().then(()=>{}).catch(t=>{e.pause()})})}),o.on("closingAnimationStart",()=>{document.body.classList.remove("oveflow-hidden")})}setActiveMedia(e){var t=Array.from(this.querySelectorAll("[data-media-id]")).find(t=>Number(t.dataset.mediaId)===e);t&&this.instance&&"function"==typeof this.instance.slideTo&&"false"===this.dataset.hideOtherVariantsMedia&&this.instance.slideTo(Number(t.dataset.index))}});class t extends HTMLElement{constructor(){super(),this.init(),window.addEventListener("resize",this.init.bind(this)),Shopify.designMode&&window.addEventListener("shopify:section:load",this.init.bind(this))}init(){let e=document.querySelector(".main-product__media--slider").offsetWidth||330;var t=((e=document.querySelector(".main-product__media--grid-item")&&750<window.innerWidth?document.querySelector(".main-product__media--grid-item").offsetWidth:e)-48)/2,i=this.querySelector("p:last-child").offsetWidth,s=this.querySelector("p[aria-hidden]");t<i?(this.classList.remove("animation-stopped"),this.style.cssText=`--marquee-speed: ${i/t*8}s`,s.style.display=""):(this.classList.add("animation-stopped"),this.style.cssText="",s.style.display="none")}}customElements.get("product-media-info")||customElements.define("product-media-info",t);
+class InstanceSwiper extends HTMLElement {
+  constructor() {
+    super(), this.handle = this.getAttribute("handle"), this.swiperInitialized = !1
+  }
+  static get observedAttributes() {
+    return ["handle"]
+  }
+  init() {
+    this.swiperInitialized || (this.swiperInitialized = !0, this.options = this.setOptions(), this.instance = new Swiper(".swiper--" + this.handle, this.options), this.setInteractions())
+  }
+  connectedCallback() {
+    Shopify.designMode ? (window.addEventListener("shopify:section:load", () => this.init()), window.addEventListener("shopify:section:select", () => this.init()), setTimeout(() => {
+      this.swiperInitialized || this.init()
+    }, 100)) : window.addEventListener("load", () => this.init())
+  }
+  disconnectedCallback() {
+    this.instance && this.instance.destroy && this.instance.destroy()
+  }
+  setOptions() {
+    return this.debug && console.log("setOptions"), this._options = this.getOptionsAsJsonScripts(), this._options
+  }
+  getOptionsAsJsonScripts() {
+    this.debug && console.log("getOptionsAsJsonScripts");
+    var t = this.querySelector(`script#swiper--${this.handle}--automated-options`),
+      i = this.querySelector(`script#swiper--${this.handle}--overwrite-options`);
+    let e = {};
+    if (t && t.textContent) try {
+      e = {
+        ...e,
+        ...JSON.parse(t.textContent)
+      }
+    } catch (e) {
+      console.error("Error parsing JSON", e, t?.textContent)
+    }
+    if (i && i.textContent) try {
+      e = {
+        ...e,
+        ...JSON.parse(i.textContent)
+      }
+    } catch (e) {
+      console.error("Error parsing JSON", e, i?.textContent)
+    }
+    return e
+  }
+  getThumbsInstance() {
+    if (this.isThumbsActive) return document.querySelector(`[handle="${this.getAttribute("thumbs")}"]`)?.instance
+  }
+  setInteractions() {
+    this.debug && console.log("setInteractions")
+  }
+}
+class InstanceSwiperProductThumbs extends InstanceSwiper {
+  constructor() {
+    super()
+  }
+  setOptions() {
+    return super.setOptions(), this.setCenteredSlides(), this._options
+  }
+  setCenteredSlides() {
+    "product-thumbs" === this.handle && (this.debug && console.log("setCenteredSlides"), this._options = {
+      ...this._options,
+      on: {
+        ...this._options.on || {},
+        afterInit: e => {
+          0 !== e.activeIndex && e.slideTo(0), this.debug && console.log("afterInit");
+          let t = e.wrapperEl,
+            i = new MutationObserver(function() {
+              t.hasAttribute("style") && t.style?.transform && "translate3d(0px, 0px, 0px)" !== t.style?.transform ? (t.style.transform = "translate3d(0px, 0px, 0px)", this.debug && console.log("swiperWrapper observer removed styles!")) : t.hasAttribute("style") && t.style?.transform && "translate3d(0px, 0px, 0px)" === t.style?.transform && setTimeout(() => {
+                t.hasAttribute("style") && t.style?.transform && "translate3d(0px, 0px, 0px)" === t.style?.transform && (i.disconnect(), this.debug) && console.log("swiperWrapper observer disconnect!")
+              }, 500)
+            });
+          i.observe(t, {
+            attributes: !0
+          });
+          let s = (this.querySelector(".swiper-slide").clientHeight + 16) * this.querySelectorAll(".swiper-slide").length,
+            o = this.parentElement;
+
+          function n() {
+            o.offsetHeight > s ? o.style.height = s - 16 + "px" : o.removeAttribute("style")
+          }
+          window.addEventListener("resize", n), setTimeout(() => {
+            n()
+          }, 2500)
+        }
+      }
+    })
+  }
+}
+customElements.get("swiper-product-thumbs") || customElements.define("swiper-product-thumbs", InstanceSwiperProductThumbs);
+class InstanceSwiperProductGallery extends InstanceSwiper {
+  constructor() {
+    super(), this.isThumbsActive = this.hasAttribute("thumbs"), this.isZoomActive = this.hasAttribute("zoom"), this.modelViewerBtn = this.querySelector(".model-viewer-btn"), this.modelViewer = this.querySelector("model-viewer"), this.isModelActive = !1
+  }
+  static get observedAttributes() {
+    return ["thumbs", "zoom"]
+  }
+  setOptions() {
+    return super.setOptions(), this.setThumbOptions(), this._options
+  }
+  setThumbOptions() {
+    var e;
+    this.isThumbsActive && (this.debug && console.log("setThumbOptions"), e = super.getThumbsInstance(), this.debug && console.log("thumbsInstance", e), this._options = {
+      ...this._options,
+      thumbs: {
+        swiper: e
+      }
+    })
+  }
+  setInteractions() {
+    this.isThumbsActive && this.setThumbsInteraction(), this.isZoomActive && this.photoSwipeLightboxInit(), this.initModelViewer(), document.querySelectorAll('.swiper-slide[data-media-type="model"]').forEach(e => {
+      e.addEventListener("click", () => this.enableSwiper())
+    }), this.instance.on("slideChange", e => {
+      window.innerWidth < 750 && (e.pagination.update(), this.debug) && console.log("Pagination updated manually on mobile.")
+    }), this.instance.on("scroll", e => {
+      clearTimeout(this.scrollTimeout), this.scrollTimeout = setTimeout(() => {
+        e.pagination.update(), this.debug && console.log("Pagination updated after scroll.")
+      }, 200)
+    })
+  }
+  initModelViewer() {
+    var e, t;
+    this.querySelectorAll('.swiper-slide[data-media-type="model"]').forEach(e => {
+      let t = e.querySelector(".model-viewer-btn");
+      e = e.querySelector(".model-viewer-container");
+      let i = e?.querySelector("model-viewer");
+      t && e && i && ((t.modelViewer = i).controlButton = t, e.addEventListener("click", e => {
+        t.classList.contains("is-active") || (e.preventDefault(), e.stopPropagation(), t.click())
+      }), t.addEventListener("click", e => {
+        e.preventDefault(), this.toggleModelViewer(t, i)
+      }), i.addEventListener("mousedown", e => {
+        t.classList.contains("is-active") || (e.preventDefault(), e.stopPropagation())
+      }))
+    }), this.instance.navigation && ({
+      nextEl: e,
+      prevEl: t
+    } = this.instance.navigation, e && e.addEventListener("click", () => {
+      this.resetAllModelViewers(), this.enableSwiper(!0)
+    }), t) && t.addEventListener("click", () => {
+      this.resetAllModelViewers(), this.enableSwiper(!0)
+    })
+  }
+  resetAllModelViewers() {
+    this.querySelectorAll('.swiper-slide[data-media-type="model"]').forEach(e => {
+      var t = e.querySelector(".model-viewer-btn"),
+        e = e.querySelector("model-viewer");
+      t && e && (t.classList.remove("is-active"), e.interactionPrompt = "none", e.cameraControls = !1)
+    }), this.isModelActive = !1, this.instance.allowTouchMove = !0
+  }
+  toggleModelViewer(e, t) {
+    var i = e.classList.contains("is-active");
+    this.resetAllModelViewers(), i || (this.isModelActive = !0, this.instance.allowTouchMove = !1, t.interactionPrompt = "auto", t.cameraControls = !0, e.classList.add("is-active"))
+  }
+  temporarilyDisableSwiper() {
+    this.instance.allowTouchMove = !1, this.swiperTimeout = setTimeout(() => {
+      this.isModelActive || this.enableSwiper()
+    }, 100)
+  }
+  enableSwiper(e = !1) {
+    this.swiperTimeout && clearTimeout(this.swiperTimeout), !e && this.isModelActive || (this.instance.allowTouchMove = !0, e && this.isModelActive && (this.isModelActive = !1, this.modelViewer && (this.modelViewer.interactionPrompt = "none", this.modelViewer.cameraControls = !1), this.modelViewerBtn.classList.remove("is-active")))
+  }
+  setThumbsInteraction() {
+    if (this.isThumbsActive && this.instance) {
+      this.debug && console.log("setThumbsInteraction");
+      let i = this.options.thumbs.swiper;
+      i.el.addEventListener("click", () => {
+        this.enableSwiper(!0), this.modelViewerBtn.classList.remove("btn--active")
+      }), this.instance.on("slideChangeTransitionStart", function(e) {
+        var e = e.activeIndex,
+          t = i.activeIndex;
+        this.debug && console.log("slideChangeTransitionStart", e, t), e !== t && i.slideTo(e)
+      })
+    }
+  }
+  photoSwipeLightboxInit() {
+    let [, , i, s, o] = [this.offsetWidth, this.offsetHeight, document.querySelector("[data-close-icon]"), document.querySelector("[data-prev-icon]"), document.querySelector("[data-next-icon]")];
+
+    function t() {
+      return window.innerWidth < 750
+    }
+    var e = new PhotoSwipeLightbox({
+      gallery: ".photoswipe-wrapper",
+      children: "a.product__gallery-toggle",
+      mainClass: "pswp--product-media-gallery",
+      loop: !1,
+      showHideAnimationType: "zoom",
+      initialZoomLevel: e => t() ? e.vFill : e.fit,
+      secondaryZoomLevel: e => t() ? e.fit : 1,
+      pswpModule: PhotoSwipe
+    });
+    e.addFilter("uiElement", (e, t) => ("close" === t.name ? e.innerHTML = i.innerHTML : "arrowPrev" === t.name ? e.innerHTML = s.innerHTML : "arrowNext" === t.name && (e.innerHTML = o.innerHTML), e)), e.addFilter("itemData", (e, t) => "html" === e.type && e.element ? {
+      html: e.element.dataset.pswpHtml
+    } : e), e.init(), e.on("beforeOpen", () => {
+      document.body.classList.add("oveflow-hidden");
+      var e = this.querySelectorAll("video");
+      Array.from(e).forEach(t => {
+        t.play().then(() => {}).catch(e => {
+          t.pause()
+        })
+      })
+    }), e.on("closingAnimationStart", () => {
+      document.body.classList.remove("oveflow-hidden")
+    })
+  }
+  setActiveMedia(t) {
+    var e = Array.from(this.querySelectorAll("[data-media-id]")).find(e => Number(e.dataset.mediaId) === t);
+    e && this.instance && "function" == typeof this.instance.slideTo && "false" === this.dataset.hideOtherVariantsMedia && this.instance.slideTo(Number(e.dataset.index))
+  }
+}
+customElements.get("swiper-product-gallery") || customElements.define("swiper-product-gallery", InstanceSwiperProductGallery);
+class ProductMediaInfo extends HTMLElement {
+  constructor() {
+    super(), this.init(), window.addEventListener("resize", this.init.bind(this)), Shopify.designMode && window.addEventListener("shopify:section:load", this.init.bind(this))
+  }
+  init() {
+    let e = document.querySelector(".main-product__media--slider").offsetWidth || 330;
+    var t = ((e = document.querySelector(".main-product__media--grid-item") && 750 < window.innerWidth ? document.querySelector(".main-product__media--grid-item").offsetWidth : e) - 48) / 2,
+      i = this.querySelector("p:last-child").offsetWidth,
+      s = this.querySelector("p[aria-hidden]");
+    t < i ? (this.classList.remove("animation-stopped"), this.style.cssText = `--marquee-speed: ${i/t*8}s`, s.style.display = "") : (this.classList.add("animation-stopped"), this.style.cssText = "", s.style.display = "none")
+  }
+}
+customElements.get("product-media-info") || customElements.define("product-media-info", ProductMediaInfo);

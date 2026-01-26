@@ -1,1 +1,38 @@
-class e extends ModalDialog{constructor(){super(),this.init(),this.attachEventListeners()}attachEventListeners(){this.buttonClose=this.querySelector(".js-button-close"),this.buttonClose.addEventListener("click",this.closeNewsletter.bind(this)),this.form&&this.form.addEventListener("submit",this.onSubscribe.bind(this))}init(){this.delay=1e3*this.dataset.delay,this.closed=getCookie("newsletter-closed"),this.subscribed=getCookie("newsletter-subscribed"),this.form=this.querySelector(".js-form"),this.ageVerificationPopup=document.querySelector("age-verification-popup")}closeNewsletter(){setCookie("newsletter-closed","true"),this.hide()}connectedCallback(){Shopify.designMode?"true"===this.dataset.openInDesignMode&&this.show():this.handlePopupVisibility()}handlePopupVisibility(){"true"!==getCookie("age-verified")&&this.ageVerificationPopup?this.handleAgeVerificationPopup():this.showPopupWithDelay()}handleAgeVerificationPopup(){let e=this.classList.contains("newsletter-popup-is-hidden");new MutationObserver(t=>{"class"!==(t=t[0]).attributeName||(t=t.target.classList.contains("newsletter-popup-is-hidden"),e===t)||(e=t)||this.showPopupWithDelay()}).observe(this,{attributes:!0})}showPopupWithDelay(){setTimeout(()=>{"true"!==this.closed&&"true"!==this.subscribed&&this.show()},this.delay)}onSubscribe(){setCookie("newsletter-subscribed","true"),this.hide()}}customElements.define("newsletter-popup",e);
+class NewsletterPopup extends ModalDialog {
+  constructor() {
+    super(), this.init(), this.attachEventListeners()
+  }
+  attachEventListeners() {
+    this.buttonClose = this.querySelector(".js-button-close"), this.buttonClose.addEventListener("click", this.closeNewsletter.bind(this)), this.form && this.form.addEventListener("submit", this.onSubscribe.bind(this))
+  }
+  init() {
+    this.delay = 1e3 * this.dataset.delay, this.closed = getCookie("newsletter-closed"), this.subscribed = getCookie("newsletter-subscribed"), this.form = this.querySelector(".js-form"), this.ageVerificationPopup = document.querySelector("age-verification-popup")
+  }
+  closeNewsletter() {
+    setCookie("newsletter-closed", "true"), this.hide()
+  }
+  connectedCallback() {
+    Shopify.designMode ? "true" === this.dataset.openInDesignMode && this.show() : this.handlePopupVisibility()
+  }
+  handlePopupVisibility() {
+    "true" !== getCookie("age-verified") && this.ageVerificationPopup ? this.handleAgeVerificationPopup() : this.showPopupWithDelay()
+  }
+  handleAgeVerificationPopup() {
+    let t = this.classList.contains("newsletter-popup-is-hidden");
+    new MutationObserver(e => {
+      var e = e[0];
+      "class" !== e.attributeName || (e = e.target.classList.contains("newsletter-popup-is-hidden"), t === e) || (t = e) || this.showPopupWithDelay()
+    }).observe(this, {
+      attributes: !0
+    })
+  }
+  showPopupWithDelay() {
+    setTimeout(() => {
+      "true" !== this.closed && "true" !== this.subscribed && this.show()
+    }, this.delay)
+  }
+  onSubscribe() {
+    setCookie("newsletter-subscribed", "true"), this.hide()
+  }
+}
+customElements.define("newsletter-popup", NewsletterPopup);

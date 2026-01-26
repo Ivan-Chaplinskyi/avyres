@@ -1,1 +1,80 @@
-if(!customElements.get("hero-slider")){class e extends HTMLElement{constructor(){super(),Shopify.designMode&&window.addEventListener("shopify:section:load",e=>{this.mountSlider()}),this.mountSlider(),window.addEventListener("shopify:block:select",e=>{e=+e.target.dataset.index,this.slider.slideTo(e,600)}),this.lastActiveIndex=null,this.addKeyboardNavigation()}mountSlider(){var e={delay:this.dataset.autoplayInterval};this.slider=new Swiper(this,{rewind:!0,slidesPerView:1,speed:600,followFinger:!1,navigation:{nextEl:".swiper-button--next",prevEl:".swiper-button--prev"},pagination:{el:".swiper-pagination",clickable:!0,renderBullet:function(e,t){return`\n            <button class="${t}">\n              <span>0${e+1}</span>\n              <svg class="square-progress" width="26" height="26">\n                <rect class="square-origin" width="26" height="26" rx="5" ry="5" />\n              </svg>\n              <svg class="progress" width="18" height="18" style="inset-inline-start: ${0-(2.4*e+3.4)}rem">\n                <circle class="circle-origin" r="8" cx="9.5" cy="9.5"></circle>\n              </svg>\n            </button>\n            `}},autoplay:"true"===this.dataset.autoplay&&e,on:{init:this.handleSlideChange.bind(this),slideChange:this.handleSlideChange.bind(this)}})}handleSlideChange(e){this.handleSlideChangeAnimations(e);var t=document.querySelector(".header__inner"),i=document.querySelectorAll(".hero__inner");t&&i&&document.documentElement.style.setProperty("--transparent-header-menu-text-color",i[e.activeIndex].dataset.headerMenuTextColor)}handleSlideChangeAnimations(e){let t=300;var i=`[data-index="${e.activeIndex}"]`;let n=[...e.wrapperEl.querySelector(i).querySelectorAll(".hero__animation")||[]];n.length&&(i=window.innerWidth<750,"true"!==e.wrapperEl.closest(".hero__content")?.dataset.animationMobile&&i?n.forEach(e=>{e.classList.remove("in-delay")}):(n.forEach(e=>{e.classList.add("in-delay")}),this.lastActiveIndex>e.activeIndex?(t=650+t,e.wrapperEl.style.transitionDuration="1000ms",e.wrapperEl.style.transitionTimingFunction="cubic-bezier(0.45, 0.00, 0.15, 0.95)"):this.lastActiveIndex<e.activeIndex&&(t=1e3+t,e.wrapperEl.style.transitionDuration="1000ms",e.wrapperEl.style.transitionTimingFunction="cubic-bezier(0.45, 0.00, 0.15, 0.95)"),setTimeout(()=>{this.lastActiveIndex>e.activeIndex?t=325+t:this.lastActiveIndex<e.activeIndex&&(t=500+t),n.forEach((e,i)=>{1===i?t+=50:2===i?t+=175:3===i&&(t+=300),e.classList.remove("in-delay")})},t),this.lastActiveIndex=e.activeIndex))}addKeyboardNavigation(){document.addEventListener("keydown",e=>{var t;this.isInViewport()&&("ArrowRight"===e.key&&(t=this.querySelector(".swiper-button--next"))&&t.click(),"ArrowLeft"===e.key)&&(t=this.querySelector(".swiper-button--prev"))&&t.click()})}isInViewport(){var e=this.getBoundingClientRect();return e.top<window.innerHeight&&0<e.bottom&&e.left<window.innerWidth&&0<e.right}}customElements.define("hero-slider",e)}
+if (!customElements.get("hero-slider")) {
+  class a extends HTMLElement {
+    constructor() {
+      super(), Shopify.designMode && window.addEventListener("shopify:section:load", e => {
+        this.mountSlider()
+      }), this.mountSlider(), window.addEventListener("shopify:block:select", e => {
+        e = +e.target.dataset.index;
+        this.slider.slideTo(e, 600)
+      }), this.lastActiveIndex = null, this.addKeyboardNavigation()
+    }
+    mountSlider() {
+      var e = {
+        delay: this.dataset.autoplayInterval
+      };
+      this.slider = new Swiper(this, {
+        rewind: !0,
+        slidesPerView: 1,
+        speed: 600,
+        followFinger: !1,
+        navigation: {
+          nextEl: ".swiper-button--next",
+          prevEl: ".swiper-button--prev"
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: !0,
+          renderBullet: function(e, t) {
+            return `
+            <button class="${t}">
+              <span>0${e+1}</span>
+              <svg class="square-progress" width="26" height="26">
+                <rect class="square-origin" width="26" height="26" rx="5" ry="5" />
+              </svg>
+              <svg class="progress" width="18" height="18" style="inset-inline-start: ${0-(2.4*e+3.4)}rem">
+                <circle class="circle-origin" r="8" cx="9.5" cy="9.5"></circle>
+              </svg>
+            </button>
+            `
+          }
+        },
+        autoplay: "true" === this.dataset.autoplay && e,
+        on: {
+          init: this.handleSlideChange.bind(this),
+          slideChange: this.handleSlideChange.bind(this)
+        }
+      })
+    }
+    handleSlideChange(e) {
+      this.handleSlideChangeAnimations(e);
+      var t = document.querySelector(".header__inner"),
+        i = document.querySelectorAll(".hero__inner");
+      t && i && document.documentElement.style.setProperty("--transparent-header-menu-text-color", i[e.activeIndex].dataset.headerMenuTextColor)
+    }
+    handleSlideChangeAnimations(e) {
+      let i = 300;
+      var t = `[data-index="${e.activeIndex}"]`;
+      let n = [...e.wrapperEl.querySelector(t).querySelectorAll(".hero__animation") || []];
+      n.length && (t = window.innerWidth < 750, !("true" === e.wrapperEl.closest(".hero__content")?.dataset.animationMobile) && t ? n.forEach(e => {
+        e.classList.remove("in-delay")
+      }) : (n.forEach(e => {
+        e.classList.add("in-delay")
+      }), this.lastActiveIndex > e.activeIndex ? (i = 650 + i, e.wrapperEl.style.transitionDuration = "1000ms", e.wrapperEl.style.transitionTimingFunction = "cubic-bezier(0.45, 0.00, 0.15, 0.95)") : this.lastActiveIndex < e.activeIndex && (i = 1e3 + i, e.wrapperEl.style.transitionDuration = "1000ms", e.wrapperEl.style.transitionTimingFunction = "cubic-bezier(0.45, 0.00, 0.15, 0.95)"), setTimeout(() => {
+        this.lastActiveIndex > e.activeIndex ? i = 325 + i : this.lastActiveIndex < e.activeIndex && (i = 500 + i), n.forEach((e, t) => {
+          1 === t ? i += 50 : 2 === t ? i += 175 : 3 === t && (i += 300), e.classList.remove("in-delay")
+        })
+      }, i), this.lastActiveIndex = e.activeIndex))
+    }
+    addKeyboardNavigation() {
+      document.addEventListener("keydown", e => {
+        var t;
+        this.isInViewport() && ("ArrowRight" === e.key && (t = this.querySelector(".swiper-button--next")) && t.click(), "ArrowLeft" === e.key) && (t = this.querySelector(".swiper-button--prev")) && t.click()
+      })
+    }
+    isInViewport() {
+      var e = this.getBoundingClientRect();
+      return e.top < window.innerHeight && 0 < e.bottom && e.left < window.innerWidth && 0 < e.right
+    }
+  }
+  customElements.define("hero-slider", a)
+}
