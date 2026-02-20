@@ -12,5 +12,7 @@
 }
 
 .program-intro__container img {
-    object-fit: contain;
+    max-width: clamp(400px, 40vw, 713px);
+    width: 100%;
+    height: auto;
 }
