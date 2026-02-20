@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "type_heading_font": "poppins_n4",
+    "type_heading_font": "inter_n4",
     "heading_font_scale": 100,
     "heading_letter_spacing": "-0.04em",
     "heading_text_transform": "none",
@@ -88,8 +88,8 @@
     },
     "content_for_index": [],
     "blocks": {
-      "10431957531522714341": {
-        "type": "shopify://apps/seowill-image/blocks/pagespeed-preloading/b6edaf80-ee08-4404-951c-d8f577b5c1b1",
+      "6905339469860921009": {
+        "type": "shopify://apps/avada-seo-suite/blocks/avada-seo/15507c6e-1aa3-45d3-b698-7e175e033440",
         "disabled": false,
         "settings": {}
       }
@@ -266,6 +266,26 @@
           "primary_button_label": "#ffffff",
           "secondary_button_label": "#111111",
           "link": "#111111",
+          "border": "#ebebeb",
+          "tag": "#5e5a59",
+          "tag_label": "#ffffff",
+          "progress_bar": "#65706e",
+          "placeholder": "#ababab",
+          "shadow": "#111111",
+          "rating_stars": "#000000"
+        }
+      },
+      "scheme-e5a4ef96-2ffe-4bfd-b04b-32a28c4c7f12": {
+        "settings": {
+          "background": "#ffffff",
+          "background_gradient": "",
+          "primary_text": "#ffffff",
+          "secondary_text": "#ffffff",
+          "header_text": "#ffffff",
+          "primary_button": "#111111",
+          "primary_button_label": "#ffffff",
+          "secondary_button_label": "#111111",
+          "link": "#ffffff",
           "border": "#ebebeb",
           "tag": "#5e5a59",
           "tag_label": "#ffffff",

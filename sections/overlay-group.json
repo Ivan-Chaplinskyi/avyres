@@ -45,10 +45,10 @@
     "newsletter-popup": {
       "type": "newsletter-popup",
       "settings": {
-        "delay": 6,
-        "heading": "Early Access. Thoughtful design. <em>A considered welcome.</em>",
+        "delay": 10,
+        "heading": "Join AVYRES Early Access now",
         "heading_size": "h3",
-        "text": "<p>Join our mailing list to receive first access to collections and a welcome privilege</p>",
+        "text": "<p>Pre-orders and clinic onboarding are now open.</p>",
         "button_close_text": "No thanks",
         "show_popup_on_customizer": true,
         "color_scheme": "scheme-1"

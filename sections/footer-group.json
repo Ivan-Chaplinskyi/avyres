@@ -11,6 +11,51 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "testimonials_NdJKLg": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_YaUH4h": {
+          "type": "testimonial",
+          "settings": {
+            "author": "Jane Doe",
+            "quote": "<p>“I absolutely love the quality of my Leo Bikini Bottoms.”</p>",
+            "rating_score": 5,
+            "color_scheme": ""
+          }
+        },
+        "testimonial_KpdB9h": {
+          "type": "testimonial",
+          "settings": {
+            "author": "Jane Doe",
+            "quote": "<p>“I absolutely love the quality of my Leo Bikini Bottoms.”</p>",
+            "rating_score": 5,
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_YaUH4h",
+        "testimonial_KpdB9h"
+      ],
+      "disabled": true,
+      "name": "t:sections.testimonials.name",
+      "settings": {
+        "heading": "Testimonials",
+        "heading_size": "h3",
+        "subheading": "",
+        "rating_icon": "star",
+        "layout": "horizontal-w-media",
+        "slider_autoplay": 3,
+        "image_position": "image-start",
+        "image_aspect_ratio": "1/1",
+        "media_show_on": "desktop",
+        "spacing_inner": "2",
+        "section_width": "max-w-page",
+        "color_scheme": "",
+        "spacing_top": "2",
+        "spacing_bottom": "2"
+      }
+    },
     "trust_indicators_DXmKCE": {
       "type": "trust-indicators",
       "blocks": {
@@ -171,7 +216,7 @@
             "column_factor": 3,
             "row_factor": 1,
             "heading": "",
-            "text": "<p>Copyright © 2025 Avyres. All rights reserved.</p>",
+            "text": "<p>Copyright © 2026 Avyres. All rights reserved.</p>",
             "content_position_vertical": "center",
             "content_alignment": "start",
             "content_alignment_for_mobile": "center"
@@ -205,6 +250,7 @@
     }
   },
   "order": [
+    "testimonials_NdJKLg",
     "trust_indicators_DXmKCE",
     "footer",
     "footer_JadcgE"
