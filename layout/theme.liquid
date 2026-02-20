@@ -28,6 +28,7 @@
     <script src="{{- 'bodyScrollLock.min.js' | asset_url -}}" defer="defer"></script>
     <script src="{{- 'pubsub.js' | asset_url -}}" defer="defer"></script>
     <script src="{{- 'global.js' | asset_url -}}" defer="defer"></script>
+    <script src="{{- 'lazy-content.js' | asset_url -}}" defer="defer"></script>
     <noscript>
       <style>
         img[loading='lazy'] { opacity: 1; }
@@ -35,7 +36,178 @@
     </noscript>
     <script src="{{ 'cookies.js' | asset_url }}" defer="defer"></script>
 
-    {{ content_for_header }}
+    {% comment %} {{ content_for_header }} {% endcomment %}
+
+    {% capture modified_content_for_header %}{{ content_for_header }}{% endcapture %}
+    {% assign domcontentloadeda = "document.addEventListener('DOMContentLoaded'" %}
+    {% assign startasyncLoadinga = "document.addEventListener('StartAsyncLoading'" %}
+    {% assign domcontentloaded = 'e.addEventListener("DOMContentLoaded"' %}
+    {% assign startasyncLoading = "e.addEventListener('StartAsyncLoading'" %}
+    {% assign rapp = ', asyncLoad' %}
+    {% assign napp = ', function(){}' %}
+    {% assign rappload = 'if(window.attachEvent)' %}
+    {% assign nappload = "document.addEventListener('StartAsyncLoading',function(event){asyncLoad();});if(window.attachEvent)" %}
+    {% assign rstorefrontload = 'var customDocumentWrite = function(content)' %}
+    {% assign nstorefrontload = "document.addEventListener('StartKernelLoading', function() { document.dispatchEvent(new CustomEvent('StartShopifyLoading')); var customDocumentWrite = function(content)" %}
+    {% assign rstorefront = "document.getElementsByTagName('head')[0].appendChild(eventsListenerScript)" %}
+    {% assign nstorefront = "document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);})" %}
+    {% if template == 'cart' %}
+      {{
+        modified_content_for_header
+        | replace: 'src=', 'data-src='
+        | replace: domcontentloadeda, startasyncLoadinga
+        | replace: domcontentloaded, startasyncLoading
+        | replace: rapp, napp
+        | replace: rappload, nappload
+      }}
+    {% else %}
+      {{
+        modified_content_for_header
+        | replace: 'src=', 'data-src='
+        | replace: domcontentloadeda, startasyncLoadinga
+        | replace: domcontentloaded, startasyncLoading
+        | replace: rapp, napp
+        | replace: rappload, nappload
+        | replace: rstorefrontload, nstorefrontload
+        | replace: rstorefront, nstorefront
+      }}
+    {% endif %}
+
+    <script>
+      var script_loaded = !1;
+      function loadJSscripts() {
+        setTimeout(function () {
+          if (!script_loaded) {
+            script_loaded = !0;
+            var t = document.getElementsByTagName('script');
+            for (i = 0; i < t.length; i++)
+              null !== t[i].getAttribute('data-src') &&
+                (t[i].setAttribute('src', t[i].getAttribute('data-src')), delete t[i].dataset.src);
+            var e = document.getElementsByTagName('link');
+            for (i = 0; i < e.length; i++)
+              null !== e[i].getAttribute('data-href') &&
+                (e[i].setAttribute('href', e[i].getAttribute('data-href')), delete e[i].dataset.href);
+            setTimeout(function () {
+              document.dispatchEvent(new CustomEvent('StartAsyncLoading')),
+                document.dispatchEvent(new CustomEvent('StartKernelLoading'));
+            }, 400);
+          }
+          console.log(' 12s wait');
+        }, 12e3);
+      }
+      function loadJSscriptsNow() {
+        if (!script_loaded) {
+          console.log(' scripts have loaded.'), (script_loaded = !0);
+          var t = document.getElementsByTagName('script');
+          for (i = 0; i < t.length; i++)
+            null !== t[i].getAttribute('data-src') &&
+              (t[i].setAttribute('src', t[i].getAttribute('data-src')), delete t[i].dataset.src);
+          var e = document.getElementsByTagName('link');
+          for (i = 0; i < e.length; i++)
+            null !== e[i].getAttribute('data-href') &&
+              (e[i].setAttribute('href', e[i].getAttribute('data-href')), delete e[i].dataset.href);
+          setTimeout(function () {
+            document.dispatchEvent(new CustomEvent('StartAsyncLoading')),
+              document.dispatchEvent(new CustomEvent('StartKernelLoading'));
+          }, 400);
+        }
+      }
+      var activityEvents = [
+        'mousedown',
+        'mousemove',
+        'keydown',
+        'scroll',
+        'touchstart',
+        'click',
+        'keypress',
+        'touchmove',
+      ];
+      activityEvents.forEach(function (t) {
+        window.addEventListener(t, loadJSscriptsNow, !1);
+      }),
+        document.addEventListener('DOMContentLoaded', loadJSscripts),
+        window.addEventListener
+          ? window.addEventListener('load', loadJSscripts)
+          : window.attachEvent
+          ? window.attachEvent('onload', loadJSscripts)
+          : (window.onload = loadJSscripts);
+    </script>
+    <!-- End of  speed boost -->
+    <script>
+      //  speed lazyload assets
+      document.addEventListener('DOMContentLoaded', function () {
+        let scriptLoaded = false;
+        let interactionTimeout;
+
+        // List of Script tag URLs
+        const scriptUrls = [
+          // Add more script URLs as needed
+        ];
+
+        // List of CSS links URLs
+        const styleUrls = [
+          // Add more style URLs as needed
+        ];
+
+        // DO NOT MODIFY ANYTHING UNDER!
+
+        function humanInteraction() {
+          if (!scriptLoaded) {
+            let output = false;
+
+            // Check and inject javascript
+            const hasValidScripts = scriptUrls.some((url) => url && url !== 'Add Your Script Link Here');
+            if (hasValidScripts) {
+              scriptUrls.forEach((url) => {
+                if (url && url !== 'Add Your Script Link Here') {
+                  let script = document.createElement('script');
+                  script.src = url;
+                  document.head.appendChild(script);
+                  output = true;
+                }
+              });
+            }
+
+            // Check and inject css
+            const hasValidStyles = styleUrls.some((url) => url && url !== 'Add Your CSS Link Here');
+            if (hasValidStyles) {
+              styleUrls.forEach((url) => {
+                if (url && url !== 'Add Your CSS Link Here') {
+                  let style = document.createElement('link');
+                  style.rel = 'stylesheet';
+                  style.href = url;
+                  document.head.appendChild(style);
+                  output = true;
+                }
+              });
+            }
+
+            if (output) {
+              console.log(' custom interaction script/style load.');
+            } else {
+              console.warn(
+                ': No valid script or style URLs found. Please add at least one valid URL to scriptUrls or styleUrls.'
+              );
+            }
+
+            scriptLoaded = true;
+            clearTimeout(interactionTimeout);
+          }
+        }
+
+        document.addEventListener('click', humanInteraction);
+        document.addEventListener('scroll', humanInteraction);
+        document.addEventListener('touchstart', humanInteraction);
+        document.addEventListener('mousemove', humanInteraction);
+        document.addEventListener('keydown', humanInteraction);
+
+        interactionTimeout = setTimeout(function () {
+          if (!scriptLoaded) {
+            humanInteraction();
+          }
+        }, 40000); // Adjust the timeout as needed
+      });
+    </script>
 
     {%- render 'settings' -%}
 

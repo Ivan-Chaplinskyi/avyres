@@ -1,0 +1,22 @@
+class LazyContent extends HTMLElement {
+  constructor() {
+    super()
+  }
+  connectedCallback() {
+    setTimeout(() => {
+      ["click", "keydown", "touchstart", "mousemove", "scroll", "keydown"].forEach(e => {
+        document.addEventListener(e, () => {
+          this.loadContent()
+        }, {
+          once: !0
+        })
+      })
+    }, 1e3)
+  }
+  loadContent() {
+    console.log("Loading lazy content");
+    var e = this.querySelector("template");
+    e && (e = e.content.cloneNode(!0), this.replaceWith(e))
+  }
+}
+customElements.get("lazy-content") || customElements.define("lazy-content", LazyContent);
