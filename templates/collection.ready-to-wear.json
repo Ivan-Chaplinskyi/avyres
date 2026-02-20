@@ -9,14 +9,37 @@
  */
 {
   "sections": {
+    "announcement_bar_UUTWAp": {
+      "type": "announcement-bar",
+      "blocks": {
+        "text_slide_pkmBCn": {
+          "type": "text-slide",
+          "settings": {
+            "content": "<p>PRE-ORDER OPEN NOW</p>",
+            "icon": "theme-box"
+          }
+        }
+      },
+      "block_order": [
+        "text_slide_pkmBCn"
+      ],
+      "name": "t:sections.announcement-bar.name",
+      "settings": {
+        "text_block_behaviour": "slider",
+        "slider_autoplay_interval": 3,
+        "font_weight": "700",
+        "section_width": "max-w-fluid",
+        "color_scheme": "scheme-1"
+      }
+    },
     "page_banner_jWtyM4": {
       "type": "page-banner",
       "settings": {
         "enable_transparent_header": true,
         "heading": "",
-        "heading_size": "h2",
+        "heading_size": "h4",
         "text": "",
-        "show_default_description": true,
+        "show_default_description": false,
         "show_on_description": "desktop",
         "content_position": "center",
         "content_alignment": "center",
@@ -25,15 +48,15 @@
         "enable_breadcrumbs": true,
         "section_height": "50svh",
         "content_width": "100%",
-        "image": "shopify://shop_images/BANNER_AVYRES_1.jpg",
+        "image": "shopify://shop_images/BANNER_AVYRES_2.jpg",
         "video_external": "",
         "show_controls_on_video": false,
         "section_height_mobile": "50svh",
         "video_external_mobile": "",
         "show_controls_on_video_mobile": false,
         "section_width": "max-w-narrow",
-        "color_scheme": "scheme-1",
-        "color_scheme_for_media": "scheme-6",
+        "color_scheme": "scheme-e5a4ef96-2ffe-4bfd-b04b-32a28c4c7f12",
+        "color_scheme_for_media": "scheme-e5a4ef96-2ffe-4bfd-b04b-32a28c4c7f12",
         "spacing_top": "2",
         "spacing_bottom": "6"
       }
@@ -102,11 +125,12 @@
             "position": 7,
             "column_factor": 2,
             "row_factor": 1,
-            "card_image": "shopify://shop_images/BANNER1_copy1111.jpg"
+            "card_image": "shopify://shop_images/BANNER_AVYRES_2.jpg"
           }
         },
         "text_card_NeqRrh": {
           "type": "text-card",
+          "disabled": true,
           "settings": {
             "color_scheme": "scheme-6",
             "text": "",
@@ -239,6 +263,7 @@
     }
   },
   "order": [
+    "announcement_bar_UUTWAp",
     "page_banner_jWtyM4",
     "featured_collections_ybC3xQ",
     "main",

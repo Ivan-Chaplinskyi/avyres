@@ -9,12 +9,37 @@
  */
 {
   "sections": {
+    "announcement_bar_6E3VAa": {
+      "type": "announcement-bar",
+      "blocks": {
+        "text_slide_mkReA9": {
+          "type": "text-slide",
+          "settings": {
+            "content": "<p>ALL STYLES ARE AVAILABLE TO PRE-ORDER NOW</p>",
+            "icon": "theme-box"
+          }
+        }
+      },
+      "block_order": [
+        "text_slide_mkReA9"
+      ],
+      "name": "t:sections.announcement-bar.name",
+      "settings": {
+        "text_block_behaviour": "slider",
+        "slider_autoplay_interval": 3,
+        "font_weight": "700",
+        "section_width": "max-w-fluid",
+        "color_scheme": ""
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
-        "breadcrumbs_TA94Lr": {
-          "type": "breadcrumbs",
-          "settings": {}
+        "preorder_Kc6cMQ": {
+          "type": "preorder",
+          "settings": {
+            "spacing_bottom": "1"
+          }
         },
         "badge_Hkd38r": {
           "type": "badge",
@@ -46,7 +71,7 @@
           "settings": {
             "spacing_bottom": "4",
             "behaviour": "plain",
-            "heading": "",
+            "heading": "All styles available for Pre-order now",
             "text_truncate": 3,
             "icon": "theme-box",
             "metafield_for_product_variant": "",
@@ -79,7 +104,7 @@
           "settings": {
             "spacing_bottom": "4",
             "show_quantity": true,
-            "layout": "inline",
+            "layout": "seperate",
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": false
           }
@@ -164,7 +189,7 @@
         }
       },
       "block_order": [
-        "breadcrumbs_TA94Lr",
+        "preorder_Kc6cMQ",
         "badge_Hkd38r",
         "1e0c79e9-7de0-4eee-b9c5-f27132635fb8",
         "8effeb43-55b7-4ec4-ab9b-68bcd89b865b",
@@ -230,7 +255,7 @@
             "block_type": "collapsible",
             "heading": "Delivery & Returns",
             "link": "",
-            "content": "<ul><li>Free shipping on EU orders over €200</li><li>EU Flat Rate Shipping €20</li><li>International shipping & duties charges calculated at checkout</li><li>Carbon-Neutral Shipping</li><li>All of our packaging is plastic-free and recyclable.</li></ul>",
+            "content": "<ul><li>All styles are available on a pre-order basis only</li><li>Delivery: May 2026 </li><li>Free shipping on EU orders over €200</li><li>EU Flat Rate Shipping €20</li><li>International shipping & duties charges calculated at checkout</li><li>Carbon-Neutral Shipping</li><li>All of our packaging is plastic-free and recyclable.</li></ul>",
             "page": ""
           }
         },
@@ -358,6 +383,7 @@
     }
   },
   "order": [
+    "announcement_bar_6E3VAa",
     "main",
     "977cac03-4044-4567-8907-fa55103a47eb",
     "multitile_KDV8BX",
