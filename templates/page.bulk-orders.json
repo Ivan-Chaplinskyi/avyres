@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "breadcrumbs": true,
         "show_page_title": true,
@@ -23,136 +24,22 @@
         "spacing_bottom": "2"
       }
     },
-    "carousel_T4xRxz": {
-      "type": "carousel",
-      "blocks": {
-        "card_dd4tU8": {
-          "type": "card",
-          "settings": {
-            "heading": "",
-            "heading_size": "h3",
-            "text": "",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "button--filled",
-            "aspect_ratio": "auto",
-            "color_scheme": "scheme-5",
-            "media_position": "background",
-            "content_position": "center",
-            "content_alignment": "center",
-            "video": "shopify://files/videos/01kc4dy7m443tyjrv8q395ncd5.mp4",
-            "video_external": "",
-            "show_controls_on_video": false,
-            "content_position_mobile": "center",
-            "content_alignment_mobile": "center",
-            "video_mobile": "shopify://files/videos/01kc4dy7m443tyjrv8q395ncd5.mp4",
-            "video_external_mobile": "",
-            "show_controls_on_video_mobile": false,
-            "spacing_inner": "2"
-          }
-        },
-        "card_6Bq4rt": {
-          "type": "card",
-          "settings": {
-            "heading": "",
-            "heading_size": "h3",
-            "text": "",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "button--filled",
-            "aspect_ratio": "auto",
-            "color_scheme": "scheme-5",
-            "media_position": "background",
-            "content_position": "center",
-            "content_alignment": "center",
-            "video": "shopify://files/videos/01kc4e5mxh0rfcpqsp1ncdy4mk.mp4",
-            "video_external": "",
-            "show_controls_on_video": false,
-            "content_position_mobile": "center",
-            "content_alignment_mobile": "center",
-            "video_mobile": "shopify://files/videos/01kc4e5mxh0rfcpqsp1ncdy4mk.mp4",
-            "video_external_mobile": "",
-            "show_controls_on_video_mobile": false,
-            "spacing_inner": "2"
-          }
-        }
-      },
-      "block_order": [
-        "card_dd4tU8",
-        "card_6Bq4rt"
-      ],
-      "disabled": true,
-      "name": "t:sections.carousel.name",
+    "program_intro_VLQUii": {
+      "type": "program-intro",
+      "name": "Program Intro",
       "settings": {
-        "show_navigation_arrows": true,
-        "slideshow_autoplay_interval": 0,
-        "slides_per_view": 2,
-        "layout": "layout-2",
-        "heading": "",
-        "heading_size": "h3",
-        "subheading": "",
-        "button_label": "View all",
-        "button_link": "shopify://collections/all",
-        "button_style": "button--filled",
-        "section_width": "max-w-page",
-        "color_scheme": "",
-        "spacing_top": "2",
-        "spacing_bottom": "2"
-      }
-    },
-    "featured_products_mUbQhF": {
-      "type": "featured-products",
-      "blocks": {
-        "collection_ENw4DK": {
-          "type": "collection",
-          "settings": {
-            "title": "",
-            "collection": "",
-            "products": [
-              "women-comfy-jacket",
-              "women-short-sleeve-draped-top",
-              "dara-trousers",
-              "atelier-clinical-jacket"
-            ],
-            "vendor": "",
-            "collection_of_products": "",
-            "show_unavailable_products": false,
-            "card_text_heading": "",
-            "card_text_button_label": "",
-            "card_text_button_style": "button--filled",
-            "card_text_button_link": "",
-            "content_position": "center",
-            "content_alignment": "center"
-          }
-        }
-      },
-      "block_order": [
-        "collection_ENw4DK"
-      ],
-      "name": "t:sections.featured-products.name",
-      "settings": {
-        "layout": "layout-1",
-        "heading": "Clinical Solutions range",
-        "heading_size": "h3",
-        "subheading": "",
-        "button_label": "View all",
-        "button_link": "shopify://collections/clinical-solutions",
-        "button_style": "button--filled",
-        "max_products": 8,
-        "enable_slideshow_overflow": false,
-        "show_navigation_arrows": true,
-        "slideshow_autoplay_interval": 0,
-        "tab_button_style": "button--filled",
-        "section_width": "max-w-page",
-        "color_scheme": "",
-        "spacing_top": "2",
-        "spacing_bottom": "2"
+        "color_scheme": "scheme-5",
+        "image": "shopify://shop_images/Group_1321314913.jpg",
+        "title": "<h1>AVYRES Clinical<br/>Solutions</h1>",
+        "heading_size": "h2",
+        "text": "<p><strong>Structured Uniform Programs for Clinical Teams</strong></p><p>AVYRES Clinical Solutions is a dedicated group uniform program for<br/> independent clinics, specialist practices, and multi-location organisations. <br/><br/>We combine garment supply, pricing structure, branding control, and long-<br/>term garment care into one operational framework — built for clinical<br/> environments.</p>",
+        "cta_text": "BEGIN YOUR CLINICAL SOLUTION PROGRAM",
+        "cta_url": "shopify://collections"
       }
     }
   },
   "order": [
     "main",
-    "carousel_T4xRxz",
-    "featured_products_mUbQhF"
+    "program_intro_VLQUii"
   ]
 }
