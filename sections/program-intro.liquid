@@ -1,0 +1,128 @@
+{%- render 'css', css: 'program-intro.css' -%}
+
+{%- liquid
+  assign color_scheme = section.settings.color_scheme
+
+  assign image = section.settings.image
+  assign title = section.settings.title
+  assign heading_size = section.settings.heading_size
+
+  assign text = section.settings.text
+  assign cta_text = section.settings.cta_text
+  assign cta_url = section.settings.cta_url
+-%}
+
+<div class="program-intro__container color-{{ color_scheme }}">
+    <div class="container">
+        <div class="program-intro__content container">
+            {%- if title != blank -%}
+                {{- title | replace_first: '>', ' class="section__heading heading_size">' | replace_first: 'heading_size', heading_size -}}
+            {%- endif -%}
+
+            {%- if text != blank -%}
+                {{- text -}}
+            {%- endif -%}
+
+            {%- if cta_text != blank and cta_url != blank -%}
+                {%- render 'button', 
+                    type: 'link', 
+                    class: 'button', 
+                    value: cta_text, 
+                    href: cta_url 
+                -%}
+            {%- endif -%}
+        </div>
+
+        {%- if image != blank -%}
+            {%- assign alt = title | strip_html | escape -%}
+
+            {%- render 'image', image: image, alt: alt -%}
+        {% endif %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Program Intro",
+    "tag": "section",
+    "class": "program-intro",
+    "settings": [
+         {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "default": "scheme-2",
+            "label": "t:sections.global.color_scheme.label"
+        },
+        {
+            "type": "header",
+            "content": "Media"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "header",
+            "content": "Text"
+        },
+        {
+            "type": "richtext",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+        "type": "select",
+        "id": "heading_size",
+        "label": "t:sections.global.element.heading_size.label",
+        "options": [
+            {
+            "value": "h6",
+            "label": "XS"
+            },
+            {
+            "value": "h5",
+            "label": "S"
+            },
+            {
+            "value": "h4",
+            "label": "M"
+            },
+            {
+            "value": "h3",
+            "label": "L"
+            },
+            {
+            "value": "h2",
+            "label": "XL"
+            }
+        ],
+        "default": "h3"
+        },
+        {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+        },
+        {
+            "type": "header",
+            "content": "CTA"
+        },
+        {
+            "type": "text",
+            "id": "cta_text",
+            "label": "CTA Text"
+        },
+        {
+            "type": "url",
+            "id": "cta_url",
+            "label": "CTA URL"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Program Intro"
+        }
+    ]
+}
+{% endschema %}

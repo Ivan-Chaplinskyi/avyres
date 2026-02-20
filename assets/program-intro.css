@@ -1,0 +1,16 @@
+.program-intro__container > .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+}
+
+.program-intro__content {
+    width: fit-content;
+}
+
+.program-intro__container img {
+    object-fit: contain;
+}
