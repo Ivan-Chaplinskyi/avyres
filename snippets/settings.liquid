@@ -76,6 +76,7 @@
     {% liquid
       assign color_background = scheme.settings.background
       assign color_background_gradient = color_background
+      assign color_background_text = scheme.settings.background_text
       if scheme.settings.background_gradient != empty
         assign color_background_gradient = scheme.settings.background_gradient
       endif
@@ -102,6 +103,7 @@
   .color-{{ scheme.id }} {
     --color-background: {{ color_background.red }},{{ color_background.green }},{{ color_background.blue }};
     --gradient-background: {{ color_background_gradient }};
+    --color-background_text: {{ color_background_text }};
 
     --color-background-contrast: {{ color_background_contrast.red }},{{ color_background_contrast.green }},{{ color_background_contrast.blue }};
     --color-shadow: {{ scheme.settings.shadow.red }},{{ scheme.settings.shadow.green }},{{ scheme.settings.shadow.blue }};

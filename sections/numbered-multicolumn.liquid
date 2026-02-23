@@ -1,0 +1,226 @@
+{%- render 'css', css: 'numbered-multicolumn.css' -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} > div {
+    padding-block-start: calc(var(--section-spacing-unit-size) * {{ section.settings.spacing_top }});
+    padding-block-end: calc(var(--section-spacing-unit-size) * {{ section.settings.spacing_bottom }});
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign color_scheme = section.settings.color_scheme
+  assign label = section.settings.label
+  assign title = section.settings.title
+  assign heading_size = section.settings.heading_size
+  assign sub_title = section.settings.sub_title
+-%}
+
+<div class="numbered-multicolumn__container color-{{ color_scheme }}">
+    <div class="container">
+        <div class="numbered-multicolumn__heading">
+            {%- if label != blank -%}
+                <p class="numbered-multicolumn__label section-label">{{- label -}}</p>
+            {%- endif -%}
+
+            {%- if title != blank -%}
+                {{- title | replace_first: '>', ' class="section__heading heading_size">' | replace_first: 'heading_size', heading_size -}}
+            {%- endif -%}
+
+            {%- if sub_title != blank -%}
+                {{- sub_title -}}
+            {%- endif -%}
+        </div>
+
+        {%- if section.blocks != blank -%}
+            <ul class="numbered-multicolumn_column">
+                {%- for block in section.blocks -%}
+                    {%- liquid
+                      assign photo = block.settings.photo
+
+                      assign top_richtext = block.settings.top_richtext
+                      assign richtext = block.settings.richtext
+                      assign bottom_richtext = block.settings.bottom_richtext
+                    -%}
+
+                    <li class="column-card">
+                        <p class="column-card__count">
+                            <b><i>{{- forloop.index -}}</i></b>
+                        </p>
+
+                        {%- if photo != blank -%}
+                            {%- assign alt = title | strip_html | escape -%}
+
+                            {%- render 'image', image: photo, alt: alt, class: 'column-card__image media' -%}
+                        {%- endif -%}
+
+                        <div class="column-card__info">
+                            {%- if top_richtext != blank -%}
+                                {{- top_richtext | replace_first: '>', ' class="h6">' -}}
+                            {%- endif -%}
+
+                            {%- if richtext != blank -%}
+                                {{- richtext -}}
+                            {%- endif -%}
+
+                            {%- if bottom_richtext != blank -%}
+                                {{- bottom_richtext -}}
+                            {%- endif -%}
+                        </div>
+                    </li>
+                {%- endfor -%}
+            </ul>
+        {%- endif -%}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Numbered Multicolumn",
+    "tag": "section",
+    "class": "numbered-multicolumn",
+    "settings": [
+         {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "default": "scheme-11",
+            "label": "t:sections.global.color_scheme.label"
+        },
+        {
+            "type": "select",
+            "id": "spacing_top",
+            "label": "t:sections.global.spacing.spacing_top.label",
+            "options": [
+                {
+                "value": "0",
+                "label": "No"
+                },
+                {
+                "value": "1",
+                "label": "S"
+                },
+                {
+                "value": "2",
+                "label": "M"
+                },
+                {
+                "value": "4",
+                "label": "L"
+                },
+                {
+                "value": "6",
+                "label": "XL"
+                }
+            ],
+            "default": "2"
+            },
+            {
+            "type": "select",
+            "id": "spacing_bottom",
+            "label": "t:sections.global.spacing.spacing_bottom.label",
+            "options": [
+                {
+                "value": "0",
+                "label": "No"
+                },
+                {
+                "value": "1",
+                "label": "S"
+                },
+                {
+                "value": "2",
+                "label": "M"
+                },
+                {
+                "value": "4",
+                "label": "L"
+                },
+                {
+                "value": "6",
+                "label": "XL"
+                }
+            ],
+            "default": "2"
+            },
+        {
+            "type": "header",
+            "content": "Text"
+        },
+        {
+            "type": "text",
+            "id": "label",
+            "label": "Label"
+        },
+        {
+            "type": "richtext",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "select",
+            "id": "heading_size",
+            "label": "t:sections.global.element.heading_size.label",
+            "options": [
+            {
+                "value": "h6",
+                "label": "XS"
+            },
+            {
+                "value": "h5",
+                "label": "S"
+            },
+            {
+                "value": "h4",
+                "label": "M"
+            },
+            {
+                "value": "h3",
+                "label": "L"
+            },
+            {
+                "value": "h2",
+                "label": "XL"
+            }
+        ],
+            "default": "h3"
+        },
+        {
+            "type": "richtext",
+            "id": "sub_title",
+            "label": "Sub Title"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "column",
+            "name": "Column",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Photo"
+                },
+                {
+                    "type": "richtext",
+                    "id": "top_richtext",
+                    "label": "Top Richtext"
+                },
+                {
+                    "type": "richtext",
+                    "id": "richtext",
+                    "label": "Richtext"
+                },
+                {
+                    "type": "richtext",
+                    "id": "bottom_richtext",
+                    "label": "Bottom Richtext"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Numbered Multicolumn"
+        }
+    ]
+}
+{% endschema %}

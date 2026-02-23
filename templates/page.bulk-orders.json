@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "breadcrumbs": true,
         "show_page_title": true,
@@ -23,136 +24,281 @@
         "spacing_bottom": "2"
       }
     },
-    "carousel_T4xRxz": {
-      "type": "carousel",
-      "blocks": {
-        "card_dd4tU8": {
-          "type": "card",
-          "settings": {
-            "heading": "",
-            "heading_size": "h3",
-            "text": "",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "button--filled",
-            "aspect_ratio": "auto",
-            "color_scheme": "scheme-5",
-            "media_position": "background",
-            "content_position": "center",
-            "content_alignment": "center",
-            "video": "shopify://files/videos/01kc4dy7m443tyjrv8q395ncd5.mp4",
-            "video_external": "",
-            "show_controls_on_video": false,
-            "content_position_mobile": "center",
-            "content_alignment_mobile": "center",
-            "video_mobile": "shopify://files/videos/01kc4dy7m443tyjrv8q395ncd5.mp4",
-            "video_external_mobile": "",
-            "show_controls_on_video_mobile": false,
-            "spacing_inner": "2"
-          }
-        },
-        "card_6Bq4rt": {
-          "type": "card",
-          "settings": {
-            "heading": "",
-            "heading_size": "h3",
-            "text": "",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "button--filled",
-            "aspect_ratio": "auto",
-            "color_scheme": "scheme-5",
-            "media_position": "background",
-            "content_position": "center",
-            "content_alignment": "center",
-            "video": "shopify://files/videos/01kc4e5mxh0rfcpqsp1ncdy4mk.mp4",
-            "video_external": "",
-            "show_controls_on_video": false,
-            "content_position_mobile": "center",
-            "content_alignment_mobile": "center",
-            "video_mobile": "shopify://files/videos/01kc4e5mxh0rfcpqsp1ncdy4mk.mp4",
-            "video_external_mobile": "",
-            "show_controls_on_video_mobile": false,
-            "spacing_inner": "2"
-          }
-        }
-      },
-      "block_order": [
-        "card_dd4tU8",
-        "card_6Bq4rt"
-      ],
-      "disabled": true,
-      "name": "t:sections.carousel.name",
+    "program_intro_VLQUii": {
+      "type": "program-intro",
+      "name": "Program Intro",
       "settings": {
-        "show_navigation_arrows": true,
-        "slideshow_autoplay_interval": 0,
-        "slides_per_view": 2,
-        "layout": "layout-2",
-        "heading": "",
-        "heading_size": "h3",
-        "subheading": "",
-        "button_label": "View all",
-        "button_link": "shopify://collections/all",
-        "button_style": "button--filled",
-        "section_width": "max-w-page",
-        "color_scheme": "",
-        "spacing_top": "2",
-        "spacing_bottom": "2"
+        "color_scheme": "scheme-5",
+        "image": "shopify://shop_images/Top_Image_AVYRES_Clinical_Solution.png",
+        "title": "<h1>AVYRES Clinical<br/>Solutions</h1>",
+        "heading_size": "h2",
+        "text": "<p><strong>Structured Uniform Programs for Clinical Teams</strong></p><p>AVYRES Clinical Solutions is a dedicated group uniform program for<br/> independent clinics, specialist practices, and multi-location organisations. <br/><br/>We combine garment supply, pricing structure, branding control, and long-<br/>term garment care into one operational framework — built for clinical<br/> environments.</p>",
+        "cta_text": "BEGIN YOUR CLINICAL SOLUTION PROGRAM",
+        "cta_url": "shopify://collections"
       }
     },
-    "featured_products_mUbQhF": {
-      "type": "featured-products",
+    "partners_list_r9xaGr": {
+      "type": "partners-list",
       "blocks": {
-        "collection_ENw4DK": {
-          "type": "collection",
+        "bullet_4ejgaR": {
+          "type": "bullet",
           "settings": {
-            "title": "",
-            "collection": "",
-            "products": [
-              "women-comfy-jacket",
-              "women-short-sleeve-draped-top",
-              "dara-trousers",
-              "atelier-clinical-jacket"
-            ],
-            "vendor": "",
-            "collection_of_products": "",
-            "show_unavailable_products": false,
-            "card_text_heading": "",
-            "card_text_button_label": "",
-            "card_text_button_style": "button--filled",
-            "card_text_button_link": "",
-            "content_position": "center",
-            "content_alignment": "center"
+            "icon": "shopify://shop_images/Group_1321314902.svg",
+            "bullet_text": "Independent practices"
+          }
+        },
+        "bullet_Xz3jPb": {
+          "type": "bullet",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1321314901.svg",
+            "bullet_text": "Dental clinics and dental groups"
+          }
+        },
+        "bullet_j6AYmN": {
+          "type": "bullet",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1321314902_1.svg",
+            "bullet_text": "Aesthetic clinics"
+          }
+        },
+        "bullet_dcnRdg": {
+          "type": "bullet",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1321314902_1e52a05d-dd00-497f-b7a8-c64e85c323ff.svg",
+            "bullet_text": "Specialist medical clinics"
+          }
+        },
+        "bullet_jNRrdt": {
+          "type": "bullet",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1321314903.svg",
+            "bullet_text": "Multi-site healthcare organisations"
+          }
+        },
+        "bullet_AYUbtq": {
+          "type": "bullet",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1321314903_1.svg",
+            "bullet_text": "Private hospitals"
           }
         }
       },
       "block_order": [
-        "collection_ENw4DK"
+        "bullet_4ejgaR",
+        "bullet_Xz3jPb",
+        "bullet_j6AYmN",
+        "bullet_dcnRdg",
+        "bullet_jNRrdt",
+        "bullet_AYUbtq"
       ],
-      "name": "t:sections.featured-products.name",
+      "name": "Partners List",
       "settings": {
-        "layout": "layout-1",
-        "heading": "Clinical Solutions range",
-        "heading_size": "h3",
-        "subheading": "",
-        "button_label": "View all",
-        "button_link": "shopify://collections/clinical-solutions",
-        "button_style": "button--filled",
-        "max_products": 8,
-        "enable_slideshow_overflow": false,
-        "show_navigation_arrows": true,
-        "slideshow_autoplay_interval": 0,
-        "tab_button_style": "button--filled",
-        "section_width": "max-w-page",
-        "color_scheme": "",
+        "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
         "spacing_top": "2",
-        "spacing_bottom": "2"
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/who_we_work_with_image_clinical.jpg",
+        "label": "Our Partners",
+        "title": "<h2>Who We Work With</h2>",
+        "heading_size": "h4",
+        "text": "<p>From first consultation to ongoing replenishment, the <br/>program is structured to scale with your organisation.</p>"
+      }
+    },
+    "feature_rows_3A3Lqp": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-bea5d3e5-74c3-4fe8-8c57-2a8fe70f7155",
+        "direction": "row-reverse",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/programe_structure_image_clinical.jpg",
+        "label": "The Process",
+        "title": "<p>Program Structure & Onboarding</p>",
+        "heading_size": "h3",
+        "sub_title": "<p>Every Clinical Solutions partnership begins with a structured consultation.</p>",
+        "feature_text": "<p><strong>We review:</strong></p><ul><li>Clinic positioning and brand identity</li><li>Role differentiation within the team</li><li>Colour architecture and garment alignment</li><li>Operational requirements (laundering, wear frequency, rotation)</li></ul>",
+        "richtext": "<p>This ensures the final uniform system aligns with both brand presentation and daily practice demands.<br/><br/>Quarterly review meetings are available to ensure performance, consistency, and scalability remain aligned as your team evolves.</p>"
+      }
+    },
+    "feature_rows_KPqdzm": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
+        "direction": "row",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/engirneered_clinical_practise.jpg",
+        "label": "Technical Innovation",
+        "title": "<h2>Embedded Name Badge System<br/>(Magnet Integration)</h2>",
+        "heading_size": "h4",
+        "sub_title": "<p>All AVYRES clinical garments are designed with embedded internal magnets to support detachable name badges.</p>",
+        "feature_text": "<p><strong>This allows:</strong></p><ul><li>Clean presentation without pin damage</li><li>No fabric puncturing</li><li>Easy staff rotation</li><li>Consistent placement across teams</li></ul>",
+        "richtext": "<p>Embroidery is optional - not required for branding clarity.</p>"
+      }
+    },
+    "feature_rows_7Ry9mm": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
+        "direction": "row-reverse",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/STREAMLINED_ORDERING.png",
+        "label": "Craftsmanship",
+        "title": "<p><strong>Branding & Embroidery Options</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "",
+        "feature_text": "<p><strong>For clinics requiring visible branding, we offer:</strong></p><ul><li>Clinic logo embroidery</li><li>Multi-location variations</li><li>Role-specific identifiers</li></ul>",
+        "richtext": "<p>Our team advises on placement, scale, and thread tone to maintain a clinically refined aesthetic.</p>"
+      }
+    },
+    "feature_rows_MWLGRw": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-bea5d3e5-74c3-4fe8-8c57-2a8fe70f7155",
+        "direction": "row",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/2custom_fashion_development_image_a58fa48e-2be8-46b6-8dd8-ffab20f80888.jpg",
+        "label": "Bespoke Design",
+        "title": "<p><strong>Custom Fashion Development</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "<p>For clinics requiring a fully proprietary uniform design:</p>",
+        "feature_text": "<p><strong>This allows:</strong></p><ul><li><strong>500+ units per order:</strong> Custom fashion development included within program structure.</li><li><strong>Below 500 units:</strong> Custom development available subject to a structured design fee.</li></ul>",
+        "richtext": "<p>Embroidery is optional - not required for branding clarity.</p>"
+      }
+    },
+    "feature_rows_tX9QCG": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
+        "direction": "row-reverse",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/av_care_image_1.jpg",
+        "label": "Partnership Tier",
+        "title": "<p><strong>Volume Pricing Structure</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "<p>Clinical Solutions operates on a tiered pricing model.</p>",
+        "feature_text": "<p><strong>You receive:</strong></p><ul><li>Preferential group rates</li><li>Tiered volume pricing</li><li>Budget-aligned program structuring</li><li>Repeat order consistency</li><li>Multi-location coordination</li></ul>",
+        "richtext": "<p>Pricing is commercially competitive without compromising garment quality or construction.</p>"
+      }
+    },
+    "numbered_multicolumn_HaxpNA": {
+      "type": "numbered-multicolumn",
+      "blocks": {
+        "column_dhXJCL": {
+          "type": "column",
+          "settings": {
+            "photo": "shopify://shop_images/av_care_image_1_1.jpg",
+            "top_richtext": "<h3><strong>Individual Employee Care Packs</strong></h3>",
+            "richtext": "<p><strong>Each team member receives:</strong></p><ul><li>Personalised garment care guidance</li><li>Individualised garment-centred storage solutions (employee garment organisers of their choice)</li><li>Antibacterial treatment washing tablets (clinically tested to remove 99.99% of bacteria)</li><li>Guidance on extended-life wash cycles to preserve fabric integrity</li></ul>",
+            "bottom_richtext": "<p><strong>This ensures consistency in garment maintenance across the entire team.</strong></p>"
+          }
+        },
+        "column_UM4khp": {
+          "type": "column",
+          "settings": {
+            "photo": "shopify://shop_images/av_care_image_2.png",
+            "top_richtext": "<h3><strong>Fabric Longevity & Antibacterial Treatment</strong></h3>",
+            "richtext": "<p><strong>The supplied antibacterial treatment supports:</strong></p><ul><li>99.99% bacterial removal</li><li>Lower temperature washing</li><li>Reduced fabric stress</li><li>Extended garment lifespan</li></ul>",
+            "bottom_richtext": "<p><strong>This reduces replacement frequency and protects presentation standards.</strong></p>"
+          }
+        },
+        "column_XHpPWG": {
+          "type": "column",
+          "settings": {
+            "photo": "shopify://shop_images/av_care_image_3.png",
+            "top_richtext": "<h3><strong>AVYRES Forever Care</strong></h3>",
+            "richtext": "<p><strong>Garments can be returned to AVYRES for repair where feasible.</strong></p><ul><li>Structural repairs</li><li>Seam reinforcement</li><li>Component replacement where possible</li><li>Extended garment lifespan</li></ul>",
+            "bottom_richtext": "<p><strong>The objective is longevity over replacement.</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_dhXJCL",
+        "column_UM4khp",
+        "column_XHpPWG"
+      ],
+      "name": "Numbered Multicolumn",
+      "settings": {
+        "color_scheme": "scheme-9a159d5d-7e43-4501-b79b-7a49915e93b2",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "label": "Longevity",
+        "title": "<h2>The AVYRES CARE Program (Included for Clinics)</h2>",
+        "heading_size": "h3",
+        "sub_title": "<p>Every Clinical Solutions partnership includes the AVYRES CARE framework.</p>"
+      }
+    },
+    "feature_rows_PdBWCa": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-bea5d3e5-74c3-4fe8-8c57-2a8fe70f7155",
+        "direction": "row",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/engirneered_clinical_practise_1.jpg",
+        "label": "Performance Fabric",
+        "title": "<p><strong>Engineered for Clinical Practice</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "<p>All garments are purpose-built for healthcare environments.</p>",
+        "feature_text": "<p><strong>Key specifications:</strong></p><ul><li>Durable performance fabrics</li><li>Breathable construction for long wear</li><li>Fade-resistant colour integrity</li><li>Tailored silhouettes for professional presence</li><li>Easy-care laundering compatibility</li></ul>",
+        "richtext": "<p>These are not adapted fashion garments. They are engineered for clinical use.</p>"
+      }
+    },
+    "feature_rows_k4gfRj": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
+        "direction": "row-reverse",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/STREAMLINED_ORDERING_1.png",
+        "label": "Efficiency",
+        "title": "<p><strong>Streamlined Ordering & Replenishment</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "<p>Our group infrastructure reduces administrative load.</p>",
+        "feature_text": "<p><strong>Support includes:</strong></p><ul><li>Dedicated account management</li><li>Size mapping and team allocation</li><li>New-hire onboarding orders</li><li>Repeat order tracking</li><li>Multi-site rollout coordination</li></ul>",
+        "richtext": "<p>Multi-site rollout coordination</p>"
+      }
+    },
+    "feature_rows_LgVdqp": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-bea5d3e5-74c3-4fe8-8c57-2a8fe70f7155",
+        "direction": "row",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/long_term_partnership.jpg",
+        "label": "Continuity",
+        "title": "<p><strong>Long-Term Partnership Model</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "<p>AVYRES is not a supplier — we are your long-term uniform partner. Our model is built on continuity, trust, and a shared commitment to clinical excellence.</p><p><br/>Annual reviews, seasonal introductions, and proactive account management ensure your uniform program evolves with your clinic.</p>",
+        "feature_text": "",
+        "richtext": ""
       }
     }
   },
   "order": [
     "main",
-    "carousel_T4xRxz",
-    "featured_products_mUbQhF"
+    "program_intro_VLQUii",
+    "partners_list_r9xaGr",
+    "feature_rows_3A3Lqp",
+    "feature_rows_KPqdzm",
+    "feature_rows_7Ry9mm",
+    "feature_rows_MWLGRw",
+    "feature_rows_tX9QCG",
+    "numbered_multicolumn_HaxpNA",
+    "feature_rows_PdBWCa",
+    "feature_rows_k4gfRj",
+    "feature_rows_LgVdqp"
   ]
 }

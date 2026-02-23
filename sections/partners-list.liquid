@@ -1,0 +1,213 @@
+{%- render 'css', css: 'partners-list.css' -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} > div {
+    padding-block-start: calc(var(--section-spacing-unit-size) * {{ section.settings.spacing_top }});
+    padding-block-end: calc(var(--section-spacing-unit-size) * {{ section.settings.spacing_bottom }});
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign color_scheme = section.settings.color_scheme
+
+  assign image = section.settings.image
+  assign label = section.settings.label
+  assign title = section.settings.title
+  assign heading_size = section.settings.heading_size
+
+  assign text = section.settings.text
+-%}
+
+<div class="partners-list__container color-{{ color_scheme }} container">
+    {% if image != blank %}
+        {%- assign alt = title | strip_html | escape -%}
+
+        <div class="media">
+            {%- render 'image', image: image, alt: alt -%}
+        </div>
+    {%- endif -%}
+
+    <div>
+        {%- if label != blank -%}
+            <p class="partners-list__label section-label">{{ label }}</p>
+        {%- endif -%}
+
+        {%- if title != blank -%}
+            {{- title | replace_first: '>', ' class="section__heading heading_size">' | replace_first: 'heading_size', heading_size -}}
+        {%- endif -%}
+
+        {%- if text != blank -%}
+            {{- text -}}
+        {%- endif -%}
+
+        {%- if section.blocks != blank -%}
+            <ul class="partners-list__bullets">
+                {%- for block in section.blocks -%}
+                    {%- liquid
+                      assign icon = block.settings.icon
+                      assign bullet_text = block.settings.bullet_text
+                    -%}
+
+                    {%- if icon != blank and bullet_text != blank -%}
+                        <li class="partners-list__bullet-item{% if forloop.last %} last-item{% endif %}">
+                            {%- render 'image', image: icon, alt: bullet_text -%}
+
+                            <p>{{ bullet_text }}</p>
+                        </li>
+                    {%- endif -%}
+                {%- endfor -%}
+            </ul>
+        {%- endif -%}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Partners List",
+    "tag": "section",
+    "class": "partners-list",
+    "settings": [
+         {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "default": "scheme-2",
+            "label": "t:sections.global.color_scheme.label"
+        },
+        {
+            "type": "select",
+            "id": "spacing_top",
+            "label": "t:sections.global.spacing.spacing_top.label",
+            "options": [
+                {
+                "value": "0",
+                "label": "No"
+                },
+                {
+                "value": "1",
+                "label": "S"
+                },
+                {
+                "value": "2",
+                "label": "M"
+                },
+                {
+                "value": "4",
+                "label": "L"
+                },
+                {
+                "value": "6",
+                "label": "XL"
+                }
+            ],
+            "default": "2"
+            },
+            {
+            "type": "select",
+            "id": "spacing_bottom",
+            "label": "t:sections.global.spacing.spacing_bottom.label",
+            "options": [
+                {
+                "value": "0",
+                "label": "No"
+                },
+                {
+                "value": "1",
+                "label": "S"
+                },
+                {
+                "value": "2",
+                "label": "M"
+                },
+                {
+                "value": "4",
+                "label": "L"
+                },
+                {
+                "value": "6",
+                "label": "XL"
+                }
+            ],
+            "default": "2"
+            },
+        {
+            "type": "header",
+            "content": "Media"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "header",
+            "content": "Text"
+        },
+        {
+            "type": "text",
+            "id": "label",
+            "label": "Label"
+        },
+        {
+            "type": "richtext",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "select",
+            "id": "heading_size",
+            "label": "t:sections.global.element.heading_size.label",
+            "options": [
+            {
+                "value": "h6",
+                "label": "XS"
+            },
+            {
+                "value": "h5",
+                "label": "S"
+            },
+            {
+                "value": "h4",
+                "label": "M"
+            },
+            {
+                "value": "h3",
+                "label": "L"
+            },
+            {
+                "value": "h2",
+                "label": "XL"
+            }
+        ],
+            "default": "h3"
+        },
+        {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "bullet",
+            "name": "Bullet",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "icon",
+                    "label": "Icon"
+                },
+                {
+                    "type": "text",
+                    "id": "bullet_text",
+                    "label": "Text"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Partners List"
+        }
+    ]
+}
+{% endschema %}

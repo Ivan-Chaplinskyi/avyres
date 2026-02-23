@@ -347,6 +347,11 @@
             "info": "t:settings_schema.colors.settings.background_gradient.info"
           },
           {
+            "type": "color",
+            "id": "background_text",
+            "label": "Background Text",
+          },
+          {
             "type": "header",
             "content": "t:sections.global.header.typography.content"
           },
