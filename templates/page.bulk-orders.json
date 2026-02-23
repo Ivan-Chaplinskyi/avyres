@@ -187,6 +187,53 @@
         "feature_text": "<p><strong>You receive:</strong></p><ul><li>Preferential group rates</li><li>Tiered volume pricing</li><li>Budget-aligned program structuring</li><li>Repeat order consistency</li><li>Multi-location coordination</li></ul>",
         "richtext": "<p>Pricing is commercially competitive without compromising garment quality or construction.</p>"
       }
+    },
+    "numbered_multicolumn_HaxpNA": {
+      "type": "numbered-multicolumn",
+      "blocks": {
+        "column_dhXJCL": {
+          "type": "column",
+          "settings": {
+            "photo": "shopify://shop_images/av_care_image_1_1.jpg",
+            "top_richtext": "<h3><strong>Individual Employee Care Packs</strong></h3>",
+            "richtext": "<p><strong>Each team member receives:</strong></p><ul><li>Personalised garment care guidance</li><li>Individualised garment-centred storage solutions (employee garment organisers of their choice)</li><li>Antibacterial treatment washing tablets (clinically tested to remove 99.99% of bacteria)</li><li>Guidance on extended-life wash cycles to preserve fabric integrity</li></ul>",
+            "bottom_richtext": "<p><strong>This ensures consistency in garment maintenance across the entire team.</strong></p>"
+          }
+        },
+        "column_UM4khp": {
+          "type": "column",
+          "settings": {
+            "photo": "shopify://shop_images/av_care_image_2.png",
+            "top_richtext": "<h3><strong>Fabric Longevity & Antibacterial Treatment</strong></h3>",
+            "richtext": "<p><strong>The supplied antibacterial treatment supports:</strong></p><ul><li>99.99% bacterial removal</li><li>Lower temperature washing</li><li>Reduced fabric stress</li><li>Extended garment lifespan</li></ul>",
+            "bottom_richtext": "<p><strong>This reduces replacement frequency and protects presentation standards.</strong></p>"
+          }
+        },
+        "column_XHpPWG": {
+          "type": "column",
+          "settings": {
+            "photo": "shopify://shop_images/av_care_image_3.png",
+            "top_richtext": "<h3><strong>AVYRES Forever Care</strong></h3>",
+            "richtext": "<p><strong>Garments can be returned to AVYRES for repair where feasible.</strong></p><ul><li>Structural repairs</li><li>Seam reinforcement</li><li>Component replacement where possible</li><li>Extended garment lifespan</li></ul>",
+            "bottom_richtext": "<p><strong>The objective is longevity over replacement.</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_dhXJCL",
+        "column_UM4khp",
+        "column_XHpPWG"
+      ],
+      "name": "Numbered Multicolumn",
+      "settings": {
+        "color_scheme": "scheme-9a159d5d-7e43-4501-b79b-7a49915e93b2",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "label": "Longevity",
+        "title": "<h2>The AVYRES CARE Program (Included for Clinics)</h2>",
+        "heading_size": "h3",
+        "sub_title": "<p>Every Clinical Solutions partnership includes the AVYRES CARE framework.</p>"
+      }
     }
   },
   "order": [
@@ -197,6 +244,7 @@
     "feature_rows_KPqdzm",
     "feature_rows_7Ry9mm",
     "feature_rows_MWLGRw",
-    "feature_rows_tX9QCG"
+    "feature_rows_tX9QCG",
+    "numbered_multicolumn_HaxpNA"
   ]
 }

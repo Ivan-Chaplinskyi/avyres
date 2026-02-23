@@ -346,6 +346,27 @@
           "shadow": "#111111",
           "rating_stars": "#000000"
         }
+      },
+      "scheme-9a159d5d-7e43-4501-b79b-7a49915e93b2": {
+        "settings": {
+          "background": "#ffffff",
+          "background_gradient": "",
+          "background_text": "#faf8f5",
+          "primary_text": "#111111",
+          "secondary_text": "#FFFFFF",
+          "header_text": "#000000",
+          "primary_button": "#111111",
+          "primary_button_label": "#ffffff",
+          "secondary_button_label": "#111111",
+          "link": "#111111",
+          "border": "#ebebeb",
+          "tag": "#fa8907",
+          "tag_label": "#ffffff",
+          "progress_bar": "#65706e",
+          "placeholder": "#ababab",
+          "shadow": "#111111",
+          "rating_stars": "#000000"
+        }
       }
     }
   },
