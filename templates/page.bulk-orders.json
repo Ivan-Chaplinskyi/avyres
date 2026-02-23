@@ -153,6 +153,40 @@
         "feature_text": "<p><strong>For clinics requiring visible branding, we offer:</strong></p><ul><li>Clinic logo embroidery</li><li>Multi-location variations</li><li>Role-specific identifiers</li></ul>",
         "richtext": "<p>Our team advises on placement, scale, and thread tone to maintain a clinically refined aesthetic.</p>"
       }
+    },
+    "feature_rows_MWLGRw": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-bea5d3e5-74c3-4fe8-8c57-2a8fe70f7155",
+        "direction": "row",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/2custom_fashion_development_image_a58fa48e-2be8-46b6-8dd8-ffab20f80888.jpg",
+        "label": "Bespoke Design",
+        "title": "<p><strong>Custom Fashion Development</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "<p>For clinics requiring a fully proprietary uniform design:</p>",
+        "feature_text": "<p><strong>This allows:</strong></p><ul><li><strong>500+ units per order:</strong> Custom fashion development included within program structure.</li><li><strong>Below 500 units:</strong> Custom development available subject to a structured design fee.</li></ul>",
+        "richtext": "<p>Embroidery is optional - not required for branding clarity.</p>"
+      }
+    },
+    "feature_rows_tX9QCG": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
+        "direction": "row-reverse",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/av_care_image_1.jpg",
+        "label": "Partnership Tier",
+        "title": "<p><strong>Volume Pricing Structure</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "<p>Clinical Solutions operates on a tiered pricing model.</p>",
+        "feature_text": "<p><strong>You receive:</strong></p><ul><li>Preferential group rates</li><li>Tiered volume pricing</li><li>Budget-aligned program structuring</li><li>Repeat order consistency</li><li>Multi-location coordination</li></ul>",
+        "richtext": "<p>Pricing is commercially competitive without compromising garment quality or construction.</p>"
+      }
     }
   },
   "order": [
@@ -161,6 +195,8 @@
     "partners_list_r9xaGr",
     "feature_rows_3A3Lqp",
     "feature_rows_KPqdzm",
-    "feature_rows_7Ry9mm"
+    "feature_rows_7Ry9mm",
+    "feature_rows_MWLGRw",
+    "feature_rows_tX9QCG"
   ]
 }
