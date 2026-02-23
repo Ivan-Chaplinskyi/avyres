@@ -136,6 +136,23 @@
         "feature_text": "<p><strong>This allows:</strong></p><ul><li>Clean presentation without pin damage</li><li>No fabric puncturing</li><li>Easy staff rotation</li><li>Consistent placement across teams</li></ul>",
         "richtext": "<p>Embroidery is optional - not required for branding clarity.</p>"
       }
+    },
+    "feature_rows_7Ry9mm": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
+        "direction": "row-reverse",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/STREAMLINED_ORDERING.png",
+        "label": "Craftsmanship",
+        "title": "<p><strong>Branding & Embroidery Options</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "",
+        "feature_text": "<p><strong>For clinics requiring visible branding, we offer:</strong></p><ul><li>Clinic logo embroidery</li><li>Multi-location variations</li><li>Role-specific identifiers</li></ul>",
+        "richtext": "<p>Our team advises on placement, scale, and thread tone to maintain a clinically refined aesthetic.</p>"
+      }
     }
   },
   "order": [
@@ -143,6 +160,7 @@
     "program_intro_VLQUii",
     "partners_list_r9xaGr",
     "feature_rows_3A3Lqp",
-    "feature_rows_KPqdzm"
+    "feature_rows_KPqdzm",
+    "feature_rows_7Ry9mm"
   ]
 }
