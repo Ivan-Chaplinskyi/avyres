@@ -94,17 +94,37 @@
       "name": "Partners List",
       "settings": {
         "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
         "image": "shopify://shop_images/who_we_work_with_image_clinical.jpg",
         "label": "Our Partners",
         "title": "<h2>Who We Work With</h2>",
         "heading_size": "h4",
         "text": "<p>From first consultation to ongoing replenishment, the <br/>program is structured to scale with your organisation.</p>"
       }
+    },
+    "feature_rows_3A3Lqp": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-bea5d3e5-74c3-4fe8-8c57-2a8fe70f7155",
+        "direction": "row-reverse",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/programe_structure_image_clinical.jpg",
+        "label": "The Process",
+        "title": "<p>Program Structure & Onboarding</p>",
+        "heading_size": "h3",
+        "sub_title": "<p>Every Clinical Solutions partnership begins with a structured consultation.</p>",
+        "feature_text": "<p><strong>We review:</strong></p><ul><li>Clinic positioning and brand identity</li><li>Role differentiation within the team</li><li>Colour architecture and garment alignment</li><li>Operational requirements (laundering, wear frequency, rotation)</li></ul>",
+        "richtext": "<p>This ensures the final uniform system aligns with both brand presentation and daily practice demands.<br/><br/>Quarterly review meetings are available to ensure performance, consistency, and scalability remain aligned as your team evolves.</p>"
+      }
     }
   },
   "order": [
     "main",
     "program_intro_VLQUii",
-    "partners_list_r9xaGr"
+    "partners_list_r9xaGr",
+    "feature_rows_3A3Lqp"
   ]
 }

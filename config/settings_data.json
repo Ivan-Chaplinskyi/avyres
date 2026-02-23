@@ -99,6 +99,7 @@
         "settings": {
           "background": "#ffffff",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#111111",
           "secondary_text": "#65706e",
           "header_text": "#000000",
@@ -119,6 +120,7 @@
         "settings": {
           "background": "#65706e",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#ffffff",
           "secondary_text": "#111111",
           "header_text": "#ffffff",
@@ -139,6 +141,7 @@
         "settings": {
           "background": "#889492",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#132d40",
           "secondary_text": "#ffffff",
           "header_text": "#132d40",
@@ -159,6 +162,7 @@
         "settings": {
           "background": "#b0b9b7",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#111111",
           "secondary_text": "#ffffff",
           "header_text": "#111111",
@@ -179,6 +183,7 @@
         "settings": {
           "background": "#f8f8f8",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#111111",
           "secondary_text": "#ffffff",
           "header_text": "#111111",
@@ -199,6 +204,7 @@
         "settings": {
           "background": "#111111",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#111111",
           "secondary_text": "#65706e",
           "header_text": "#111111",
@@ -219,6 +225,7 @@
         "settings": {
           "background": "#e47424",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#ffffff",
           "secondary_text": "#ffffff",
           "header_text": "#ffffff",
@@ -239,6 +246,7 @@
         "settings": {
           "background": "#6c7775",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#ffffff",
           "secondary_text": "#ffffff",
           "header_text": "#ffffff",
@@ -259,6 +267,7 @@
         "settings": {
           "background": "#000000",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#ffffff",
           "secondary_text": "#65706e",
           "header_text": "#000000",
@@ -279,6 +288,7 @@
         "settings": {
           "background": "#ffffff",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#ffffff",
           "secondary_text": "#ffffff",
           "header_text": "#ffffff",
@@ -299,16 +309,38 @@
         "settings": {
           "background": "#ffffff",
           "background_gradient": "",
+          "background_text": "",
           "primary_text": "#111111",
-          "secondary_text": "#65706e",
+          "secondary_text": "#ffffff",
           "header_text": "#000000",
           "primary_button": "#111111",
           "primary_button_label": "#ffffff",
           "secondary_button_label": "#111111",
           "link": "#111111",
           "border": "#ebebeb",
-          "tag": "#5e5a59",
-          "tag_label": "#ffffff",
+          "tag": "#fa8907",
+          "tag_label": "#fa8907",
+          "progress_bar": "#65706e",
+          "placeholder": "#ababab",
+          "shadow": "#111111",
+          "rating_stars": "#000000"
+        }
+      },
+      "scheme-bea5d3e5-74c3-4fe8-8c57-2a8fe70f7155": {
+        "settings": {
+          "background": "#f8f8f8",
+          "background_gradient": "",
+          "background_text": "#ffffff",
+          "primary_text": "#111111",
+          "secondary_text": "#ffffff",
+          "header_text": "#000000",
+          "primary_button": "#111111",
+          "primary_button_label": "#ffffff",
+          "secondary_button_label": "#111111",
+          "link": "#111111",
+          "border": "#ebebeb",
+          "tag": "#fa8907",
+          "tag_label": "#fa8907",
           "progress_bar": "#65706e",
           "placeholder": "#ababab",
           "shadow": "#111111",
