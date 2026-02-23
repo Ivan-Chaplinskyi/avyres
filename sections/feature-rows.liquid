@@ -1,4 +1,4 @@
-{%- render 'css', css: 'partners-list.css' -%}
+{%- render 'css', css: 'feature-rows.css' -%}
 
 {%- style -%}
   #shopify-section-{{ section.id }} > div {
@@ -9,69 +9,80 @@
 
 {%- liquid
   assign color_scheme = section.settings.color_scheme
+  assign direction = section.settings.direction
 
   assign image = section.settings.image
   assign label = section.settings.label
   assign title = section.settings.title
   assign heading_size = section.settings.heading_size
+  assign sub_title = section.settings.sub_title
 
-  assign text = section.settings.text
+  assign feature_text = section.settings.feature_text
+
+  assign richtext = section.settings.richtext
 -%}
 
-<div class="partners-list__container color-{{ color_scheme }} container">
-    {% if image != blank %}
-        {%- assign alt = title | strip_html | escape -%}
+<div class="feature-rows__container color-{{ color_scheme }}">
+    <div class="container" style="flex-direction: {{ direction }}">
+        {%- if image != blank -%}
+            {%- assign alt = title | strip_html | escape -%}
 
-        <div class="media">
-            {%- render 'image', image: image, alt: alt -%}
+            {%- render 'image', image: image, alt: alt, class: 'media' -%}
+        {% endif %}
+
+        <div class="feature-rows__info">
+            {%- if label != blank -%}
+                <p class="section-label">{{ label }}</p>
+            {%- endif -%}
+
+            {%- if title != blank -%}
+                {{- title | replace_first: '>', ' class="section__heading heading_size">' | replace_first: 'heading_size', heading_size -}}
+            {%- endif -%}
+
+            {%- if sub_title != blank -%}
+                {{- sub_title -}}
+            {%- endif -%}
+
+            {%- if feature_text != blank -%}
+                <div class="feature-text" style="background-color: var(--color-background_text);">
+                    {{- feature_text -}}
+                </div>
+            {%- endif -%}
+
+            {%- if richtext != blank -%}
+                {{- richtext -}}
+            {%- endif -%}
         </div>
-    {%- endif -%}
-
-    <div>
-        {%- if label != blank -%}
-            <p class="partners-list__label section-label">{{ label }}</p>
-        {%- endif -%}
-
-        {%- if title != blank -%}
-            {{- title | replace_first: '>', ' class="section__heading heading_size">' | replace_first: 'heading_size', heading_size -}}
-        {%- endif -%}
-
-        {%- if text != blank -%}
-            {{- text -}}
-        {%- endif -%}
-
-        {%- if section.blocks != blank -%}
-            <ul class="partners-list__bullets">
-                {%- for block in section.blocks -%}
-                    {%- liquid
-                      assign icon = block.settings.icon
-                      assign bullet_text = block.settings.bullet_text
-                    -%}
-
-                    {%- if icon != blank and bullet_text != blank -%}
-                        <li class="partners-list__bullet-item{% if forloop.last %} last-item{% endif %}">
-                            {%- render 'image', image: icon, alt: bullet_text -%}
-
-                            <p>{{ bullet_text }}</p>
-                        </li>
-                    {%- endif -%}
-                {%- endfor -%}
-            </ul>
-        {%- endif -%}
     </div>
 </div>
 
 {% schema %}
 {
-    "name": "Partners List",
+    "name": "Feature Rows",
     "tag": "section",
-    "class": "partners-list",
+    "class": "feature-rows",
     "settings": [
          {
             "type": "color_scheme",
             "id": "color_scheme",
             "default": "scheme-2",
             "label": "t:sections.global.color_scheme.label"
+        },
+        {
+            "type": "select",
+            "id": "direction",
+            "label": "Direction",
+            "options": [
+                {
+                    "value": "row",
+                    "label": "Row"
+                },
+                {
+                    "value": "row-reverse",
+                    "label": "Row Reverse"
+                }
+            ],
+            "default": "row"
         },
         {
             "type": "select",
@@ -182,31 +193,23 @@
         },
         {
             "type": "richtext",
-            "id": "text",
-            "label": "Text"
-        }
-    ],
-    "blocks": [
+            "id": "sub_title",
+            "label": "Sub Title"
+        },
         {
-            "type": "bullet",
-            "name": "Bullet",
-            "settings": [
-                {
-                    "type": "image_picker",
-                    "id": "icon",
-                    "label": "Icon"
-                },
-                {
-                    "type": "text",
-                    "id": "bullet_text",
-                    "label": "Text"
-                }
-            ]
+            "type": "richtext",
+            "id": "feature_text",
+            "label": "Feature Text"
+        },
+        {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Rich Text"
         }
     ],
     "presets": [
         {
-            "name": "Partners List"
+            "name": "Feature Rows"
         }
     ]
 }
