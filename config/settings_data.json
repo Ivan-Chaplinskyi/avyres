@@ -309,7 +309,7 @@
         "settings": {
           "background": "#ffffff",
           "background_gradient": "",
-          "background_text": "",
+          "background_text": "#f8f8f8",
           "primary_text": "#111111",
           "secondary_text": "#ffffff",
           "header_text": "#000000",

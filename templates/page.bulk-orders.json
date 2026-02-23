@@ -119,12 +119,30 @@
         "feature_text": "<p><strong>We review:</strong></p><ul><li>Clinic positioning and brand identity</li><li>Role differentiation within the team</li><li>Colour architecture and garment alignment</li><li>Operational requirements (laundering, wear frequency, rotation)</li></ul>",
         "richtext": "<p>This ensures the final uniform system aligns with both brand presentation and daily practice demands.<br/><br/>Quarterly review meetings are available to ensure performance, consistency, and scalability remain aligned as your team evolves.</p>"
       }
+    },
+    "feature_rows_KPqdzm": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
+        "direction": "row",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/engirneered_clinical_practise.jpg",
+        "label": "Technical Innovation",
+        "title": "<h2>Embedded Name Badge System<br/>(Magnet Integration)</h2>",
+        "heading_size": "h4",
+        "sub_title": "<p>All AVYRES clinical garments are designed with embedded internal magnets to support detachable name badges.</p>",
+        "feature_text": "<p><strong>This allows:</strong></p><ul><li>Clean presentation without pin damage</li><li>No fabric puncturing</li><li>Easy staff rotation</li><li>Consistent placement across teams</li></ul>",
+        "richtext": "<p>Embroidery is optional - not required for branding clarity.</p>"
+      }
     }
   },
   "order": [
     "main",
     "program_intro_VLQUii",
     "partners_list_r9xaGr",
-    "feature_rows_3A3Lqp"
+    "feature_rows_3A3Lqp",
+    "feature_rows_KPqdzm"
   ]
 }
