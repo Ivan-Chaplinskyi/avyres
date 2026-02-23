@@ -234,6 +234,40 @@
         "heading_size": "h3",
         "sub_title": "<p>Every Clinical Solutions partnership includes the AVYRES CARE framework.</p>"
       }
+    },
+    "feature_rows_PdBWCa": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-bea5d3e5-74c3-4fe8-8c57-2a8fe70f7155",
+        "direction": "row",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/engirneered_clinical_practise_1.jpg",
+        "label": "Performance Fabric",
+        "title": "<p><strong>Engineered for Clinical Practice</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "<p>All garments are purpose-built for healthcare environments.</p>",
+        "feature_text": "<p><strong>Key specifications:</strong></p><ul><li>Durable performance fabrics</li><li>Breathable construction for long wear</li><li>Fade-resistant colour integrity</li><li>Tailored silhouettes for professional presence</li><li>Easy-care laundering compatibility</li></ul>",
+        "richtext": "<p>These are not adapted fashion garments. They are engineered for clinical use.</p>"
+      }
+    },
+    "feature_rows_k4gfRj": {
+      "type": "feature-rows",
+      "name": "Feature Rows",
+      "settings": {
+        "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
+        "direction": "row-reverse",
+        "spacing_top": "2",
+        "spacing_bottom": "2",
+        "image": "shopify://shop_images/STREAMLINED_ORDERING_1.png",
+        "label": "Efficiency",
+        "title": "<p><strong>Streamlined Ordering & Replenishment</strong></p>",
+        "heading_size": "h5",
+        "sub_title": "<p>Our group infrastructure reduces administrative load.</p>",
+        "feature_text": "<p><strong>Support includes:</strong></p><ul><li>Dedicated account management</li><li>Size mapping and team allocation</li><li>New-hire onboarding orders</li><li>Repeat order tracking</li><li>Multi-site rollout coordination</li></ul>",
+        "richtext": "<p>Multi-site rollout coordination</p>"
+      }
     }
   },
   "order": [
@@ -245,6 +279,8 @@
     "feature_rows_7Ry9mm",
     "feature_rows_MWLGRw",
     "feature_rows_tX9QCG",
-    "numbered_multicolumn_HaxpNA"
+    "numbered_multicolumn_HaxpNA",
+    "feature_rows_PdBWCa",
+    "feature_rows_k4gfRj"
   ]
 }
