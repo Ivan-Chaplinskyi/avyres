@@ -41,6 +41,7 @@
     .feature-rows__container > div {
         flex-wrap: nowrap;
         justify-content: space-between;
+        gap: 70px;
     }
 
     .feature-rows__container img {
