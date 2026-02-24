@@ -323,6 +323,76 @@
         "feature_text": "",
         "richtext": ""
       }
+    },
+    "full_width_banner_HEQfrP": {
+      "type": "full-width-banner",
+      "blocks": {
+        "heading_rVFwPn": {
+          "type": "heading",
+          "settings": {
+            "heading": "Begin Your Clinical Solutions Program",
+            "heading_size": "h3"
+          }
+        },
+        "subheading_LPzpqE": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "For consultation, pricing structure, custom development, or onboarding:",
+            "link": ""
+          }
+        },
+        "subheading_iajPgg": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "<strong>contact@avyres.com</strong>",
+            "link": ""
+          }
+        },
+        "buttons_9tgGPG": {
+          "type": "buttons",
+          "settings": {
+            "button_link_1": "shopify://pages/contact",
+            "button_link_1_type": "card",
+            "button_label_1": "CONTACT AVYRES",
+            "button_style_1": "button--filled",
+            "color_scheme_first_button": "scheme-252ca45d-f568-4179-8c9a-3f86fe2b3c78",
+            "button_link_2": "/",
+            "button_label_2": "",
+            "button_style_2": "button--outlined",
+            "color_scheme_second_button": "scheme-1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_rVFwPn",
+        "subheading_LPzpqE",
+        "subheading_iajPgg",
+        "buttons_9tgGPG"
+      ],
+      "name": "t:sections.full-width-banner.name",
+      "settings": {
+        "enable_transparent_header": true,
+        "media_position": "background",
+        "section_height": "third",
+        "content_position": "center",
+        "content_alignment": "center",
+        "image": "shopify://shop_images/download_5.jpg",
+        "video_external": "",
+        "show_controls_on_video": false,
+        "aspect_ratio": "auto",
+        "section_height_mobile": "half",
+        "content_position_mobile": "center",
+        "content_alignment_mobile": "center",
+        "video_external_mobile": "",
+        "show_controls_on_video_mobile": false,
+        "aspect_ratio_mobile": "auto",
+        "section_width": "max-w-full",
+        "color_scheme": "scheme-ab539b3a-7e93-40e6-88e5-e36fa762547e",
+        "color_scheme_for_content": "scheme-ab539b3a-7e93-40e6-88e5-e36fa762547e",
+        "spacing_inner": "2",
+        "spacing_top": "0",
+        "spacing_bottom": "0"
+      }
     }
   },
   "order": [
@@ -338,6 +408,7 @@
     "numbered_multicolumn_HaxpNA",
     "feature_rows_PdBWCa",
     "feature_rows_k4gfRj",
-    "feature_rows_LgVdqp"
+    "feature_rows_LgVdqp",
+    "full_width_banner_HEQfrP"
   ]
 }
