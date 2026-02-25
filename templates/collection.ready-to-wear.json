@@ -34,6 +34,7 @@
     },
     "page_banner_jWtyM4": {
       "type": "page-banner",
+      "disabled": true,
       "settings": {
         "enable_transparent_header": true,
         "heading": "",
@@ -48,7 +49,6 @@
         "enable_breadcrumbs": true,
         "section_height": "50svh",
         "content_width": "100%",
-        "image": "shopify://shop_images/BANNER_AVYRES_2.jpg",
         "video_external": "",
         "show_controls_on_video": false,
         "section_height_mobile": "50svh",

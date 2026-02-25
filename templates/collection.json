@@ -11,6 +11,7 @@
   "sections": {
     "page_banner_jWtyM4": {
       "type": "page-banner",
+      "disabled": true,
       "settings": {
         "enable_transparent_header": true,
         "heading": "",
