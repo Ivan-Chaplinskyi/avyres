@@ -160,6 +160,7 @@
     },
     "feature_rows_KPqdzm": {
       "type": "feature-rows",
+      "disabled": true,
       "name": "Feature Rows",
       "settings": {
         "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
@@ -177,6 +178,7 @@
     },
     "feature_rows_7Ry9mm": {
       "type": "feature-rows",
+      "disabled": true,
       "name": "Feature Rows",
       "settings": {
         "color_scheme": "scheme-a7511bf2-99da-4932-b654-d5514d1bc4ab",
@@ -194,6 +196,7 @@
     },
     "feature_rows_MWLGRw": {
       "type": "feature-rows",
+      "disabled": true,
       "name": "Feature Rows",
       "settings": {
         "color_scheme": "scheme-bea5d3e5-74c3-4fe8-8c57-2a8fe70f7155",
