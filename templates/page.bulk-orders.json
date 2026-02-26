@@ -321,7 +321,7 @@
         "direction": "row",
         "spacing_top": "2",
         "spacing_bottom": "2",
-        "image": "shopify://shop_images/long_term_partnership.jpg",
+        "image": "shopify://shop_images/long_term_partnership.webp",
         "label": "",
         "title": "<p><strong>Long-Term Partnership Model</strong></p>",
         "heading_size": "h5",
