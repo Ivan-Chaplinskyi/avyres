@@ -101,11 +101,36 @@
         "spacing_top": "2",
         "spacing_bottom": "2"
       }
+    },
+    "17858470570e872b2e": {
+      "type": "apps",
+      "blocks": {
+        "uppromote_affiliate_customer_referral_landing_rXifWq": {
+          "type": "shopify://apps/uppromote-affiliate/blocks/customer-referral-landing/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
+          "settings": {
+            "section_corners": 0,
+            "section_top_margin": 20,
+            "section_bottom_margin": 20
+          }
+        }
+      },
+      "block_order": [
+        "uppromote_affiliate_customer_referral_landing_rXifWq"
+      ],
+      "settings": {
+        "section_layout": "normal",
+        "spacing_inner": "2",
+        "section_width": "max-w-page",
+        "color_scheme": "",
+        "spacing_top": "2",
+        "spacing_bottom": "2"
+      }
     }
   },
   "order": [
     "main",
     "form",
-    "map"
+    "map",
+    "17858470570e872b2e"
   ]
 }
