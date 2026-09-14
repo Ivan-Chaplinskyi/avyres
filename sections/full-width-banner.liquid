@@ -147,9 +147,7 @@
                 {%- case block.type -%}
                   {%- when 'form' -%}
                     <show-popup>
-                      {%- 
-                      render 'button', type: 'button', class: 'button section-full-width-banner__button', button_style: block.settings.button_style_1 | default: 'default', value: block.settings.text_button, color_scheme: block.settings.color_scheme_first_button, attr: 'data-toggle-popup'
-                     -%}
+                      {%- render 'button', type: 'button', class: 'button section-full-width-banner__button', button_style: block.settings.button_style_1, default: 'default', value: block.settings.text_button, color_scheme: block.settings.color_scheme_first_button, attr: 'data-toggle-popup' -%}
 
                      <div data-popup="show-popup" class="hidden color-scheme-1">
                       <div class="show-popup__header">
@@ -228,11 +226,11 @@
                     <div class="section-full-width-banner__buttons max-w-sm {{ section.settings.content_position_horizontal }} {{ block_class }}">
                       {%- liquid
                         if block.settings.button_label_1 != blank and block.settings.button_link_1 != blank
-                          render 'button', type: 'link', class: 'button section-full-width-banner__button', button_style: block.settings.button_style_1 | default: 'default', value: block.settings.button_label_1, href: block.settings.button_link_1, color_scheme: block.settings.color_scheme_first_button
+                          render 'button', type: 'link', class: 'button section-full-width-banner__button', button_style: block.settings.button_style_1, default: 'default', value: block.settings.button_label_1, href: block.settings.button_link_1, color_scheme: block.settings.color_scheme_first_button
                         endif
 
                         if block.settings.button_label_2 != blank and block.settings.button_link_2 != blank
-                          render 'button', type: 'link', class: 'button section-full-width-banner__button', button_style: block.settings.button_style_2 | default: 'default', value: block.settings.button_label_2, href: block.settings.button_link_2, color_scheme: block.settings.color_scheme_second_button
+                          render 'button', type: 'link', class: 'button section-full-width-banner__button', button_style: block.settings.button_style_2, default: 'default', value: block.settings.button_label_2, href: block.settings.button_link_2, color_scheme: block.settings.color_scheme_second_button
                         endif
                       -%}
                     </div>
@@ -1076,3 +1074,33 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- \n                      render 'button', type: 'button', class: 'button
+    section-full-width-banner__button', button_style: block.settings.button_style_1
+    | default: 'default', value: block.settings.text_button, color_scheme: block.settings.color_scheme_first_button,
+    attr: 'data-toggle-popup'\n                     -%}"
+  to: "{%- render 'button', type: 'button', class: 'button section-full-width-banner__button',
+    button_style: block.settings.button_style_1, default: 'default', value: block.settings.text_button,
+    color_scheme: block.settings.color_scheme_first_button, attr: 'data-toggle-popup'
+    -%}"
+  position: 7115..7388
+- from: "                          render 'button', type: 'link', class: 'button section-full-width-banner__button',
+    button_style: block.settings.button_style_1 | default: 'default', value: block.settings.button_label_1,
+    href: block.settings.button_link_1, color_scheme: block.settings.color_scheme_first_button"
+  to: "                          render 'button', type: 'link', class: 'button section-full-width-banner__button',
+    button_style: block.settings.button_style_1, default: 'default', value: block.settings.button_label_1,
+    href: block.settings.button_link_1, color_scheme: block.settings.color_scheme_first_button"
+  position: 11967..12268
+- from: "                          render 'button', type: 'link', class: 'button section-full-width-banner__button',
+    button_style: block.settings.button_style_2 | default: 'default', value: block.settings.button_label_2,
+    href: block.settings.button_link_2, color_scheme: block.settings.color_scheme_second_button"
+  to: "                          render 'button', type: 'link', class: 'button section-full-width-banner__button',
+    button_style: block.settings.button_style_2, default: 'default', value: block.settings.button_label_2,
+    href: block.settings.button_link_2, color_scheme: block.settings.color_scheme_second_button"
+  position: 12408..12710
+{% endcomment %}

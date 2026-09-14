@@ -146,7 +146,7 @@
                         <div class="card header__card header__card-text color-{{ block.settings.color_scheme }} block-{{ block.id }} {{ show_on_class }} media-position--background">
                           {%- if block.settings.image != blank -%}
                             <div class="media media--overlay card__media media--{{ block.settings.card_aspect_ratio }}">
-                              {%- render 'image', image: block.settings.image, alt: block.settings.image.alt | escape -%}
+                              {%- render 'image', image: block.settings.image, alt: block.settings.image.alt -%}
                             </div>
                           {%- endif -%}
 
@@ -238,11 +238,7 @@
             {%- if section.settings.country_drawer_navigation_menu -%}
               <li class="drawer__subs-item">
                 <menu-drawer class="drawer">
-                  {%- render 'country-drawer',
-                    button_class: ' drawer__subs-link',
-                    section: section,
-                    append_id: 'header-drawer-' | append: section.id
-                  -%}
+                  {%- render 'country-drawer', button_class: ' drawer__subs-link', section: section, append_id: 'header-drawer-', append: section.id -%}
                 </menu-drawer>
               </li>
             {%- endif -%}
@@ -257,3 +253,24 @@
     </div>
   </details>
 </header-drawer>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'image', image: block.settings.image, alt: block.settings.image.alt
+    | escape -%}"
+  to: "{%- render 'image', image: block.settings.image, alt: block.settings.image.alt
+    -%}"
+  position: 7264..7346
+- from: |-
+    {%- render 'country-drawer',
+                        button_class: ' drawer__subs-link',
+                        section: section,
+                        append_id: 'header-drawer-' | append: section.id
+                      -%}
+  to: "{%- render 'country-drawer', button_class: ' drawer__subs-link', section: section,
+    append_id: 'header-drawer-', append: section.id -%}"
+  position: 11354..11488
+{% endcomment %}
